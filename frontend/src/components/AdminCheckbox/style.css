@@ -1,0 +1,26 @@
+.admin-checkbox {
+  align-items: center;
+  cursor: pointer;
+  direction: rtl;
+  display: flex;
+}
+
+.admin-checkbox__checkbox {
+  align-items: center;
+  background: white;
+  border: 1px solid #DEDEDE;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  margin-left: 16px;
+  width: 24px;
+}
+
+.admin-checkbox__label {
+  color: #474747;
+  font: normal normal normal 22px/28px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+}

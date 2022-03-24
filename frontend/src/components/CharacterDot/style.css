@@ -1,0 +1,18 @@
+.character-dot {
+  background-color: #D8D8D8;
+  background-size: cover;
+  border: 2px solid #FFFFFF;
+  border-radius: 16px;
+  display: block;
+  height: 30px;
+  transition-duration: 0.1s;
+  transition-property: transform;
+  transition-timing-function: ease-in;
+  width: 30px;
+  z-index: 100;
+}
+
+.character-dot:hover {
+  transform: scale(1.1);
+  z-index: 200;
+}

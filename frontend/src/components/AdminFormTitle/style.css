@@ -1,0 +1,23 @@
+.admin-form-title {
+  align-items: center;
+  direction: rtl;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 45px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.admin-form-title__title {
+  color: #474747;
+  font: normal normal 600 42px/10px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+}
+
+.admin-form-title__step {
+  color: #474747;
+  font: normal normal normal 22px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+}

@@ -1,0 +1,48 @@
+.admin-table {
+  background: white;
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 0px 15px 20px #0000001A;
+  color: #474747;
+  font: normal normal normal 22px/31px Assistant;
+  letter-spacing: 0px;
+  padding: 35px;
+  text-align: right;
+  width: 100%;
+}
+
+.admin-table__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.admin-table tr td, .admin-table tr th {
+  height: 70px;
+  vertical-align: middle;
+}
+
+.admin-table tr:nth-child(odd) {
+  background-color: rgba(220, 31, 87, 0.05);
+}
+
+.admin-table tr td:first-child, .admin-table tr th:first-child {
+  padding-right: 30px;
+}
+
+.admin-table thead tr {
+  background-color: transparent !important;
+}
+
+.admin-table__edit, .admin-table__edit-link {
+  color: rgba(71, 71, 71, 0.6);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.admin-table__edit:hover, .admin-table__edit-link:hover {
+  color: rgba(71, 71, 71, 1);
+}
+
+.admin-table__delete {
+  cursor: pointer;
+}

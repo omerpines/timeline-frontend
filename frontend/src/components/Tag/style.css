@@ -1,0 +1,12 @@
+.tag {
+  background: rgba(157,1,1,0.1);
+  border-radius: 6px;
+  color: #5B5B5B;
+  direction: rtl;
+  font: normal normal normal 22px/31px Assistant;
+  height: 43px;
+  letter-spacing: 0px;
+  line-height: 43px;
+  padding: 0px 30px;
+  text-align: right;
+}

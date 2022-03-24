@@ -1,0 +1,12 @@
+export { default as test } from 'store/reducers/test';
+export { default as authentication } from 'store/reducers/authentication';
+export { default as periods } from 'store/reducers/periods';
+export { default as periodForm } from 'store/reducers/periodForm';
+export { default as characters } from 'store/reducers/characters';
+export { default as characterForm } from 'store/reducers/characterForm';
+export { default as stories } from 'store/reducers/stories';
+export { default as storyForm } from 'store/reducers/storyForm';
+export { default as events } from 'store/reducers/events';
+export { default as eventForm } from 'store/reducers/eventForm';
+export { default as books } from 'store/reducers/books';
+export { default as bookForm } from 'store/reducers/bookForm';

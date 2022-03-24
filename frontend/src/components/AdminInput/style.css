@@ -1,0 +1,13 @@
+.admin-input {
+  margin-bottom: 40px;
+}
+
+.admin-input--flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.admin-input--flex-container .admin-form__label {
+  width: 100%;
+}

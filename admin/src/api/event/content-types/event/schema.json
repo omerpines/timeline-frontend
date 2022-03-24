@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "fromDate": {
+      "type": "integer",
+      "max": 120000,
+      "min": 80000,
+      "required": true
+    },
+    "showTimeOnSite": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "age": {
+      "type": "string"
+    },
+    "quote": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "richtext"
+    },
+    "location": {
+      "type": "richtext"
+    },
+    "references": {
+      "type": "richtext"
+    },
+    "path": {
+      "type": "integer",
+      "max": 3,
+      "min": 1
+    },
+    "color": {
+      "type": "string",
+      "default": "#ffffff",
+      "regex": "^#(?:[0-9a-fA-F]{3}){1,2}$",
+      "required": true
+    },
+    "endDate": {
+      "type": "integer",
+      "required": true,
+      "max": 120000,
+      "min": 80000
+    },
+    "shortDescription": {
+      "type": "string"
+    },
+    "links": {
+      "type": "richtext"
+    },
+    "story": {
+      "type": "integer"
+    },
+    "characters": {
+      "type": "json"
+    },
+    "media": {
+      "type": "json"
+    }
+  }
+}

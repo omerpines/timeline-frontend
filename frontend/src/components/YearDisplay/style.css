@@ -1,0 +1,13 @@
+.year-display {
+  color: white;
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  pointer-events: none;
+}
+
+.year-display.year-display--in-dimensional {
+  bottom: 20px;
+  position: absolute;
+  right: 20px;
+}

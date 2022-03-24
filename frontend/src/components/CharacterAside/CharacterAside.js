@@ -1,0 +1,79 @@
+import React, { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import ReactHtmlParser from 'react-html-parser';
+import Aside from 'components/Aside';
+import CharacterDot from 'components/CharacterDot';
+import TagCloud from 'components/TagCloud';
+import QuoteBlock from 'components/QuoteBlock';
+import MediaGallery from 'components/MediaGallery';
+import useData from 'hooks/useData';
+import useLanguage from 'hooks/useLanguage';
+import { checkLocalized, getLocalized } from 'helpers/util';
+import './style.css';
+
+const CharacterAside = () => {
+  const { id } = useParams();
+  const lang = useLanguage();
+  const { t } = useTranslation();
+
+  const { characters } = useData();
+
+  const data = useMemo(() => {
+    const cid = parseInt(id);
+    return characters.find(s => s.id === cid);
+  }, [characters, id]);
+
+  const tags = useMemo(() => {
+    if (!data) return '';
+    const gender = t(`admin.gender.${data.gender}`);
+    return `${gender}, ${data.role}, ${data.nation}, ${data.tags}`;
+  }, [data]);
+
+  const content = useMemo(() => {
+    if (!data) return false;
+    return (
+      <React.Fragment>
+        {ReactHtmlParser(`<div>${getLocalized(data, 'content', lang)}</div>`)}
+        {ReactHtmlParser(`<div>${getLocalized(data, 'timeline', lang)}</div>`)}
+        {ReactHtmlParser(`<div>${getLocalized(data, 'appearances', lang)}</div>`)}
+        {!data.links ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-title">{t('admin.forMoreInformation')}</div>
+            {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
+          </React.Fragment>
+        )}
+      </React.Fragment>
+    );
+  }, [data, lang]);
+
+  const header = useMemo(() => {
+    if (!data) return undefined;
+    return (
+      <React.Fragment>
+        <div className="character-aside__title">
+          <CharacterDot data={data} className="character-aside__dot" />
+          {getLocalized(data, 'name', lang)}
+        </div>
+        {checkLocalized(data, 'subtitle', lang) && (
+          <div className="character-aside__subtitle">{getLocalized(data, 'subtitle', lang)}</div>
+        )}
+      </React.Fragment>
+    );
+  }, [data]);
+
+  if (!data) return false;
+
+  return (
+    <Aside header={header}>
+      {data.tags ? (
+        <TagCloud tags={tags} />
+      ) : false}
+      <MediaGallery data={data.media} />
+      <QuoteBlock data={data} />
+      {content}
+    </Aside>
+  );
+};
+
+export default CharacterAside;

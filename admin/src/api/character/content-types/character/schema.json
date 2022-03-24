@@ -1,0 +1,95 @@
+{
+  "kind": "collectionType",
+  "collectionName": "characters",
+  "info": {
+    "singularName": "character",
+    "pluralName": "characters",
+    "displayName": "Character",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "attribution": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "default": "male",
+      "required": true
+    },
+    "area": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "summary": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "timeline": {
+      "type": "richtext"
+    },
+    "appearances": {
+      "type": "richtext"
+    },
+    "quote": {
+      "type": "string"
+    },
+    "fromDate": {
+      "type": "integer",
+      "required": true,
+      "max": 120000,
+      "min": 80000
+    },
+    "endDate": {
+      "type": "integer",
+      "required": true,
+      "max": 120000,
+      "min": 80000
+    },
+    "showTimeOnSite": {
+      "type": "boolean",
+      "default": false
+    },
+    "nation": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "string"
+    },
+    "characters": {
+      "type": "json"
+    },
+    "shortDescription": {
+      "type": "string"
+    },
+    "links": {
+      "type": "richtext"
+    },
+    "media": {
+      "type": "json"
+    }
+  }
+}

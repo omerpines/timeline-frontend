@@ -1,0 +1,88 @@
+{
+  "kind": "collectionType",
+  "collectionName": "books",
+  "info": {
+    "singularName": "book",
+    "pluralName": "books",
+    "displayName": "Book",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "fromDate": {
+      "type": "integer",
+      "required": true,
+      "max": 120000,
+      "min": 80000
+    },
+    "endDate": {
+      "type": "integer",
+      "max": 120000,
+      "min": 80000,
+      "required": true
+    },
+    "showTimeOnSite": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "age": {
+      "type": "richtext"
+    },
+    "location": {
+      "type": "richtext"
+    },
+    "summary": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "geographic": {
+      "type": "string"
+    },
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "tags": {
+      "type": "string"
+    },
+    "characters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::character.character"
+    },
+    "period": {
+      "type": "integer"
+    },
+    "shortDescription": {
+      "type": "string"
+    },
+    "links": {
+      "type": "richtext"
+    },
+    "media": {
+      "type": "json"
+    }
+  }
+}

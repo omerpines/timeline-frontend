@@ -1,0 +1,10 @@
+.admin-relations {
+  background: rgba(157, 1, 1, 0.1);
+  border-radius: 12px;
+  box-sizing: border-box;
+  direction: row;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 29px 20px;
+}

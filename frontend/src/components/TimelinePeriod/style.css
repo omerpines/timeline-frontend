@@ -1,0 +1,29 @@
+.timeline__period {
+  bottom: 0px;
+  color: #0A0A0A;
+  cursor: pointer;
+  font: normal normal 600 28px/10px Assistant;
+  height: 48px;
+  letter-spacing: 0px;
+  line-height: 48px;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.timeline__period-image {
+  background-position: center center;
+  background-size: cover;
+  opacity: 0.6;
+}
+
+.timeline__period-image, .timeline__period-shadow {
+  bottom: 48px;
+  height: 253px;
+  left: 0px;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}

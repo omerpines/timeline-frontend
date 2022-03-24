@@ -1,0 +1,93 @@
+.admin-file-input__uploader {
+  border: 3px dashed #DC1F57A6;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+}
+
+.admin-file-input__background {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.5;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.admin-file-input__droparea {
+  align-items: center;
+  background: #DC1F5703;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 329px;
+  justify-content: center;
+  width: 562px;
+}
+
+.admin-file-input__title {
+  color: #474747;
+  font: normal normal bold 42px/65px Assistant;
+  height: 65px;
+  letter-spacing: 0px;
+  opacity: 0.85;
+  text-align: center;
+}
+
+.admin-file-input__subtitle {
+  color: #474747;
+  font: normal normal normal 19px/34px Assistant;
+  height: 34px;
+  letter-spacing: 0px;
+  opacity: 0.4;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.admin-file-input__label {
+  color: #474747;
+  font: normal normal normal 16px/38px Assistant;
+  letter-spacing: 0px;
+  margin-bottom: 30px;
+  text-align: right;
+}
+
+.admin-file-input__droparea:hover .admin-file-input__subtitle {
+  opacity: 1;
+}
+
+.admin-file-input--left .admin-file-input__uploader {
+  border-radius: 22px 0px 0px 22px;
+}
+
+.admin-file-input--right .admin-file-input__uploader{
+  border-left-width: 0px;
+  border-radius: 0px 22px 22px 0px;
+}
+
+.admin-file-input--flex {
+  flex-basis: 0px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.admin-file-input--flex .admin-file-input__droparea {
+  width: auto;
+}
+
+.admin-file-input--small .admin-file-input__title {
+  font: normal normal bold 29px/7px Assistant;
+  height: 30px;
+}
+
+.admin-file-input--small .admin-file-input__subtitle {
+  font: normal normal normal 13px/7px Assistant;
+}
+
+.admin-file-input--small .admin-file-input__droparea {
+  height: 240px;
+}

@@ -1,0 +1,46 @@
+.timeline-book-group {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 3px 8px #0000000D;
+  box-sizing: border-box;
+  color: #474747;
+  display: flex;
+  font: normal normal 300 24px/10px Assistant;
+  height: 63px;
+  letter-spacing: 0px;
+  line-height: 33px;
+  overflow: hidden;
+  padding-top: 6px;
+  position: absolute;
+  right: 0px;
+  text-align: right;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  top: 164px;
+  white-space: nowrap;
+}
+
+.timeline-book-group__book {
+  background-color: white;
+  border-radius: 15px 15px 0px 0px;
+  color: #474747;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font: normal normal 600 28px/51px Assistant;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.2s ease-in background-color;
+}
+
+.timeline-book-group__book:first-child {
+  border-top-left-radius: 0px;
+}
+
+.timeline-book-group__book:last-child {
+  border-top-right-radius: 0px;
+}
+
+.timeline-book-group__book:hover {
+  background-color: #F3F3F3;
+}

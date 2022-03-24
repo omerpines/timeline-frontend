@@ -1,0 +1,229 @@
+.story-preview {
+  background: white;
+  border-radius: 10px;
+  bottom: 50px;
+  box-shadow: 0px 3px 8px #0000000D;
+  box-sizing: border-box;
+  direction: rtl;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  transform: translateX(-50%);
+  transition-duration: 0.2s;
+  transition-property: height, width, margin-top;
+  transition-timing-function: ease-in;
+  z-index: 300;
+}
+
+.story-preview::before {
+  background: white;
+  border-radius: 0px 0px 10px 0px;
+  bottom: -8px;
+  content: '';
+  height: 20px;
+  left: 50%;
+  position: absolute;
+  transform: rotate(45deg) translateX(-25%);
+  transform-origin: left top;
+  width: 20px;
+  z-index: -5;
+}
+
+.story-preview--small {
+  height: 100px;
+  margin-top: -130px;
+  padding: 20px 25px 15px 15px;
+  width: 300px;
+}
+
+.story-preview--medium {
+  height: 150px;
+  margin-top: -210px;
+  width: 360px;
+}
+
+.story-preview--large {
+  box-sizing: border-box;
+  height: 430px;
+  margin-top: -480px;
+  overflow: hidden;
+  padding: 29px 23px 25px 17px;
+  width: 360px;
+}
+
+.story-preview.story-preview--small::before {
+  bottom: -5px;
+}
+
+.story-preview.story-preview--medium::before {
+  bottom: -10px;
+  height: 30px;
+  width: 30px;
+}
+
+.story-preview.story-preview--large::before {
+  bottom: -12px;
+  height: 40px;
+  width: 40px;
+}
+
+.story-preview__header {
+  direction: ltr;
+  display: flex;
+  width: 100%;
+}
+
+.story-preview__image-box {
+  background-size: cover;
+  transition: height 0.2s ease-in;
+}
+
+.story-preview--medium .story-preview__image-box {
+  border: 1px solid white;
+  border-radius: 10px 10px 0px 0px;
+  border-width: 2px 2px 0px 2px;
+  box-sizing: border-box;
+  height: 60px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.story-preview--large .story-preview__image-box {
+  border: 0.5px solid #707070;
+  border-radius: 5px;
+  height: 219px;
+  margin-bottom: 13px;
+  width: 100%;
+}
+
+.story-preview__header {
+  position: relative;
+}
+
+.story-preview--small .story-preview__header {
+  height: 100%;
+}
+
+.story-preview--medium .story-preview__header {
+  box-sizing: border-box;
+  height: calc(100% - 80px);
+  padding-right: 30px;
+}
+
+.story-preview__more-arrow {
+  align-items: center;
+  color: #707070;
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 100%;
+  justify-content: center;
+  font-size: 15px;
+  opacity: 1;
+  overflow: hidden;
+  text-decoration: none;
+  transition-duration: 0.2s;
+  transition-property: width, opacity;
+  transition-timing-function: ease-in;
+  width: 25px;
+}
+
+.story-preview--medium .story-preview__more-arrow {
+  height: 100%;
+  width: 51px;
+}
+
+.story-preview--large .story-preview__more-arrow {
+  opacity: 0;
+  width: 0px;
+}
+
+.story-preview__titles {
+  direction: rtl;
+  flex-basis: 0px;
+  flex-grow: 1;
+  width: 0px;
+}
+
+.story-preview__title {
+  color: #474747;
+  flex-grow: 0;
+  font: normal normal 600 22px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.story-preview--medium .story-preview__title {
+  margin-bottom: 10px;
+}
+
+.story-preview--large .story-preview__title {
+  margin-bottom: 10px;
+}
+
+.story-preview__subtitle {
+  color: #474747;
+  flex-grow: 0;
+  font: normal normal normal 18px/23px Assistant;
+  letter-spacing: 0px;
+  opacity: 0.8;
+  text-align: right;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.story-preview--large .story-preview__subtitle {
+  margin-bottom: 30px;
+}
+
+.story-preview__characters {
+  display: flex;
+  flex-direction: row-reverse;
+  left: 51px;
+  padding-left: 10px;
+  position: absolute;
+  top: 0px;
+}
+
+.story-preview--large .story-preview__characters {
+  left: 0px;
+}
+
+.story-preview__character {
+  background-color: #D8D8D8;
+  border: 2px solid #FFFFFF;
+  border-radius: 16px;
+  display: block;
+  height: 30px;
+  margin-left: -15px;
+  width: 30px;
+}
+
+@keyframes moreFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.story-preview__more-button {
+  animation: 0.2s ease-in moreFade forwards;
+  background: #DC1F57;
+  border-radius: 25px;
+  color: #FFFFFF;
+  display: block;
+  font: normal normal normal 18px Assistant;
+  height: 49px;
+  letter-spacing: 0px;
+  line-height: 49px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}

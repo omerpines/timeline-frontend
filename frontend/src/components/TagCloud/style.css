@@ -1,0 +1,11 @@
+.tag-cloud {
+  direction: rtl;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.tag-cloud__tag {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}

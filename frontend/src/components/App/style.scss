@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Tinos&display=swap');
+@import '../../scss/font-awesome.scss';
+
+html, body, #root {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+}
+
+.app__layout-horizontal {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.app__layout-vertical {
+  display: flex;
+  flex-basis: 0px;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}

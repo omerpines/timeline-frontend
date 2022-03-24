@@ -1,0 +1,38 @@
+.character-relation-block__row {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 37px;
+}
+
+.character-relation-block__character {
+  margin-bottom: 20px;
+}
+
+.character-relation-block__reference {
+  flex-grow: 1;
+  margin-bottom: 0px;
+  margin-left: 35px;
+}
+
+.character-relation-block__add {
+  align-items: center;
+  background: #DC1F57;
+  border-radius: 25px;
+  border-width: 0px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  flex-grow: 0;
+  font: normal normal 600 22px/18px Assistant;
+  height: 50px;
+  justify-content: center;
+  letter-spacing: 0px;
+  outline: none;
+  text-align: center;
+  width: 230px;
+}
+
+.character-relation-block__relations {
+  min-height: 160px;
+}

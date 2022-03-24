@@ -1,0 +1,16 @@
+.logo {
+  align-items: center;
+  background: white;
+  border-radius: 0px 0px 8px 8px;
+  box-shadow: 0px 3px 6px #00000029;
+  cursor: pointer;
+  display: flex;
+  height: 73px;
+  justify-content: center;
+  left: 50%;
+  margin-left: -67px;
+  position: fixed;
+  top: 0px;
+  width: 139px;
+  z-index: 4500;
+}

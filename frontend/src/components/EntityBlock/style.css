@@ -1,0 +1,18 @@
+.entity-block {
+  align-items: center;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 3px 8px #6704041A;
+  box-sizing: border-box;
+  color: #474747;
+  direction: rtl;
+  display: flex;
+  font: normal normal normal 20px/35px Assistant;
+  height: 80px;
+  letter-spacing: 0px;
+  margin-bottom: 30px;
+  padding: 0px 30px;
+  text-align: right;
+  text-decoration: none;
+  width: 256px;
+}

@@ -1,0 +1,38 @@
+import types from 'store/actionTypes';
+
+const initialValue = {
+  name: '',
+  endDate: '100001',
+  fromDate: '100001',
+  showTimeOnSite: false,
+  attribution: '',
+  gender: 'male',
+  area: '',
+  roles: [],
+  tags: '',
+  image: null,
+  summary: '',
+  content: '',
+  timeline: '',
+  appearances: '',
+  quote: '',
+  characters: [],
+  shortDescription: '',
+  links: '',
+  media: [],
+};
+
+const characterForm = (state = initialValue, action) => {
+  switch (action.type) {
+    case types.CHARACTER_RESET: {
+      return initialValue;
+    } case types.CHARACTER_UPDATE: {
+      return { ...state, [action.param]: action.value };
+    } case types.CHARACTER_FETCH_SUCCESS: {
+      return action.data;
+    } default:
+      return state;
+  }
+};
+
+export default characterForm;

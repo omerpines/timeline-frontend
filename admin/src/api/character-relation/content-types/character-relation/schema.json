@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "character_relations",
+  "info": {
+    "singularName": "character-relation",
+    "pluralName": "character-relations",
+    "displayName": "CharacterRelation"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "character": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::character.character"
+    },
+    "related": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::character.character"
+    },
+    "reference": {
+      "type": "enumeration",
+      "enum": [
+        "family",
+        "brother",
+        "sister",
+        "son",
+        "daughter",
+        "father",
+        "mother",
+        "grandfather",
+        "grandmother",
+        "husband",
+        "wife",
+        "concubine",
+        "uncle",
+        "aunt",
+        "cousin_m",
+        "cousin_f"
+      ]
+    }
+  }
+}

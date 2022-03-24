@@ -1,0 +1,120 @@
+.media-modal__box {
+  background: white;
+  border-radius: 20px;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  height: 642px;
+  left: 50%;
+  max-height: 642px;
+  max-width: 1058px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 40px);
+}
+
+.media-modal__header {
+  box-shadow: 0px 8px 13px #00000029;
+  padding: 17px 0px;
+}
+
+.media-modal__title {
+  color: #474747;
+  font: normal normal 600 36px/47px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+  padding: 0px 50px;
+}
+
+.media-modal__footer {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0px 63px;
+}
+
+.media-modal__submit-button {
+  background: #DC1F57;
+  border-radius: 25px;
+  border-width: 0px;
+  box-shadow: 0px 3px 6px #00000029;
+  color: #FFFFFF;
+  cursor: pointer;
+  font: normal normal 600 22px/51px Assistant;
+  height: 51px;
+  letter-spacing: 0px;
+  text-align: center;
+  outline: none;
+  width: 363px;
+}
+
+.media-modal__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.media-modal__via-link {
+  align-items: center;
+  display: flex;
+  padding: 41px 67px 84px 96px;
+}
+
+.media-modal__link-input {
+  flex-grow: 1;
+  margin-left: 53px;
+}
+
+.media-modal__add-link-button {
+  background: transparent;
+  border: 1px solid #DC1F57;
+  border-radius: 25px;
+  color: #000000;
+  cursor: pointer;
+  height: 49px;
+  text-align: center;
+  font: normal normal normal 22px/49px Assistant;
+  letter-spacing: 0px;
+  width: 205px;
+}
+
+.media-modal__links {
+  flex-basis: 0px;
+  flex-grow: 1;
+  padding: 0px 105px;
+}
+
+.media-modal__links .scrollbar-container {
+  right: 87px;
+}
+
+.media-modal__links-content {
+  padding: 10px 0px;
+}
+
+.media-modal__link {
+  align-items: center;
+  border: 2px solid #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px #00000029;
+  box-sizing: border-box;
+  display: flex;
+  height: 80px;
+  margin-bottom: 28px;
+  padding: 3px;
+}
+
+.media-modal__link-hyper {
+  color: #474747;
+  flex-grow: 1;
+  font: normal normal normal 16px/21px Assistant;
+  letter-spacing: 0px;
+  padding-left: 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media-modal__delete-link {
+  cursor: pointer;
+  margin-left: 30px;
+}

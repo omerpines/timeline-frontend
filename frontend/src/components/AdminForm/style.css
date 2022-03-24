@@ -1,0 +1,115 @@
+.admin-form {
+  background: white;
+  box-shadow: 0px 15px 20px #0000001A;
+  box-sizing: border-box;
+  border-radius: 15px;
+  direction: rtl;
+  margin-bottom: 107px;
+  padding: 40px 65px;
+  width: 100%;
+}
+
+.admin-form__header {
+  color: #474747;
+  font: normal normal 600 22px/31px Assistant;
+  letter-spacing: 0px;
+  margin-bottom: 40px;
+  text-align: right;
+}
+
+.admin-form__columns {
+  direction: rtl;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-form__column {
+  flex-basis: 0px;
+  flex-grow: 1;
+  margin-left: 50px;
+}
+
+.admin-form__column:last-child {
+  margin-left: 0px;
+}
+
+.admin-form__column--no-grow {
+  flex-grow: 0;
+}
+
+.admin-form__label {
+  color: #474747;
+  font: normal normal normal 16px/21px Assistant;
+  height: 21px;
+  letter-spacing: 0px;
+  margin-bottom: 8px;
+  text-align: right;
+}
+
+.admin-form__text {
+  background: white;
+  border: 1px solid #DEDEDE;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #474747;
+  direction: rtl;
+  font: normal normal normal 22px/31px Assistant;
+  height: 60px;
+  letter-spacing: 0px;
+  outline: none;
+  padding: 16px;
+  text-align: right;
+  width: 100%;
+}
+
+.admin-form__text::placeholder {
+  opacity: 0.4;
+}
+
+.admin-form__text--cut-left {
+  border-left-width: 0px;
+  border-radius: 0px 8px 8px 0px;
+}
+
+.admin-form__input-toggler {
+  background: #DEDEDE;
+  border: 1px solid #DEDEDE;
+  border-radius: 8px 0px 0px 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font: normal normal normal 22px/31px Assistant;
+  font-weight: bold;
+  height: 60px;
+  letter-spacing: 0px;
+  padding: 16px;
+}
+
+.admin-form__between {
+  color: #474747;
+  font: normal normal normal 22px/60px Assistant;
+  height: 60px;
+  letter-spacing: 0px;
+  margin-left: 9px;
+  margin-right: 8px;
+  opacity: 0.4;
+  text-align: right;
+  width: 28px;
+}
+
+.admin-form__textarea {
+  border: 1px solid #DEDEDE;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #474747;
+  font: normal normal normal 22px/31px Assistant;
+  letter-spacing: 0px;
+  max-width: 100%;
+  min-height: 333px;
+  padding: 16px;
+  text-align: right;
+  width: 100%;
+}
+
+.admin-form__textarea::placeholder {
+  opacity: 0.4;
+}

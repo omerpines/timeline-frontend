@@ -1,0 +1,63 @@
+.dimensional {
+  background: #000033;
+  flex-grow: 1;
+  margin: 0px;
+  overflow: hidden;
+  padding: 0px;
+  position: relative;
+  transition: filter 0.2s ease-in-out;
+}
+
+.dimensional--blurred {
+  filter: blur(4px);
+  transform: translate3d(0, 0, 0);
+}
+
+.dimensional__nodes {
+  height: 100%;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+.dimensional__item {
+  display: block;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  z-index: 100;
+}
+
+.dimensional__item::before {
+  background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 80%);
+  content: '';
+  left: -25px;
+  position: absolute;
+  top: -18px;
+  height: 50px;
+  width: 50px;
+}
+
+.dimensional__item-link {
+  background-color: inherit;
+  border-radius: 25px;
+  box-shadow: -7px -7px 20px 5px inset rgba(0, 0, 0, 0.75);
+  display: block;
+  height: 50px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 50px;
+}
+
+.dimensional__canvas {
+  left: 0px;
+  pointer-events: none;
+  position: absolute;
+  top: 0px;
+  z-index: 200;
+}
+
+.dimensional__canvas.dimensional__canvas--road {
+  z-index: 80;
+}

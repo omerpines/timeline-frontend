@@ -1,0 +1,46 @@
+.timeline-character-group {
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 16px;
+  box-shadow: 0px 0px 3px #00000029;
+  display: flex;
+  direction: rtl;
+  flex-direction: row;
+  height: 32px;
+  overflow: hidden;
+  padding: 0px 5px;
+  position: absolute;
+  right: 0px;
+  top: 47px;
+}
+
+.timeline-character-group__text {
+  color: #474747;
+  font: normal normal normal 18px/32px Assistant;
+  letter-spacing: 0px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.timeline-character-group__characters {
+  display: flex;
+  direction: ltr;
+  flex-direction: row-reverse;
+  left: 8px;
+  position: relative;
+}
+
+.timeline-character-group__character {
+  margin-left: -10px;
+  order: 2;
+}
+
+.timeline-character-group__more {
+  color: #474747;
+  font: normal normal normal 18px/32px Assistant;
+  letter-spacing: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+  order: 1;
+  text-align: right;
+}

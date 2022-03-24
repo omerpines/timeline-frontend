@@ -1,0 +1,27 @@
+.character-aside__title {
+  align-items: center;
+  color: #474747;
+  direction: rtl;
+  display: flex;
+  font: normal normal 600 42px/10px Assistant;
+  letter-spacing: 0px;
+  margin-bottom: 7px;
+  text-align: right;
+}
+
+.character-aside__dot {
+  border: 5px solid white;
+  border-radius: 47px;
+  box-shadow: 0px 3px 6px #00000029;
+  height: 47px;
+  margin-left: 11px;
+  pointer-events: none;
+  width: 47px;
+}
+
+.character-aside__subtitle {
+  color: #474747;
+  font: normal normal normal 36px/33px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+}

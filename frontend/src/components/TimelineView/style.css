@@ -1,0 +1,51 @@
+.timeline {
+  flex-grow: 0;
+  height: 293px;
+  position: relative;
+  transition: height ease-in 0.2s;
+}
+
+.timeline--admin {
+  bottom: 0px;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  z-index: 20000;
+}
+
+.timeline--minimize {
+  height: 0px;
+}
+
+.timeline__container {
+  background: white;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  list-style: none;
+  margin: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-top: 58px;
+  position: relative;
+  width: 100%;
+}
+
+.timeline__minimize {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: -5px 3px 15px #00000045 inset;
+  border-radius: 16px 16px 0px 0px;
+  box-sizing: border-box;
+  color: #474747;
+  cursor: pointer;
+  font: normal normal 600 28px/36px Assistant;
+  height: 58px;
+  letter-spacing: 0px;
+  text-align: right;
+  padding: 11px 30px;
+  position: absolute;
+  right: 100px;
+  top: -58px;
+  width: 363px;
+  z-index: 200;
+}

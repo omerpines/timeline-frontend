@@ -1,0 +1,93 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stories",
+  "info": {
+    "singularName": "story",
+    "pluralName": "stories",
+    "displayName": "Story",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "fromDate": {
+      "type": "integer",
+      "max": 120000,
+      "min": 80000,
+      "required": true,
+      "default": 100001
+    },
+    "endDate": {
+      "type": "integer",
+      "default": 100001,
+      "required": true,
+      "min": 80000,
+      "max": 120000
+    },
+    "showTimeOnSite": {
+      "type": "boolean",
+      "default": false
+    },
+    "age": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "richtext"
+    },
+    "plot": {
+      "type": "richtext"
+    },
+    "references": {
+      "type": "richtext"
+    },
+    "location": {
+      "type": "richtext"
+    },
+    "path": {
+      "type": "integer",
+      "max": 3,
+      "min": 1,
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "default": "#ffffff",
+      "regex": "^#(?:[0-9a-fA-F]{3}){1,2}$",
+      "required": true
+    },
+    "tags": {
+      "type": "string"
+    },
+    "quote": {
+      "type": "string"
+    },
+    "characters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::character.character"
+    },
+    "secondaryCharacters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::character.character"
+    },
+    "book": {
+      "type": "integer"
+    },
+    "links": {
+      "type": "richtext"
+    },
+    "shortDescription": {
+      "type": "string"
+    },
+    "media": {
+      "type": "json"
+    }
+  }
+}

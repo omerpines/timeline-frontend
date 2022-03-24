@@ -1,0 +1,29 @@
+.admin-date-input {
+  direction: rtl;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.admin-date-input .admin-form__label {
+  width: 100%;
+}
+
+.admin-date-input .admin-form__text {
+  flex-basis: 0px;
+  flex-grow: 1;
+}
+
+.admin-date-input .admin-form__between {
+  flex-grow: 0;
+}
+
+.admin-form__input-toggler--ad {
+  background: #DC1F57;
+  color: white;
+}
+
+.admin-date-input__show {
+  display: flex;
+  margin-top: 15px;
+  width: 100%;
+}

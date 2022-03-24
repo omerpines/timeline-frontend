@@ -1,0 +1,20 @@
+.timeline__story {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 3px 8px #0000000D;
+  box-sizing: border-box;
+  color: #474747;
+  font: normal normal 300 24px/10px Assistant;
+  height: 63px;
+  letter-spacing: 0px;
+  line-height: 33px;
+  overflow: hidden;
+  padding: 15px;
+  position: absolute;
+  right: 0px;
+  text-align: right;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  top: 92px;
+  white-space: nowrap;
+}
