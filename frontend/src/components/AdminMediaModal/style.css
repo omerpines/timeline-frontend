@@ -16,7 +16,7 @@
 
 .media-modal__header {
   box-shadow: 0px 8px 13px #00000029;
-  padding: 17px 0px;
+  padding: 17px 0px 0px;
 }
 
 .media-modal__title {
@@ -50,14 +50,23 @@
 
 .media-modal__body {
   display: flex;
+  flex-basis: 0px;
   flex-direction: column;
   flex-grow: 1;
+  overflow: hidden;
 }
 
-.media-modal__via-link {
+.media-modal__via-link, .media-modal__via-upload {
   align-items: center;
   display: flex;
   padding: 41px 67px 84px 96px;
+}
+
+.media-modal__via-upload {
+  display: block;
+  height: 100%;
+  padding-bottom: 0px;
+  padding-top: 21px;
 }
 
 .media-modal__link-input {
@@ -78,21 +87,30 @@
   width: 205px;
 }
 
-.media-modal__links {
+.media-modal__links, .media-modal__uploads {
   flex-basis: 0px;
   flex-grow: 1;
   padding: 0px 105px;
+}
+
+.media-modal__uploads {
+  height: 342px;
+  padding: 0px 40px 0px 2px;
 }
 
 .media-modal__links .scrollbar-container {
   right: 87px;
 }
 
-.media-modal__links-content {
+.media-modal__uploads .scrollbar-container {
+  right: 0px;
+}
+
+.media-modal__links-content, .media-modal__uploads-content {
   padding: 10px 0px;
 }
 
-.media-modal__link {
+.media-modal__link, .media-modal__upload {
   align-items: center;
   border: 2px solid #FFFFFF;
   border-radius: 10px;
@@ -104,7 +122,7 @@
   padding: 3px;
 }
 
-.media-modal__link-hyper {
+.media-modal__link-hyper, .media-modal__upload-name {
   color: #474747;
   flex-grow: 1;
   font: normal normal normal 16px/21px Assistant;
@@ -114,7 +132,12 @@
   white-space: nowrap;
 }
 
-.media-modal__delete-link {
+.media-modal__delete-link, .media-modal__delete-upload {
   cursor: pointer;
   margin-left: 30px;
+}
+
+.media-modal__file-input, .media-modal__file-input .admin-file-input__droparea {
+  height: 342px;
+  width: 456px;
 }

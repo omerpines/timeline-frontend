@@ -114,10 +114,18 @@ const renderYoutube = media => (
   <YouTube key={media.id} videoId={media.youtubeId} opts={youtubeOpts} />
 );
 
+const renderNewImage = media => {
+  const style = { backgroundImage: `url(${media.url})` };
+  return (
+    <div className="admin-media__image admin-media__new-image" style={style} key={media.id} />
+  );
+};
+
 const renderMedia = (t, onDelete, onChangeTitle, onChangeDescription) => media => {
   let thumb = null;
-  if      (media.type === 'image') thumb = renderImage(media);
-  else if (media.type === 'youtube') thumb = renderYoutube(media);
+  if      (media.type === 'image')    thumb = renderImage(media);
+  else if (media.type === 'youtube')  thumb = renderYoutube(media);
+  else if (media.type === 'newImage') thumb = renderNewImage(media);
 
   return (
     <li className="admin-media__media" key={media.id}>

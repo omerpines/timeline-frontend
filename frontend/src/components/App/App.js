@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import mergeRanges from 'merge-ranges';
 import DimensionalView from 'components/DimensionalView';
 import TimelineView from 'components/TimelineView';
@@ -12,10 +13,12 @@ import BookAside from 'components/BookAside';
 import PeriodAside from 'components/PeriodAside';
 import SecuredPart from 'components/SecuredPart';
 import Logo from 'components/Logo';
+import Search from 'components/SearchBar';
 import useData from 'hooks/useData';
 import config from 'constants/config';
 import { inRange } from 'helpers/util';
 import { getStoryLink, getCharacterLink, getEventLink, getBookLink, getPeriodLink } from 'helpers/urls';
+import { isDataLoading } from 'store/selectors/data';
 import './style.scss';
 
 const storyLink = getStoryLink(':id');
@@ -150,6 +153,8 @@ const useWelcomeModal = () => {
 function App() {
   const data = useData();
 
+  const isLoading = useSelector(isDataLoading);
+
   const [rangeData, min, max, current, setCurrent] = useScroll(data);
   const [filteredData, onChangePeriod] = useFilters(rangeData);
   const characterGroups = useCharacterGroups(filteredData);
@@ -178,7 +183,10 @@ function App() {
     loop();
 
     return () => window.setTimeout(triggerResize, 0);
+    
   }, [minimized]);
+
+  if (isLoading) return 'loading';
 
   return (
     <Routes>
@@ -199,6 +207,7 @@ function App() {
       }/>
       <Route path="*" element={
         <div className="app">
+          <Search/>
           <Logo />
           <div className="app__layout-horizontal">
             <div className="app__layout-vertical">

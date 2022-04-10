@@ -1,0 +1,86 @@
+.auth__body p {
+    margin: 30px 0px;
+    color: #474747;
+}
+.modal__header img{
+    cursor: pointer;
+}
+form {
+    text-align: center;
+}
+
+.formDiv .multiInputDiv {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.formDiv .multiInputDiv .inputDiv {
+    width: 45%;
+    text-align: right;
+}
+
+.formDiv .inputDiv {
+    text-align: right;
+}
+
+.formDiv .inputDiv input,
+.formDiv .inputDiv textarea {
+    width: 100%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DEDEDE;
+    border-radius: 8px;
+    height: 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.formDiv .inputDiv label {
+    font-size: 16px;
+    color: #474747;
+    text-align: right;
+}
+
+.formDiv .inputDiv textarea {
+    height: 200px;
+}
+
+.formBtn {
+    background: #DC1F57 0% 0% no-repeat padding-box;
+    border-radius: 25px;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    max-width: 40%;
+    margin: auto;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .auth__box {
+        min-height: initial;
+        max-height: initial;
+        width: calc(86vw - 20px);
+    }
+    .modal__header{
+        padding-top: 30px;
+    }
+    .formDiv .multiInputDiv{
+        display: block;
+    }
+    .formDiv .multiInputDiv .inputDiv{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .formBtn{
+        max-width: 100%;
+    }
+}

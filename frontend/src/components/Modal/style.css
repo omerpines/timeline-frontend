@@ -31,3 +31,7 @@
 .modal__box {
   pointer-events: auto;
 }
+.modal__title{
+  font-family: Assistant;
+  font-weight: 600;
+}

@@ -25,3 +25,11 @@
   top: 20px;
   z-index: 100;
 }
+@media screen and (max-width: 768px) {
+.quote-block__text{
+  font-size: 20px;
+}
+.quote-block i{
+  font-size: 18px;
+}
+}

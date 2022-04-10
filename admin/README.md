@@ -17,9 +17,9 @@ yarn develop
 Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)
 
 ```
-npm run start
+NODE_ENV=production npm run start
 # or
-yarn start
+NODE_ENV=production yarn start
 ```
 
 ### `build`
@@ -27,9 +27,9 @@ yarn start
 Build your admin panel. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-build)
 
 ```
-npm run build
+NODE_ENV=production npm run build
 # or
-yarn build
+NODE_ENV=production yarn build
 ```
 
 ## ⚙️ Deployment
@@ -55,3 +55,25 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 ---
 
 <sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+
+## Permissions
+
+Permissions are accessible through the admin panel's Settings -> Users & Permissions Plugin -> Roles tab.
+
+The required permissions are:
+For Authenticated:
+
+- Book: all
+- Character: all
+- Event: all
+- Period: all
+- Story: all
+- Upload: all
+
+For Public:
+
+- Book: find
+- Character: find
+- Event: find
+- Period: find
+- Story: find

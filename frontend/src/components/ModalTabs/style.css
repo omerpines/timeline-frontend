@@ -1,4 +1,5 @@
 .modal-tabs {
+  direction: rtl;
   display: flex;
   list-style: none;
   padding: 0px;
@@ -23,7 +24,7 @@
 
 .modal-tabs__tab--selected::after {
   background: #DC1F57;
-  bottom: 6px;
+  bottom: 0px;
   content: '';
   height: 6px;
   left: 0px;

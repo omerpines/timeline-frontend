@@ -12,6 +12,7 @@ import AdminEventList from 'components/AdminEventList';
 import AdminEventForm from 'components/AdminEventForm';
 import AdminBookList from 'components/AdminBookList';
 import AdminBookForm from 'components/AdminBookForm';
+import AdminDashboard from 'components/AdminDashboard';
 import './style.css';
 
 const navLinkClassNameFn = ({ isActive }) => (isActive ? 'admin__nav-link admin__nav-link--active' : 'admin__nav-link');
@@ -30,22 +31,22 @@ const AdminPanel = () => {
           <AdminWelcome />
           <nav className="admin__nav">
             <NavLink to="/admin" className={navLinkClassNameFn} end>
-              {t('admin.link.dashboard')}
+              <i className='fa fa-plus'></i> {t('admin.link.dashboard')}
             </NavLink>
             <NavLink to="/admin/periods" className={navLinkClassNameFn}>
-              {t('admin.link.period')}
+            <i className='fa fa-plus'></i> {t('admin.link.period')}
             </NavLink>
             <NavLink to="/admin/books" className={navLinkClassNameFn}>
-              {t('admin.link.book')}
+            <i className='fa fa-plus'></i> {t('admin.link.book')}
             </NavLink>
             <NavLink to="/admin/stories" className={navLinkClassNameFn}>
-              {t('admin.link.story')}
+            <i className='fa fa-plus'></i> {t('admin.link.story')}
             </NavLink>
             <NavLink to="/admin/events" className={navLinkClassNameFn}>
-              {t('admin.link.event')}
+            <i className='fa fa-plus'></i> {t('admin.link.event')}
             </NavLink>
             <NavLink to="/admin/characters" className={navLinkClassNameFn}>
-              {t('admin.link.character')}
+            <i className='fa fa-plus'></i> {t('admin.link.character')}
             </NavLink>
           </nav>
         </aside>
@@ -66,6 +67,7 @@ const AdminPanel = () => {
             <Route path="books" element={<AdminBookList />} />
             <Route path="books/add" element={<AdminBookForm editMode={false} />} />
             <Route path="books/edit/:id" element={<AdminBookForm editMode={false} />} />
+            <Route path="/" element={<AdminDashboard />} />
             <Route path="*" element="TBD" />
           </Routes>
         </div>

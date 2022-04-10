@@ -35,3 +35,35 @@
   text-align: center;
   width: 351px;
 }
+
+@media screen and (max-width: 768px) {
+  .welcome__footer{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 90px;
+    bottom: 50px;
+    left: 0px;
+  }
+  .welcome__body{
+    flex-grow: initial;
+  }
+  .welcome__box {
+    padding: 0px 20px;
+    width: calc(84vw - 20px);
+  }
+
+  .welcome__title {
+    max-width: 100%;
+  }
+
+  .modal__title {
+    font-size: 24px !important;
+  }
+
+  .welcome__text,
+  .welcome__link {
+    font-size: 16px;
+    line-height: 25px;
+  }
+}

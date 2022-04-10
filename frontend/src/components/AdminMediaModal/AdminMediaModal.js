@@ -1,23 +1,31 @@
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next'; 
+import ScrollArea from 'react-scrollbar/dist/no-css';
 import Modal from 'components/Modal';
 import ModalTabs from 'components/ModalTabs';
-import ScrollArea from 'react-scrollbar/dist/no-css';
+import AdminFileInput from 'components/AdminFileInput';
 import { v4 as uuid } from 'uuid';
-import { getYoutubeId } from 'helpers/util';
+import { getYoutubeId, getFileUrl } from 'helpers/util';
 import './style.css';
 
 const emptyList = [];
 
 const tabOptions = [
-  ['viaLink', 'mediaModal.viaLink'],
   ['viaUpload', 'mediaModal.viaUpload'],
+  ['viaLink', 'mediaModal.viaLink'],
 ];
 
 const renderLink = onDelete => link => (
   <div className="media-modal__link" key={link}>
-  <div className="media-modal__link-hyper">{link}</div>
+    <div className="media-modal__link-hyper">{link}</div>
     <i className="fa fa-times media-modal__delete-link" onClick={onDelete} data-id={link} />
+  </div>
+);
+
+const renderUpload = onDelete => upload => (
+  <div className="media-modal__upload" key={upload.name}>
+    <div className="media-modal__upload-name">{upload.name}</div>
+    <i className="fa fa-times media-modal__delete-upload" onClick={onDelete} data-name={upload.name} />
   </div>
 );
 
@@ -27,12 +35,20 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
   const [tab, setTab] = useState('viaLink');
   const [link, setLink] = useState('');
   const [links, setLinks] = useState(emptyList);
+  const [uploads, setUploads] = useState(emptyList);
 
   const onChangeLink = useCallback(e => {
     setLink(e.currentTarget.value);
   }, []);
 
+  const onChangeUploadFile = useCallback((name, file) => {
+    if (!file || !file.name) return;
+
+    setUploads(u => [...u, file]);
+  }, []);
+
   const onAddLink = useCallback(() => {
+    if (!link) return;
     setLinks(ls => [...ls, link]);
     setLink('');
   }, [link]);
@@ -40,6 +56,11 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
   const onDeleteLink = useCallback(e => {
     const { id } = e.currentTarget.dataset;
     setLinks(ls => ls.filter(l => l !== id));
+  }, []);
+
+  const onDeleteUpload = useCallback(e => {
+    const { name } = e.currentTarget.dataset;
+    setUploads(us => us.filter(u => u.name !== name));
   }, []);
 
   const onSubmitInner = useCallback(() => {
@@ -61,8 +82,19 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
         description: '',
       };
     });
-    onSubmit(objectLinks);
-  }, [links, onSubmit]);
+
+    const objectUploads = uploads.map(upload => {
+      return {
+        id: uuid(),
+        type: 'newImage',
+        file: upload,
+        title: '',
+        description: '',
+        url: getFileUrl(upload),
+      };
+    });
+    onSubmit([...objectUploads, ...objectLinks]);
+  }, [uploads, links, onSubmit]);
 
   return (
     <Modal onClose={onClose}>
@@ -71,6 +103,32 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
           <div className="modal__title media-modal__title">{t('mediaModal.title')}</div>
           <ModalTabs options={tabOptions} value={tab} onChange={setTab} />
         </header>
+        {tab === 'viaUpload' && (
+          <div className="modal__body media-modal__body">
+            <div className="media-modal__via-upload">
+              <div className="admin-form__columns">
+                <div className="admin-form__column">
+                  <AdminFileInput
+                    name="newFile"
+                    noLabel
+                    onChange={onChangeUploadFile}
+                    className="media-modal__file-input"
+                  />
+                </div>
+                <div className="admin-form__column">
+                  <ScrollArea
+                  vertical
+                  smoothScrolling
+                  className="aside__scrollarea media-modal__uploads"
+                  contentClassName="aside__scrollable media-modal__uploads-content"
+                >
+                  {uploads.map(renderUpload(onDeleteUpload))}
+                </ScrollArea>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         {tab === 'viaLink' && (
           <div className="modal__body media-modal__body">
             <div className="media-modal__via-link">

@@ -6,7 +6,7 @@ import './style.css';
 
 const fileTypes = ['jpg', 'png'];
 
-const AdminFileInput = ({ name, value, onChange, label, labelInside, className }) => {
+const AdminFileInput = ({ name, value, onChange, label, labelInside, noLabel, className }) => {
   const { t } = useTranslation();
 
   const onChangeInput = useCallback(val => {
@@ -26,7 +26,7 @@ const AdminFileInput = ({ name, value, onChange, label, labelInside, className }
 
   return (
     <div className={classes}>
-      {!labelInside && <div className="admin-form__label">{t(label)}</div>}
+      {!labelInside && !noLabel && <div className="admin-form__label">{t(label)}</div>}
       <div className="admin-file-input__uploader">
         <div className="admin-file-input__background" style={styles} />
         <FileUploader
@@ -35,7 +35,7 @@ const AdminFileInput = ({ name, value, onChange, label, labelInside, className }
           file={fileTypes}
           classes="admin-file-input__droparea"
         >
-          {labelInside && <div className="admin-file-input__label">{t(label)}</div>}
+          {labelInside && !noLabel && <div className="admin-file-input__label">{t(label)}</div>}
           <div className="admin-file-input__title">{t('admin.dragFiles')}</div>
           <div className="admin-file-input__subtitle">{t('admin.clickFiles')}</div>
         </FileUploader>

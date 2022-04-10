@@ -48,8 +48,9 @@ const Aside = ({ children, header, className }) => {
     <React.Fragment>
       <div className="aside__shadow" />
       <div className={classes} onWheel={onWheel}>
-        <div className="aside__container">
+        <div className="aside__container ">
           <header className="aside__header">
+            {/* <img src='/imagePreview.png' className='img-fluid'/> */}
             <Link to="/" className="aside__back" onClick={onBack}>
               <div className="aside__back-text">{t('common.back')}</div>
               <i className="fa fa-chevron-right aside__back-icon" />

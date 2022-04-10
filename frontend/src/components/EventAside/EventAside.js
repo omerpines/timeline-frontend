@@ -60,6 +60,9 @@ const EventAside = () => {
     return (
       <React.Fragment>
         <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
+        <div className='aside__header-img'>
+          <img src='/imagePreview.png'/>
+        </div>
         <div className="aside__subtitle">{getLocalized(data, 'shortDescription', lang)}</div>
         {!relatedStory ? false : (
           <div className="aside__subsubtitle">{getLocalized(relatedStory, 'name', lang)}</div>
@@ -71,7 +74,7 @@ const EventAside = () => {
   if (!data) return false;
 
   return (
-    <Aside header={header}>
+    <Aside header={header} className="event__aside">
       <MediaGallery data={data.media} />
       <div className="aside__characters">
         {characterData.map(renderCharacter)}

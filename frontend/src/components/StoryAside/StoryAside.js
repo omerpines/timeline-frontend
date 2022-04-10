@@ -80,7 +80,7 @@ const StoryAside = () => {
   if (!data) return false;
 
   return (
-    <Aside header={header}>
+    <Aside header={header} >
       <div className="aside__characters">
         {data.tags ? (
           <TagCloud tags={data.tags} />

@@ -23,9 +23,55 @@ export function* callApi(method, url, iData, headers) {
   return response;
 }
 
+function* processMediaQueries(data) {
+  const { media } = data;
+  const newMedia = [];
+  
+  const token = yield select(getToken);
+  const tokenHeader = { Authorization: `Bearer ${token}` };
+
+  for (let i = 0, l = media.length; i < l; i += 1) {
+    const m = media[i];
+
+    if (m.type !== 'newImage') {
+      newMedia.push(m);
+      continue;
+    }
+
+    const formData = new FormData();
+    formData.append('files', m.file);
+
+    const response = yield call(axios, {
+      method: 'POST',
+      url: `${config.API}/api/upload`,
+      data: formData,
+      headers: tokenHeader,
+    });
+
+    const url = `${config.API}${response.data[0].url}`;
+
+    newMedia.push({
+      id: m.id,
+      type: 'image',
+      url,
+      title: m.title,
+      description: m.description,
+      isInternal: true,
+      toDelete: false,
+    });
+  }
+
+  return { ...data, media: newMedia };
+}
+
 export function* callAuthenticatedApi(method, url, iData, head) {
-  const params = method === 'GET' ? iData : undefined;
-  let data   = method === 'GET' ? undefined : iData;
+  let pData = iData;
+  if (iData.media && (method === 'POST' || method === 'PUT')) {
+    pData = yield call(processMediaQueries, iData);
+  }
+
+  const params = method === 'GET' ? pData : undefined;
+  let data   = method === 'GET' ? undefined : pData;
 
   const token = yield select(getToken);
   const tokenHeader = { Authorization: `Bearer ${token}` };

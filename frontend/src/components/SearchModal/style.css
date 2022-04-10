@@ -1,0 +1,118 @@
+.search__box{
+  min-height: 550px;
+  max-height: 550px;
+}
+.search__title {
+  color: #474747;
+  font-size: 36px;
+}
+
+.search__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search__header img {
+  cursor: pointer;
+}
+
+.searchInputDiv {
+  margin-top: 30px;
+  width: 100%;
+  text-align: right;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 8px;
+  border: none;
+  position: relative;
+}
+
+.searchInputDiv input {
+  padding: 20px 20px;
+  border: none;
+  width: 80%;
+  text-align: right;
+  color: #474747;
+  font-size: 24px;
+  font-family: Assistant;
+  font-weight: 300;
+}
+.tableBody thead th{
+  font-family: Assistant;
+  font-weight: 200;
+}
+.tableBody tbody td,
+.tableBody table th{
+  font-family: Assistant;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.searchInputDiv i {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: #DC1F57;
+  font-size: 22px;
+}
+
+.tableBody table {
+  border-collapse: collapse;
+  direction: rtl;
+  width: 100%;
+}
+
+.tableBody table td,
+.tableBody table th {
+  font-weight: 100;
+  color: #474747;
+  height: 70px;
+  padding: 0px 20px;
+}
+
+.tableBody table thead {
+  background-color: rgb(91 91 91 / 15%);
+}
+
+.tableBody table td.editText {
+  text-decoration: underline;
+  color: hsl(0deg 0% 60%);
+}
+.tableBody table td:last-child{
+  padding: 0px;
+}
+.tableBody table td:nth-child(1){
+  text-align: left;
+  font-size: 20px;
+}
+.circleDiv {
+  width: 38px;
+  height: 38px;
+  background: #FF9E9E 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 4px solid #FFFFFF;
+  opacity: 1;
+  border-radius: 100%;
+  margin: auto;
+}
+.tableBody table  tbody tr:nth-child(odd) {background: rgb(220 30 87 / 5%);}
+.tableBody table tbody tr:nth-child(even) {background: #FFF}
+.tableBody{
+  height: 450px;
+}
+.tableBody .media-modal__links .scrollbar-container{
+  right: 0px;
+  top: 10px;
+}
+.tableBody .media-modal__links{
+  padding: 0px !important;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .tableBody table td,
+  .tableBody table th{
+    font-size: 18px;
+  }
+}

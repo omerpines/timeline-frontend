@@ -87,7 +87,6 @@ export function* onDeleteBook() {
 export function* addBook({ data }) {
   try {
     const [method, generatePath] = endpoints.CREATE;
-    console.log(data);
     const response = yield call(
       callAuthenticatedApi,
       method,
