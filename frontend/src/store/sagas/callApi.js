@@ -1,6 +1,7 @@
-import { select, call } from 'redux-saga/effects';
+import { select, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import config from 'constants/config';
+import { logoutAuthentication } from 'store/actionCreators/authentication';
 import { getToken } from 'store/selectors/authentication';
 import { prepareApiObject } from 'helpers/util';
 
@@ -86,6 +87,12 @@ export function* callAuthenticatedApi(method, url, iData, head) {
     headers,
     baseURL: config.API,
   });
+
+  if (response.status === 401) {
+    window.localStorage.removeItem('auth');
+    yield put(logoutAuthentication());
+  }
+
   return response;
 }
 

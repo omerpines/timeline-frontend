@@ -94,7 +94,15 @@ export const relationToId = rel => (rel && rel.data ? rel.data.id : null);
 
 export const cleanStringList = s => s.split(',').map(ss => ss.trim()).filter(ss => !!ss);
 
+const youtubeRegexA = /youtube\.com\/watch\?v=([a-zA-Z0-9\-]+)/;
+const youtubeRegexB = /youtu\.be\/([a-zA-Z0-9\-]+)/;
+
 export const getYoutubeId = link => {
-  const a = link.split('/').pop();
-  return a;
+  if (youtubeRegexB.test(link)) {
+    const a = link.split('/').pop();
+    return a;
+  }
+
+  const a = link.match(youtubeRegexA);
+  return a[1];
 };

@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom';
 import { Bezier} from 'bezier-js/dist/bezier';
 import StoryPreview from 'components/StoryPreview';
+import DimensionalPeriod from 'components/DimensionalPeriod';
 import useData from 'hooks/useData';
 import config from 'constants/config';
 import { fromRange, inRange, easeShare, hexToRGBA } from 'helpers/util';
@@ -198,14 +199,14 @@ const useRoad = (containerRef, roadRef, paths) => {
 
     window.addEventListener('resize', resize);
 
-    paths.forEach(p => {
-      ctx.beginPath();
-      ctx.lineCap = 'round';
-      ctx.lineWidth = 3;
-      ctx.moveTo(p.points[0].x, p.points[0].y);
-      ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
-      ctx.stroke();
-    });
+    // paths.forEach(p => {
+    //   ctx.beginPath();
+    //   ctx.lineCap = 'round';
+    //   ctx.lineWidth = 3;
+    //   ctx.moveTo(p.points[0].x, p.points[0].y);
+    //   ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
+    //   ctx.stroke();
+    // });
 
     const roadPaths = calculateRoadPaths(containerRef);
 
@@ -220,6 +221,8 @@ const useRoad = (containerRef, roadRef, paths) => {
     // });
 
     const [rp1, rp2, rp3, rp4] = roadPaths;
+    ctx.globalAlpha = 0.5;
+
     ctx.beginPath();
     ctx.fillStyle = '#DE8909';
     ctx.strokeStyle = '#DE8909';
@@ -254,6 +257,8 @@ const useRoad = (containerRef, roadRef, paths) => {
     ctx.lineTo(rp3.points[0].x, rp3.points[0].y);
     ctx.fill();
     ctx.stroke();
+
+    ctx.globalAlpha = 1;
 
     return () => window.removeEventListener('resize', resize);
   }, [paths]);
@@ -309,12 +314,16 @@ const renderDataPoint = (characters, paths, min, range) => data => {
   );
 }
 
+const renderPeriod = (min, range) => period => (
+  <DimensionalPeriod data={period} min={min} range={range} key={period.id} />
+);
+
 const DimensionalView = ({ data, min, max, onChangeCurrent, children }) => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const roadRef = useRef(null);
 
-  const { characters } = useData();
+  const { characters, periods } = useData();
 
   const paths = usePaths(containerRef);
   const [onDragStart, onDrag, onDragEnd] = useDrag(containerRef, min, max, onChangeCurrent);
@@ -324,6 +333,7 @@ const DimensionalView = ({ data, min, max, onChangeCurrent, children }) => {
   return (
     <div className="dimensional">
       <canvas className="dimensional__canvas dimensional__canvas--road" ref={roadRef} style={{ transform: 'translate(0.5, 0.5)' }} />
+      {periods.map(renderPeriod(min, max - min))}
       <ul
         className="dimensional__nodes"
         ref={containerRef}

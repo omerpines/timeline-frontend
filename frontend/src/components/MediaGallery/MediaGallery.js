@@ -35,12 +35,12 @@ const MediaGallery = ({ data }) => {
   }, [data]);
 
   let leftClasses = 'fa fa-chevron-left media-gallery__icon media-gallery__icon--left';
-  if (shift === data.length - 1) leftClasses += ' media-gallery__icon--hidden';
+  if (data && data.length && shift === data.length - 1) leftClasses += ' media-gallery__icon--hidden';
 
   let rightClasses = 'fa fa-chevron-right media-gallery__icon media-gallery__icon--right';
   if (shift === 0) rightClasses += ' media-gallery__icon--hidden';
 
-  if (!data.length) return false;
+  if (!data || !data.length) return false;
 
   return (
     <div className="media-gallery" ref={ref}>

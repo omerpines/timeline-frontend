@@ -213,5 +213,8 @@ export default {
     "search.type": "סוג",
     "search.edit": "הצג",
     "search.placeholder": "...הקלד שם של דמות, ספר, סיפור או אירוע לחיפוש",
+    "auth.username": "שם משתמש",
+    "auth.password": "סיסמה",
+    "auth.login": "התחברות",
   },
 };

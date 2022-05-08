@@ -2,13 +2,15 @@ import React, { useMemo } from 'react';
 import YouTube from 'react-youtube';
 
 const MediaYoutube = ({ data, width, height, className }) => {
-  const opts = useMemo(() => ({
+  const opts = useMemo(() => (width && height ? {
     width: width.toString(),
     height: height.toString(),
-  }), [width, height]);
+  } : null), [width, height]);
 
   let classes = 'media-youtube';
   if (className) classes += ` ${className}`;
+
+  if (!opts) return false;
 
   return (
     <div className={classes}>

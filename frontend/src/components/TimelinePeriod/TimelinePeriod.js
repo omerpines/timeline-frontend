@@ -43,7 +43,7 @@ const TimelinePeriod = ({ width, data, min, max, onChangePeriod }) => {
   return (
     <Link className="timeline__period" style={styles} to={getPeriodLink(data.id)}>
       {getLocalized(data, 'name', lang)}
-      {imageStyles && <div className="timeline__period-image" style={imageStyles} />}
+      {false && imageStyles && <div className="timeline__period-image" style={imageStyles} />}
       <div className="timeline__period-shadow" style={shadowStyles} />
     </Link>
   );

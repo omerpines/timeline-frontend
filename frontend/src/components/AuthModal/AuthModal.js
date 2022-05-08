@@ -43,20 +43,17 @@ const AuthModal = ({ onClose }) => {
   return (
     <Modal onClose={onClose}>
       <div className="modal__box auth__box">
-        <header className="modal__header auth__header">
-          <div className="modal__title auth__title">{t('auth.title')}</div>
-        </header>
         <div className="modal__body auth__body">
           <input
             type="text"
-            className="auth__username auth__input"
+            className="auth__username auth__input admin-form__text"
             value={username}
             placeholder={t('auth.username')}
             onChange={onChangeUsername}
           />
           <input
             type="password"
-            className="auth__password auth__input"
+            className="auth__password auth__input admin-form__text"
             value={password}
             placeholder={t('auth.password')}
             onChange={onChangePassword}

@@ -65,7 +65,7 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
 
   const onSubmitInner = useCallback(() => {
     const objectLinks = links.map(link => {
-      const isYoutube = link.includes('youtu.be');
+      const isYoutube = link.includes('youtu.be') || link.includes('youtube.com');
       if (isYoutube) return {
         id: uuid(),
         type: 'youtube',

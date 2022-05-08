@@ -18,7 +18,7 @@ const AdminDateInput = ({ onChange, state, fromOnly }) => {
       parseYear(value, isBC(state.fromDate))
     );
     onChange('fromDate', newVal);
-  }, [onChange, state.fromDate]);
+  }, [onChange, state.endDate, state.fromDate]);
 
   const onEndChange = useCallback(e => {
     const value = parseInt(e.currentTarget.value, 10);
@@ -28,7 +28,7 @@ const AdminDateInput = ({ onChange, state, fromOnly }) => {
       parseYear(value, isBC(state.endDate))
     );
     onChange('endDate', newVal);
-  }, [onChange, state.endDate]);
+  }, [onChange, state.fromDate, state.endDate]);
 
   const onShowChange = useCallback(() => {
     onChange('showTimeOnSite', !state.showTimeOnSite);
