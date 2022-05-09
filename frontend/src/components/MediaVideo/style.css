@@ -1,0 +1,7 @@
+.media-video__video {
+  border: 0.5px solid #707070;
+  border-radius: 5px;
+  height: 260px;
+  object-fit: cover;
+  width: 500px;
+}

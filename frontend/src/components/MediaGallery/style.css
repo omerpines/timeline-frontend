@@ -8,11 +8,12 @@
 .media-gallery__gallery {
   display: flex;
   flex-direction: row;
-  right: 0px;
+  height: 100%;
   list-style: none;
   margin: 0px;
   padding: 0px;
   position: relative;
+  right: 0px;
   transition: right 0.2s ease-in;
 }
 

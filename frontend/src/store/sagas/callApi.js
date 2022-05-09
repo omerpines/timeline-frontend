@@ -34,7 +34,7 @@ function* processMediaQueries(data) {
   for (let i = 0, l = media.length; i < l; i += 1) {
     const m = media[i];
 
-    if (m.type !== 'newImage') {
+    if (m.type !== 'newImage' && m.type !== 'newVideo') {
       newMedia.push(m);
       continue;
     }
@@ -51,10 +51,13 @@ function* processMediaQueries(data) {
 
     const url = `${config.API}${response.data[0].url}`;
 
+    let type = 'image';
+    if (m.type === 'newVideo') type = 'video';
+
     newMedia.push({
-      id: m.id,
-      type: 'image',
+      type,
       url,
+      id: m.id,
       title: m.title,
       description: m.description,
       isInternal: true,

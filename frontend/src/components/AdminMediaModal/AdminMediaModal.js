@@ -84,6 +84,16 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
     });
 
     const objectUploads = uploads.map(upload => {
+      const [type] = upload.type.split('/');
+      if (type === 'video') return {
+        id: uuid(),
+        type: 'newVideo',
+        file: upload,
+        title: '',
+        description: '',
+        url: getFileUrl(upload),
+      };
+
       return {
         id: uuid(),
         type: 'newImage',

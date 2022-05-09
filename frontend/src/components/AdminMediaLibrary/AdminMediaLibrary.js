@@ -110,6 +110,10 @@ const renderImage = media => (
   <img className="admin-media__image" src={media.url} key={media.id} />
 );
 
+const renderVideo = media => (
+  <video className="admin-media__video" src={media.url} controls key={media.id} />
+);
+
 const renderYoutube = media => (
   <YouTube key={media.id} videoId={media.youtubeId} opts={youtubeOpts} />
 );
@@ -121,11 +125,19 @@ const renderNewImage = media => {
   );
 };
 
+const renderNewVideo = media => {
+  return (
+    <video className="admin-media__video admin-media__new-video" src={media.url} controls key={media.id} />
+  );
+};
+
 const renderMedia = (t, onDelete, onChangeTitle, onChangeDescription) => media => {
   let thumb = null;
   if      (media.type === 'image')    thumb = renderImage(media);
+  else if (media.type === 'video')    thumb = renderVideo(media);
   else if (media.type === 'youtube')  thumb = renderYoutube(media);
   else if (media.type === 'newImage') thumb = renderNewImage(media);
+  else if (media.type === 'newVideo') thumb = renderNewVideo(media);
 
   return (
     <li className="admin-media__media" key={media.id}>
