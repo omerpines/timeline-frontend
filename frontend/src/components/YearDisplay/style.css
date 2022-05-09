@@ -8,6 +8,7 @@
 
 .year-display.year-display--in-dimensional {
   bottom: 20px;
+  left: 20px;
   position: absolute;
-  right: 20px;
+  z-index: 400;
 }

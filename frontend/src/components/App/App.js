@@ -160,6 +160,8 @@ function App() {
   const characterGroups = useCharacterGroups(filteredData);
   const [showWelcomeModal, onCloseWelcomeModal] = useWelcomeModal();
 
+  const range = max - min;
+
   const [minimized, setMinimized] = useState(false);
   const onMinimize = useCallback(() => {
     return setMinimized(a => !a);
@@ -217,7 +219,10 @@ function App() {
                 max={max}
                 onChangeCurrent={setCurrent}
               >
-                <YearDisplay className="year-display--in-dimensional" current={current} />
+                <YearDisplay
+                  className="year-display--in-dimensional"
+                  current={min + Math.round(range / 100 * config.FOCUS_POINT)}
+                />
               </DimensionalView>
               <TimelineView
                 data={filteredData}

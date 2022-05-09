@@ -1,5 +1,5 @@
 import { all, call } from 'redux-saga/effects';
-import { watchAuthentication, watchLogout } from 'store/sagas/authentication';
+import { watchAuthentication, watchTokenExpiration, watchLogout } from 'store/sagas/authentication';
 import {
   fetchPeriods,
   onFetchPeriods,
@@ -44,6 +44,7 @@ import {
 function* rootSaga() {
   yield all([
     call(watchAuthentication),
+    call(watchTokenExpiration),
     call(watchLogout),
     call(fetchPeriods),
     call(onFetchPeriods),

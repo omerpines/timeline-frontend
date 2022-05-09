@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import TimelinePeriod from 'components/TimelinePeriod';
 import TimelineStory from 'components/TimelineStory';
 import TimelineCharacterGroup from 'components/TimelineCharacterGroup';
 import TimelineBookGroup from 'components/TimelineBookGroup';
+import TimelineFocusPoint from 'components/TimelineFocusPoint';
 import './style.css';
-import { t } from 'i18next';
 
 const useSize = ref => {
   const [width, setWidth] = useState(0);
@@ -72,6 +72,7 @@ const TimelineView = ({ data, characterGroups, min, max, onChangePeriod, onMinim
         {characterGroups.map(renderCharacterGroup(min, max, width))}
         {data.bookGroups.map(renderBookGroup(min, max, width))}
       </div>
+      <TimelineFocusPoint />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import './style.css';
 
 const renderMedia = media => (
   <li className="media-gallery__slide" key={media.id}>
-    <Media data={media}  />
+    <Media data={media} />
   </li>
 );
 

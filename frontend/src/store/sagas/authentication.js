@@ -1,11 +1,13 @@
-import { take, fork, put, call } from 'redux-saga/effects';
+import { take, fork, put, call, delay } from 'redux-saga/effects';
 import axios from 'axios';
+import jsonwebtoken from 'jsonwebtoken';
 import { getAuthenticatedApi } from 'store/sagas/callApi';
 import {
   successAuthentication,
   failureAuthentication,
   successAuthenticationData,
   failureAuthenticationData,
+  logoutAuthentication,
 } from 'store/actionCreators/authentication';
 import config from 'constants/config';
 import types from 'store/actionTypes';
@@ -32,6 +34,20 @@ function* processAuthenticationRequest({ username, password }) {
     yield call(processAuthenticationDataRequest);
   } catch (e) {
     yield put(failureAuthentication(e.response.data.error));
+  }
+}
+
+export function* watchTokenExpiration() {
+  while (true) {
+    const { data } = yield take(types.AUTHENTICATION_SUCCESS);
+    const { jwt } = data;
+    const decodedJWT = jsonwebtoken.decode(jwt);
+    const { exp } = decodedJWT;
+    while (Math.floor(Date.now() / 1000) < exp) {
+      yield delay(5000);
+    }
+    window.localStorage.removeItem('auth');
+    yield put(logoutAuthentication());
   }
 }
 

@@ -11,6 +11,12 @@ export const fromRange = (min, max, point) => {
   return (point - min) / (max - min);
 };
 
+export const restrictedFromRange = (min, max, point) => {
+  if (point > max) return 1;
+  if (point < min) return 0;
+  return fromRange(min, max, point);
+}
+
 export const inRange = (min, max, value) => {
   if (isNaN(value)) return min;
   return Math.max(min, Math.min(max, value));

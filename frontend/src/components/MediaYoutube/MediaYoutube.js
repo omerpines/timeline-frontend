@@ -5,7 +5,10 @@ const MediaYoutube = ({ data, width, height, className }) => {
   const opts = useMemo(() => (width && height ? {
     width: width.toString(),
     height: height.toString(),
-  } : null), [width, height]);
+  } : {
+    width: '500',
+    height: '260',
+  }), [width, height]);
 
   let classes = 'media-youtube';
   if (className) classes += ` ${className}`;

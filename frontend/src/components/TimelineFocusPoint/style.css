@@ -1,0 +1,30 @@
+.timeline-focus {
+  background: transparent linear-gradient(0deg, #DC1F5700 0%, #DC1F57 100%) 0% 0% no-repeat padding-box;
+  bottom: 0px;
+  position: absolute;
+  top: 24px;
+  width: 3px;
+  z-index: 300;
+}
+
+.timeline-focus__pointer-box {
+  height: 28px;
+  left: -20px;
+  overflow: hidden;
+  position: absolute;
+  top: -36px;
+  width: 41px;
+}
+
+.timeline-focus__pointer {
+  border-radius: 5px;
+  background-color: #DC1F57;
+  content: '';
+  height: 29px;
+  left: 50%;
+  position: absolute;
+  top: -9px;
+  transform: scaleY(1.2) translateX(-50%) rotate(45deg);
+  transform-origin: center center;
+  width: 29px;
+}

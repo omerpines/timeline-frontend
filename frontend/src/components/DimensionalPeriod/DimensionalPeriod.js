@@ -1,19 +1,23 @@
 import React, { useMemo } from 'react';
 import config from 'constants/config';
-import { easeShare } from 'helpers/util';
+import { restrictedFromRange } from 'helpers/util';
 import './style.css';
 
 const DimensionalPeriod = ({ data, min, range}) => {
   const style = useMemo(() => {
     const { fromDate, endDate } = data;
-    const startPosition = easeShare(1 - (fromDate - min) / range);
-    const endPosition = easeShare(1 - (endDate - min) / range);
-    const width = Math.abs((endPosition - startPosition) * 100);
-    const shift = endPosition * 100;
+    const distanceInYears = range / 100 * config.PERIOD_TRANSITION_RANGE;
+    const focusYear = min + range / 100 * config.FOCUS_POINT;
+
+    let opacity = 1;
+    if (focusYear - distanceInYears < fromDate) {
+      opacity = restrictedFromRange(fromDate - distanceInYears, fromDate + distanceInYears, focusYear);
+    } else if (focusYear +distanceInYears > endDate) {
+      opacity = 1 - restrictedFromRange(endDate - distanceInYears, endDate + distanceInYears, focusYear);
+    }
 
     return {
-      left: `${shift}%`,
-      width: `${width}%`,
+      opacity,
       backgroundImage: data.image && data.image.data ? `url(${config.API}${data.image.data.attributes.url})` : 'none',
     };
   }, [min, range, data]);

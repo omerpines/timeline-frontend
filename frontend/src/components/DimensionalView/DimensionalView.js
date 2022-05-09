@@ -169,6 +169,8 @@ const useCanvas = (containerRef, canvasRef, data, min, max, paths) => {
     const canvas = canvasRef.current;
 
     const resize = () => {
+      if (!containerRef.current) return;
+
       const { width, height } = containerRef.current.getBoundingClientRect();
       canvas.width = width;
       canvas.height = height;
@@ -190,6 +192,8 @@ const useRoad = (containerRef, roadRef, paths) => {
     const ctx = canvas.getContext('2d');
 
     const resize = () => {
+      if (!containerRef.current) return;
+
       const { width, height } = containerRef.current.getBoundingClientRect();
       canvas.width = width;
       canvas.height = height;
