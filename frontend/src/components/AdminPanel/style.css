@@ -45,7 +45,7 @@
   flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
-  width: 551px;
+  width: 350px;
 }
 
 .admin__nav {
@@ -74,12 +74,12 @@
 
 .admin__nav-link:hover, .admin__nav-link--active {
   background-color: #DC1F57;
-  color: white;
   background-position: 100% 0%;
+  color: white;
 }
 
 .admin__main {
   flex-grow: 1;
-  padding: 0px 20px;
+  padding: 0px 20px 351px;
   width: 80%;
 }

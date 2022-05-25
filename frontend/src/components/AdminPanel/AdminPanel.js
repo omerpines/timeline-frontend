@@ -31,22 +31,22 @@ const AdminPanel = () => {
           <AdminWelcome />
           <nav className="admin__nav">
             <NavLink to="/admin" className={navLinkClassNameFn} end>
-              <i className='fa fa-plus'></i> {t('admin.link.dashboard')}
+              {t('admin.link.dashboard')}
             </NavLink>
             <NavLink to="/admin/periods" className={navLinkClassNameFn}>
-            <i className='fa fa-plus'></i> {t('admin.link.period')}
+              {t('admin.link.period')}
             </NavLink>
             <NavLink to="/admin/books" className={navLinkClassNameFn}>
-            <i className='fa fa-plus'></i> {t('admin.link.book')}
+              {t('admin.link.book')}
             </NavLink>
             <NavLink to="/admin/stories" className={navLinkClassNameFn}>
-            <i className='fa fa-plus'></i> {t('admin.link.story')}
+              {t('admin.link.story')}
             </NavLink>
             <NavLink to="/admin/events" className={navLinkClassNameFn}>
-            <i className='fa fa-plus'></i> {t('admin.link.event')}
+              {t('admin.link.event')}
             </NavLink>
             <NavLink to="/admin/characters" className={navLinkClassNameFn}>
-            <i className='fa fa-plus'></i> {t('admin.link.character')}
+              {t('admin.link.character')}
             </NavLink>
           </nav>
         </aside>

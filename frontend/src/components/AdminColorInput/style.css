@@ -1,0 +1,11 @@
+.admin-form__color {
+  max-width: 200px;
+  position: relative;
+}
+
+.admin-form__color .sketch-picker {
+  margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  z-index: 4000;
+}

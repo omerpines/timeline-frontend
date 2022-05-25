@@ -35,15 +35,18 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
 
   return (
     <div className="timeline-character-group" style={styles}>
-      <div className="timeline-character-group__characters">
-        {data.characters.map(renderCharacter)}
-        {data.characters.length > 3 && (
-          <div className="timeline-character-group__more">
-            {`+ ${data.characters.length - 3}`}
-          </div>
-        )}
+      <div className="timeline-character-group__visible">
+        <div className="timeline-character-group__characters">
+          {data.characters.map(renderCharacter)}
+          {data.characters.length > 3 && (
+            <div className="timeline-character-group__more">
+              {`+ ${data.characters.length - 3}`}
+            </div>
+          )}
+        </div>
+        <div className="timeline-character-group__text">{text}</div>
       </div>
-      <div className="timeline-character-group__text">{text}</div>
+      <div className="timeline-character-group__hover" />
     </div>
   );
 };

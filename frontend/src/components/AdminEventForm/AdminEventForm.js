@@ -83,13 +83,6 @@ const AdminCharacterForm = ({ editMode }) => {
               integer
               noTranslation
             />
-            <AdminInput
-              type="text"
-              label="admin.event.age"
-              name="age"
-              value={state.age}
-              onChange={onChange}
-            />
             <AdminDropdown
               value={state.path}
               options={pathOptions}

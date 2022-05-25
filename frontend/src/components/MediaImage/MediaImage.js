@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import './style.css';
 
-const MediaImage = ({ data, width, height, className }) => {
+const MediaImage = ({ data, width, height, className, onClick, index }) => {
   const styles = useMemo(() => ({
-    backgroundImage: `url(${data.url})`, 
+    backgroundImage: `url(${data.smallUrl || data.url})`, 
     width,
     height,
   }), [data, width, height]);
@@ -12,9 +12,11 @@ const MediaImage = ({ data, width, height, className }) => {
   if (className) classes += ` ${className}`;
 
   return (
-    <div className={classes}>
-      <div className="media-image__image" style={styles} />
-    </div>
+    <React.Fragment>
+      <div className={classes}>
+        <div className="media-image__image" style={styles} onClick={onClick} data-index={index} />
+      </div>
+    </React.Fragment>
   );
 };
 

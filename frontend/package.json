@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.25.0",
     "bezier-js": "^4.1.1",
+    "fslightbox-react": "^1.6.2-2",
     "i18next": "^21.6.3",
     "js-easing-functions": "^1.0.3",
     "jsonwebtoken": "^8.5.1",

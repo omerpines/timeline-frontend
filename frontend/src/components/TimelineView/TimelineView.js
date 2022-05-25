@@ -53,11 +53,16 @@ const renderBookGroup = (min, max, width) => data => (
   <TimelineBookGroup group={data} min={min} max={max} width={width} />
 );
 
-const TimelineView = ({ data, characterGroups, min, max, onChangePeriod, onMinimize, minimized, className }) => {
+const TimelineView = ({ data, characterGroups, min, max, onChangePeriod, onMinimize, minimized, className, minimize }) => {
   const { t } = useTranslation();
 
   const containerRef = useRef(null);
   const width = useSize(containerRef);
+
+  useEffect(() => {
+    if (minimize && !minimized) onMinimize();
+    else if (!minimize && minimized) onMinimize();
+  }, []);
 
   let classes = 'timeline';
   if (minimized) classes += ` timeline--minimize`;
@@ -65,7 +70,10 @@ const TimelineView = ({ data, characterGroups, min, max, onChangePeriod, onMinim
 
   return (
     <div className={classes}>
-      <div className="timeline__minimize" onClick={onMinimize}>{t('timeline.minimize')}</div>
+      <div className="timeline__minimize" onClick={onMinimize}>
+        {!minimized && t('timeline.minimize')}
+        {minimized && t('timeline.expand')}
+      </div>
       <div className="timeline__container" ref={containerRef}>
         {data.periods.map(renderPeriod(min, max, width, onChangePeriod))}
         {data.stories.map(renderStory(min, max, width))}

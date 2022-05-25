@@ -5,6 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Aside from 'components/Aside';
 import TagCloud from 'components/TagCloud';
 import EntityBlock from 'components/EntityBlock';
+import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
 import { getBookLink } from 'helpers/urls';

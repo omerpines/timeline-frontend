@@ -50,6 +50,7 @@ function* processMediaQueries(data) {
     });
 
     const url = `${config.API}${response.data[0].url}`;
+    // const smallUrl = type === 'image' && response.data[0].formats ? `${config.API}${response.data[0].formats.small.url}` : null;
 
     let type = 'image';
     if (m.type === 'newVideo') type = 'video';

@@ -10,7 +10,6 @@ const AdminWelcome = () => {
 
   return (
     <div className="admin-welcome">
-      <div className="admin-welcome__avatar" />
       <div className="admin-welcome__hello">{t('admin.hello')}</div>
       <div className="admin-welcome__name">{data.username}</div>
     </div>

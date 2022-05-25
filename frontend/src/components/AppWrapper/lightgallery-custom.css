@@ -1,0 +1,9 @@
+.lg-outer.lg-visible {
+  z-index: 80000;
+}
+
+.lg-backdrop {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 79000;
+}

@@ -46,7 +46,7 @@ const Aside = ({ children, header, className }) => {
 
   return (
     <React.Fragment>
-      <div className="aside__shadow" />
+      <div className="aside__shadow" onClick={onBack} />
       <div className={classes} onWheel={onWheel}>
         <div className="aside__container ">
           <header className="aside__header">

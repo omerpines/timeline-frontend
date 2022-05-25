@@ -39,3 +39,5 @@ export const compareDateStrings = (a, b) => {
 export const sortEntitiesByUpdatedAt = es => {
   return es.sort((a, b) => compareDateStrings(a.updatedAt, b.updatedAt));
 }
+
+export const sortEntitiesByFromDate = (a, b) => a.fromDate - b.fromDate;

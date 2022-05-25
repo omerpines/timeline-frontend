@@ -203,6 +203,7 @@ function App() {
             onMinimize={onMinimize}
             minimized={minimized}
             className="timeline--admin"
+            minimize
           />
           <SecuredPart />
         </React.Fragment>
