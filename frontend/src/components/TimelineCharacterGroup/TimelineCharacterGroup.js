@@ -1,8 +1,11 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import ScrollArea from 'react-scrollbar';
 import CharacterDot from 'components/CharacterDot';
 import useLanguage from 'hooks/useLanguage';
 import { joinHebrew } from 'helpers/lang';
 import { getLocalized } from 'helpers/util';
+import { getCharacterLink } from 'helpers/urls';
 import './style.css';
 
 const renderCharacter = (c, i) => {
@@ -11,6 +14,15 @@ const renderCharacter = (c, i) => {
     <CharacterDot key={c.id} data={c} className="timeline-character-group__character" />
   );
 };
+
+const renderHoverCharacter = c => (
+  <li key={c.id} className="timeline-character-group__hover-character">
+    <Link to={getCharacterLink(c.id)} className="timeline-character-group__hover-link">
+      <CharacterDot data={c} className="timeline-character-group__hover-dot" />
+      <span className="timeline-character-group__hover-name">{c.name}</span>
+    </Link>
+  </li>
+);
 
 const TimelineCharacterGroup = ({ data, width, min, max }) => {
   const lang = useLanguage();
@@ -33,6 +45,9 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
     };
   }, [width, data, min, max]);
 
+  let hoverClasses = 'timeline-character-group__hover';
+  if (data.characters.length > 3) hoverClasses += ' timeline-character-group__hover--list';
+
   return (
     <div className="timeline-character-group" style={styles}>
       <div className="timeline-character-group__visible">
@@ -46,7 +61,22 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
         </div>
         <div className="timeline-character-group__text">{text}</div>
       </div>
-      <div className="timeline-character-group__hover" />
+      <div className={hoverClasses}>
+        <div className="timeline-character-group__hover-wrapper">
+          <ScrollArea
+            vertical
+            smoothScrolling
+            stopScrollPropagation
+            className="aside__scrollarea timeline-character-group__scrollarea"
+            contentClassName="aside__scrollable"
+          >
+            <ul className="timeline-character-group__hover-list">
+              {data.characters.map(renderHoverCharacter)}
+            </ul>
+          </ScrollArea>
+        </div>
+      </div>
+      <div className="timeline-character-group__hover-bridge" />
     </div>
   );
 };
