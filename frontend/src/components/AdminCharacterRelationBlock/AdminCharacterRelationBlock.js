@@ -27,7 +27,7 @@ const referenceOptions = [
   ['cousin_f', 'admin.character.relation.cousin_f'],
 ];
 
-const AdminCharacterRelationBlock = ({ name, value, onChange, idsOnly }) => {
+const AdminCharacterRelationBlock = ({ name, value, currentId, onChange, idsOnly }) => {
   const lang = useLanguage();
   const { t } = useTranslation();
 
@@ -39,9 +39,9 @@ const AdminCharacterRelationBlock = ({ name, value, onChange, idsOnly }) => {
   const ids = useMemo(() => (idsOnly ? value : value.map(r => r[0])), [value, idsOnly]);
 
   const characterOptions = useMemo(() => {
-    const filteredCharacters = characters.filter(c => ids.indexOf(c.id) < 0);
+    const filteredCharacters = characters.filter(c => ids.indexOf(c.id) < 0 && currentId !== c.id);
     return filteredCharacters.map(c => [c.id, getLocalized(c, 'name', lang)]);
-  }, [ids, characters, lang]);
+  }, [ids, characters, lang, currentId]);
 
   const onChangeCharacter = useCallback((name, value) => {
     setCharacterId(value);

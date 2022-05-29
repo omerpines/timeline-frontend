@@ -98,6 +98,7 @@ const AdminCharacterForm = ({ editMode }) => {
           name="characters"
           value={state.characters}
           onChange={onChange}
+          currentId=""
           idsOnly
         />
         <AdminInput

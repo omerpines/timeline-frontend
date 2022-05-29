@@ -27,3 +27,11 @@
   position: absolute;
   width: 100%;
 }
+
+.timeline__period-shadow {
+  transition: height 0.2s ease-in;
+}
+
+.timeline--minimize .timeline__period-shadow {
+  height: 0px;
+}

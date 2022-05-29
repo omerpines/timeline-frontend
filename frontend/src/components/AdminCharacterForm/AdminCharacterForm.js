@@ -29,6 +29,7 @@ const genderOptions = [
 
 const AdminCharacterForm = ({ editMode }) => {
   const { id } = useParams();
+  const pid = parseInt(id, 10);
 
   const [state, onChange] = useForm(
     characterForm,
@@ -101,6 +102,7 @@ const AdminCharacterForm = ({ editMode }) => {
               name="characters"
               value={state.characters}
               onChange={onChange}
+              currentId={pid}
             />
           </div>
           <div className="admin-form__column">

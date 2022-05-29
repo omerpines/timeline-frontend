@@ -36,6 +36,15 @@
   letter-spacing: 0px;
   opacity: 0.85;
   text-align: center;
+  transition: opacity 0.2s ease-in;
+}
+
+.admin-file-input--not-empty .admin-file-input__title {
+  opacity: 0;
+}
+
+.admin-file-input--not-empty:hover .admin-file-input__title {
+  opacity: 1;
 }
 
 .admin-file-input__subtitle {
@@ -46,6 +55,7 @@
   opacity: 0.4;
   text-align: center;
   text-decoration: underline;
+  transition: opacity 0.2s ease-in;
 }
 
 .admin-file-input__label {

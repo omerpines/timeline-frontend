@@ -31,8 +31,8 @@ export const isBC = iYear => {
 export const compareDateStrings = (a, b) => {
   const am = moment(a);
   const bm = moment(b);
-  if (bm.isBefore(am)) return 1;
-  if (am.isBefore(bm)) return -1;
+  if (am.isBefore(bm)) return 1;
+  if (bm.isBefore(am)) return -1;
   return 0;
 };
 

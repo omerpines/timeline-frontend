@@ -23,6 +23,7 @@ const AdminFileInput = ({ name, value, onChange, label, labelInside, noLabel, cl
 
   let classes = 'admin-file-input';
   if (className) classes += ` ${className}`;
+  if (value) classes += ' admin-file-input--not-empty';
 
   return (
     <div className={classes}>
@@ -36,8 +37,8 @@ const AdminFileInput = ({ name, value, onChange, label, labelInside, noLabel, cl
           classes="admin-file-input__droparea"
         >
           {labelInside && !noLabel && <div className="admin-file-input__label">{t(label)}</div>}
-          {!value && <div className="admin-file-input__title">{t('admin.dragFiles')}</div>}
-          {!value && <div className="admin-file-input__subtitle">{t('admin.clickFiles')}</div>}
+          <div className="admin-file-input__title">{t('admin.dragFiles')}</div>
+          <div className="admin-file-input__subtitle">{t('admin.clickFiles')}</div>
         </FileUploader>
       </div>
     </div>

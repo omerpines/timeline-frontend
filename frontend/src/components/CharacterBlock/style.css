@@ -26,3 +26,15 @@
   pointer-events: none;
   width: 47px;
 }
+
+.character-block__data {
+  display: flex;
+  flex-direction: column;
+}
+
+.character-block__relation {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: center;
+}

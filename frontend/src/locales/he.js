@@ -23,7 +23,7 @@ export default {
     "admin.form.header": ".אנא הכנס את הפרטים הבאים. ניתן לערוך את השדות גם לאחר שמירת הפריט",
     "admin.startDate": "תאריך התחלה",
     "admin.endDate": "תאריך סיום",
-    "admin.color": "צרע",
+    "admin.color": "צבע",
     "admin.shortDescription": "תיאור קצר",
     "admin.shortDescription.placeholder": "תיאור קצר",
     "admin.forMoreInformation": "העמקה וקריאה נוספת",
