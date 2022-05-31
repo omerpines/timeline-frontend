@@ -16,7 +16,7 @@ const config = {
   MIN_RANGE: 100,
   MAX_RANGE: 4000,
   EMAIL: 'office@929.org.il',
-  API: 'http://localhost:1337',
+  API: 'https://timelineapi.testing.929.org.il/',
   // In percents. Determines the position of the red line
   FOCUS_POINT: 20,
   // In percents. Determines the distance from the red line where a period background starts to fade in/out
