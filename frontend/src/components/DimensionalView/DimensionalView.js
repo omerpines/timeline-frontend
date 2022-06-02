@@ -4,6 +4,7 @@ import { Bezier} from 'bezier-js/dist/bezier';
 import StoryPreview from 'components/StoryPreview';
 import DimensionalPeriod from 'components/DimensionalPeriod';
 import useData from 'hooks/useData';
+import useDrag from 'hooks/useDrag';
 import config from 'constants/config';
 import { fromRange, inRange, easeShare, hexToRGBA } from 'helpers/util';
 import { getEventLink } from 'helpers/urls';
@@ -91,40 +92,6 @@ const usePaths = ref => {
 
   return [p1, p2, p3];
 }
-
-const useDrag = (ref, min, max, onChangeCurrent) => {
-  let isDragged = useRef(false);
-
-  const onDragStart = useCallback(() => {
-    isDragged.current = true;
-  }, []);
-
-  const onDrag = useCallback(e => {
-    if (!isDragged.current || !ref.current || !e.movementX) return;
-
-    e.stopPropagation();
-
-    const range = max - min;
-    const { width } = ref.current.getBoundingClientRect();
-
-    const yearCost = width / range * -1;
-    const yearDelta = Math.round(e.movementX * -1 / yearCost);
-
-    onChangeCurrent(yearDelta);
-  }, [min, max, onChangeCurrent]);
-
-  const onDragEnd = useCallback(() => {
-    isDragged.current = false;
-  }, []);
-
-  useEffect(() => {
-    const onOutOfBounds = () => isDragged.current = false;
-    window.addEventListener('mouseup', onOutOfBounds);
-    return () => window.removeEventListener('mouseup', onOutOfBounds);
-  }, []);
-
-  return [onDragStart, onDrag, onDragEnd];
-};
 
 const useCanvas = (containerRef, canvasRef, data, min, max, paths) => {
   const canvasData = useMemo(() => data.filter(dp => dp.fromDate && dp.endDate), [data]);

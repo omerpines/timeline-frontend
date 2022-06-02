@@ -110,6 +110,13 @@ const AdminCharacterForm = ({ editMode }) => {
         />
         <AdminInput
           type="text"
+          label="admin.quotesource"
+          name="quotesource"
+          value={state.quotesource}
+          onChange={onChange}
+        />
+        <AdminInput
+          type="text"
           label="admin.event.quote"
           name="quote"
           value={state.quote}

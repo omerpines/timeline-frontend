@@ -87,8 +87,8 @@ const AdminStoryForm = ({ editMode }) => {
               options={bookOptions}
               onChange={onChange}
               name="book"
-              placeholder="admin.bookRelation"
-              label="admin.bookRelation.placeholder"
+              placeholder="admin.bookRelation.placeholder"
+              label="admin.bookRelation"
               integer
             />
           </div>

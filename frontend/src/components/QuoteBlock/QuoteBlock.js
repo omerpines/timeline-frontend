@@ -13,6 +13,7 @@ const QuoteBlock = ({ data }) => {
       <i className="fa fa-quote-left quote-block__icon-left" />
       <i className="fa fa-quote-right quote-block__icon-right" />
       <div className="quote-block__text">{getLocalized(data, 'quote', lang)}</div>
+      <div className="quote-block__source">{getLocalized(data, 'quotesource', lang)}</div>
     </div>
   );
 };

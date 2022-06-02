@@ -67,3 +67,20 @@
   text-align: center;
   width: 351px;
 }
+
+.welcome__not-show {
+  align-items: center;
+  direction: rtl;
+  display: flex;
+  font: normal normal normal 18px/18px Assistant;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.welcome__not-show-text {
+  margin-right: 5px;
+}
+
+.welcome__not-show-checkbox {
+  cursor: pointer;
+}

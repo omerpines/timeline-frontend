@@ -21,6 +21,8 @@ import { getStoryLink, getCharacterLink, getEventLink, getBookLink, getPeriodLin
 import { isDataLoading } from 'store/selectors/data';
 import './style.scss';
 
+const skipWelcomeModal = window.localStorage.getItem('skipWelcomeModal');
+
 const storyLink = getStoryLink(':id');
 const characterLink = getCharacterLink(':id');
 const eventLink = getEventLink(':id');
@@ -231,11 +233,12 @@ function App() {
                 min={min}
                 max={max}
                 onChangePeriod={onChangePeriod}
+                onChangeCurrent={setCurrent}
                 onMinimize={onMinimize}
                 minimized={minimized}
               />
             </div>
-            {showWelcomeModal && <WelcomeModal onClose={onCloseWelcomeModal} />}
+            {showWelcomeModal && !skipWelcomeModal && <WelcomeModal onClose={onCloseWelcomeModal} />}
             <Routes>
               <Route path={storyLink} element={<StoryAside />} />
               <Route path={characterLink} element={<CharacterAside />} />
