@@ -64,6 +64,7 @@ const AdminStoryList = () => {
         addTo="/admin/stories/add"
         addTitle="admin.add.story"
         title="admin.title.story"
+        csvType="story"
       />
       <AdminTable headers={headers}>
         {stories.map(renderRow(t, lang, onDelete))}

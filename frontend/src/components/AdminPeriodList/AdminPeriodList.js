@@ -62,6 +62,7 @@ const AdminPeriodList = () => {
         addTo="/admin/periods/add"
         addTitle="admin.add.period"
         title="admin.title.period"
+        csvType="period"
       />
       <AdminTable headers={headers}>
         {periods.map(renderRow(t, lang, onDelete))}

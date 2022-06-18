@@ -40,6 +40,9 @@ import {
   onAddBook,
   onEditBook,
 } from 'store/sagas/books';
+import {
+  onUploadCSV,
+} from 'store/sagas/csv';
 
 function* rootSaga() {
   yield all([
@@ -76,6 +79,7 @@ function* rootSaga() {
     call(onDeleteBook),
     call(onAddBook),
     call(onEditBook),
+    call(onUploadCSV),
   ]);
 }
 

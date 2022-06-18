@@ -36,7 +36,10 @@ const AdminCharacterRelationBlock = ({ name, value, currentId, onChange, idsOnly
 
   const { characters } = useData();
 
-  const ids = useMemo(() => (idsOnly ? value : value.map(r => r[0])), [value, idsOnly]);
+  const ids = useMemo(() => {
+    if (!value) return [];
+    return idsOnly ? value : value.map(r => r[0]); 
+  }, [value, idsOnly]);
 
   const characterOptions = useMemo(() => {
     const filteredCharacters = characters.filter(c => ids.indexOf(c.id) < 0 && currentId !== c.id);

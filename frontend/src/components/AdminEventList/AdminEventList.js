@@ -54,6 +54,7 @@ const AdminEventList = () => {
         addTo="/admin/events/add"
         addTitle="admin.add.event"
         title="admin.title.event"
+        csvType="event"
       />
       <AdminTable headers={headers}>
         {events.map(renderRow(t, lang, onDelete))}

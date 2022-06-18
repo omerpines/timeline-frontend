@@ -69,6 +69,7 @@ const AdminCharacterList = () => {
         addTo="/admin/characters/add"
         addTitle="admin.add.character"
         title="admin.title.character"
+        csvType="character"
       />
       <AdminTable headers={headers}>
         {characters.map(renderRow(t, lang, onDelete))}
