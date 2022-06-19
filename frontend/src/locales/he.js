@@ -214,6 +214,8 @@ export default {
     "story": "סיפור",
     "event": "אירוע",
     "character": "דמות",
+    "search.title": "תוצאות חיפוש",
+    "search.placeholder": "...הקלד את שם התקופה, הספר, הסיפור, הדמות או האירוע",
     "search.name": "שם",
     "search.type": "סוג",
     "search.edit": "הצג",

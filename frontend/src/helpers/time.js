@@ -41,3 +41,5 @@ export const sortEntitiesByUpdatedAt = es => {
 }
 
 export const sortEntitiesByFromDate = (a, b) => a.fromDate - b.fromDate;
+
+export const sortEntitiesByEndDate = (a, b) => a.endDate - b.endDate;

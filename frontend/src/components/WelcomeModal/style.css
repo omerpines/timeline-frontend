@@ -4,7 +4,6 @@
   box-shadow: 0px 8px 13px #00000029;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 20px);
   left: 50%;
   max-height: 642px;
   max-width: 634px;
@@ -36,7 +35,7 @@
   color: #474747;
   font: normal normal normal 22px/38px Assistant;
   letter-spacing: 0px;
-  margin-bottom: 54px;
+  margin-bottom: 20px;
 }
 
 .welcome__link {
@@ -44,11 +43,11 @@
   display: block;
   font: normal normal normal 22px/33px Assistant;
   letter-spacing: 0px;
-  text-align: center;
   text-transform: capitalize;
 }
 
 .welcome__footer {
+  margin-top: 20px;
   position: relative;
   text-align: center;
   width: 100%;
@@ -73,7 +72,6 @@
   direction: rtl;
   display: flex;
   font: normal normal normal 18px/18px Assistant;
-  justify-content: center;
   margin-top: 40px;
 }
 

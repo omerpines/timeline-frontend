@@ -25,7 +25,7 @@
   width: 60px;
 }
 
-.searchbar:hover .searchbar__image {
+.searchbar__hover .searchbar__image {
   color: #DC1F57;
 }
 
@@ -47,19 +47,19 @@
   padding: 0px 30px;
 }
 
-.searchbar:hover input {
+.searchbar__hover input {
   display: block;
 }
 
-.searchbar:hover {
+.searchbar__hover {
   width: 550px;
 }
 @media screen and (max-width: 768px) {
-  .searchbar:hover input,
+  .searchbar__hover input,
   .searchbar:focus input{
       display: none;
   }   
-  .searchbar:hover{
+  .searchbar__hover {
       width: auto;
   }
 }

@@ -73,3 +73,12 @@
   object-fit: cover;
   width: 100%;
 }
+
+.admin-page-title--gallery .admin-page-title__title {
+  font-size: 22px;
+  line-height: 31px;
+}
+
+.admin-page-title--gallery .admin-page-title__add-csv {
+  display: none;
+}

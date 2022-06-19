@@ -209,7 +209,12 @@ const AdminMediaLibrary = ({ form, onBack }) => {
       <AdminPage>
         <AdminFormTitle title={titles[form]} step={2} totalSteps={2} />
         <div className="admin-form admin-media">
-          <AdminPageTitle title="admin.title.media" addTitle="admin.add.media" onClickAdd={onClickAdd} />
+          <AdminPageTitle
+            title="admin.title.media"
+            addTitle="admin.add.media"
+            onClickAdd={onClickAdd}
+            className="admin-page-title--gallery"
+          />
           <ul className="admin-media__medias">
             {media.map(renderMedia(t, onDelete, onChangeTitle, onChangeDescription))}
           </ul>

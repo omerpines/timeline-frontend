@@ -28,7 +28,7 @@ const renderCSVError = t => ([x, y, error]) => {
   );
 };
 
-const AdminPageTitle = ({ addTo, title, addTitle, onClickAdd, csvType }) => {
+const AdminPageTitle = ({ addTo, title, addTitle, onClickAdd, csvType, className }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -56,12 +56,15 @@ const AdminPageTitle = ({ addTo, title, addTitle, onClickAdd, csvType }) => {
     dispatch(resetCSV());
   }, []);
 
+  let classes = "admin-page-title";
+  if (className) classes += ` ${className}`;
+
   return (
     <React.Fragment>
-      <header className="admin-page-title">
+      <header className={classes}>
         <div className="admin-page-title__title">{t(title)}</div>
         <div className="admin-page-title__buttons">
-          <Link className="admin-page-title__add" to="#" onClick={onClickCSV}>
+          <Link className="admin-page-title__add admin-page-title__add-csv" to="#" onClick={onClickCSV}>
             <span className="admin-page-title__add-icon"><i className="fa fa-table" /></span>
             <span className="admin-page-title__add-text">{t('csv')}</span>
           </Link>

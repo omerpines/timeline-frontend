@@ -15,6 +15,7 @@ import AdminMediaLibrary from 'components/AdminMediaLibrary';
 import useForm from 'hooks/useForm';
 import useLanguage from 'hooks/useLanguage';
 import useAdminTab from 'hooks/useAdminTab';
+import useData from 'hooks/useData';
 import {
   resetBook,
   updateBook,
@@ -23,16 +24,13 @@ import {
   requestEditBook,
 } from 'store/actionCreators/books';
 import { bookForm } from 'store/selectors/bookForm';
-import { getPeriods } from 'store/selectors/periods';
-import { getCharacters } from 'store/selectors/characters';
 import { getLocalized } from 'helpers/util';
 
 const AdminBookForm = ({ editMode }) => {
   const { id } = useParams();
   const lang = useLanguage();
 
-  const periods = useSelector(getPeriods);
-  const characters = useSelector(getCharacters);
+  const { periods, characters } = useData();
 
   const periodOptions = useMemo(() => {
     return periods.map(p => [p.id, getLocalized(p, 'name', lang)]);
@@ -130,13 +128,6 @@ const AdminBookForm = ({ editMode }) => {
             </AdminInput>
           </div>
         </div>
-        <AdminInput
-          type="text"
-          label="admin.tags"
-          name="tags"
-          value={state.tags}
-          onChange={onChange}
-        />
         <AdminInput
           type="text"
           label="admin.book.age"

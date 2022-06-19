@@ -89,13 +89,6 @@ const AdminCharacterForm = ({ editMode }) => {
         </div>
         <AdminInput type="text" label="admin.character.role" name="role" value={state.role} onChange={onChange} />
         <AdminInput type="text" label="admin.character.nation" name="nation" value={state.nation} onChange={onChange} />
-        <AdminInput
-          type="text"
-          label="admin.tags"
-          name="tags"
-          value={state.tags}
-          onChange={onChange}
-        />
         <div className="admin-form__columns admin-character-form__mb">
           <div className="admin-form__column">
             <AdminCharacterRelationBlock
