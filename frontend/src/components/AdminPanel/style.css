@@ -37,6 +37,7 @@
   flex-basis: 0px;
   flex-direction: row;
   flex-grow: 1;
+  width: 100%;
 }
 
 .admin__aside {
@@ -79,7 +80,9 @@
 }
 
 .admin__main {
+  flex-basis: 0px;
   flex-grow: 1;
+  flex-shrink: 1;
   padding: 0px 20px 351px;
-  width: 80%;
+  width: 0px;
 }

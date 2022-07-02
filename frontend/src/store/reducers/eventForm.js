@@ -15,6 +15,7 @@ const initialValue = {
   shortDescription: '',
   links: '',
   characters: [],
+  secondaryCharacters: [],
   media: [],
 };
 

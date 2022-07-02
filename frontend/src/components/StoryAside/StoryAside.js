@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactHtmlParser from 'react-html-parser';
 import Aside from 'components/Aside';
@@ -9,6 +9,7 @@ import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
 import { getLocalized, denormalize } from 'helpers/util';
+import { getBookLink } from 'helpers/urls';
 import './style.css';
 
 const renderCharacter = data => (
@@ -71,7 +72,12 @@ const StoryAside = () => {
         <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
         <div className="aside__subtitle">{getLocalized(data, 'shortDescription', lang)}</div>
         {!relatedBook ? false : (
-          <div className="aside__subsubtitle">{getLocalized(relatedBook, 'name', lang)}</div>
+          <Link
+            className="aside__subsubtitle"
+            to={getBookLink(relatedBook.id)}
+          >
+            {getLocalized(relatedBook, 'name', lang)}
+          </Link>
         )}
       </React.Fragment>
     );

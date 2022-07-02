@@ -1,4 +1,5 @@
 .admin-welcome {
+  align-items: center;
   box-sizing: border-box;
   height: 178px;
   padding-right: 54px;
@@ -6,9 +7,19 @@
   width: 100%;
 }
 
+.admin-welcome .admin-form__column {
+  margin-left: 0px;
+}
+
+.admin-welcome .admin-welcome__hello-column {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
 .admin-welcome__hello {
   color: #474747;
-  font: normal normal normal 24px/10px Assistant;
+  font: normal normal normal 20px/10px Assistant;
   letter-spacing: 0px;
   margin-bottom: 25px;
   opacity: 0.75;
@@ -17,6 +28,15 @@
 
 .admin-welcome__name {
   color: #474747;
-  font: normal normal 600 36px/10px Assistant;
+  font: normal normal 600 24px/10px Assistant;
   letter-spacing: 0px;
+}
+
+.admin-welcome__image {
+  border-radius: 41px;
+  box-shadow: 0px 3px 6px #00000029;
+  background-position: center center;
+  background-size: cover;
+  height: 82px;
+  width: 82px;
 }

@@ -54,16 +54,16 @@ const AdminStoryForm = ({ editMode }) => {
   }, [books, lang]);
 
   const characterOptions = useMemo(() => {
-    const relations = state.characters;
+    const relations = [...state.characters, ...state.secondaryCharacters];
     const filteredCharacters = characters.filter(c => relations.indexOf(c.id) < 0);
     return filteredCharacters.map(c => [c.id, getLocalized(c, 'name', lang)]);
-  }, [state.characters, characters, lang]);
+  }, [state.characters, state.secondaryCharacters, characters, lang]);
 
   const secondaryCharacterOptions = useMemo(() => {
-    const relations = state.secondaryCharacters;
+    const relations = [...state.characters, ...state.secondaryCharacters];
     const filteredCharacters = characters.filter(c => relations.indexOf(c.id) < 0);
     return filteredCharacters.map(c => [c.id, getLocalized(c, 'name', lang)]);
-  }, [state.secondaryCharacters, characters, lang]);
+  }, [state.characters, state.secondaryCharacters, characters, lang]);
 
   const formTitle = editMode ? 'admin.story.title.edit' : 'admin.story.title.add';
 

@@ -1,0 +1,104 @@
+.send-email__box {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 8px 13px #00000029;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  max-height: 642px;
+  max-width: 902px;
+  padding: 35px 42px 64px;
+  position: absolute;
+  text-align: right;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 20px);
+}
+
+.send-email__header {
+  align-items: center;
+  direction: rtl;
+  display: flex;
+}
+
+.send-email__title {
+  color: #474747;
+  flex-grow: 1;
+  font: normal normal 600 36px Assistant;
+  letter-spacing: 0px;
+}
+
+.send-email__close.fa {
+  color: #DC1F57;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.send-email__body {
+  color: #474747;
+  font: normal normal 600 36px/36px Assistant;
+  letter-spacing: 0px;
+  opacity: 1;
+  padding: 30px 0px 34px;
+  text-align: center;
+}
+
+.send-email__text {
+  color: #474747;
+  font: normal normal normal 22px/38px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+}
+
+.send-email__footer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 8px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.send-email__confirm {
+  background-color: transparent;
+  border: 1px solid #DC1F57;
+  border-radius: 25px;
+  box-shadow: 0px 3px 6px #00000000;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  flex-grow: 0;
+  font: normal normal normal 22px/49px Assistant;
+  height: 49px;
+  letter-spacing: 0px;
+  outline: none;
+  text-align: center;
+  transition-duration: 0.2s;
+  transition-property: color, background-color, box-shadow;
+  transition-timing-function: ease-in;
+  width: 350px;
+}
+
+.send-email__confirm:hover {
+  background-color: #DC1F57;
+  box-shadow: 0px 3px 6px #00000029;
+  color: white;
+}
+
+.send-email__label {
+  color: #474747;
+  display: block;
+  font: normal normal normal 16px/38px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
+  width: 100%;
+}
+
+.send-email__textarea {
+  height: 187px;
+  max-height: 187px;
+  max-width: 100%;
+  min-height: 187px;
+  min-width: 100%;
+  width: 100%;
+}

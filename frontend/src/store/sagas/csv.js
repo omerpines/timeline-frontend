@@ -72,7 +72,7 @@ const validatePath = (x, y, path) => {
   return [x, y, 'error.wrongPath'];
 }
 
-const quoteRegex = /^"([^\W\d_]+)" \(([^\W\d_]+)\)/i;
+const quoteRegex = /(.*?)\((.*?)\)/;
 
 const validateQuote = (x, y, quote) => {
   if (!quote) return true;
@@ -185,6 +185,11 @@ const parseGender = gender => {
   return 'female';
 }
 
+const parseQuote = quote => {
+  const [q, quoteText, quoteSource] = quote.match(quoteRegex);
+  return [quoteText.trim(), quoteSource.trim()];
+}
+
 const parseMedia = media => {
   const isYoutube = media.includes('youtu.be') || media.includes('youtube.com');
 
@@ -288,6 +293,7 @@ const parseEvent = data => row => {
     story,
     path,
     characters,
+    secondaryCharacters: [],
     name: row[0],
     color: row[6],
     summary: row[10],

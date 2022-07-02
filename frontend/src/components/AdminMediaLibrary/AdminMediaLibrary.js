@@ -199,6 +199,7 @@ const AdminMediaLibrary = ({ form, onBack }) => {
   }, [onChange, media]);
 
   const onChangeDescription = useCallback(e => {
+    if (!e.currentTarget) return;
     const { id } = e.currentTarget.dataset;
     const newMedia = media.map(m => (m.id === id ? { ...m, description: e.currentTarget.value } : m));
     onChange('media', newMedia);

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactHtmlParser from 'react-html-parser';
 import Aside from 'components/Aside';
@@ -9,6 +9,7 @@ import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
 import { getLocalized, denormalize } from 'helpers/util';
+import { getStoryLink } from 'helpers/urls';
 import './style.css';
 
 const renderCharacter = data => (data ? (
@@ -37,7 +38,6 @@ const EventAside = () => {
     if (!data) return false;
     return (
       <React.Fragment>
-      {ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
       {ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
       {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
       {!data.links ? false : (
@@ -50,10 +50,15 @@ const EventAside = () => {
     );
   }, [data, lang]);
 
+  const chars = useMemo(() => {
+    if (!data) return false;
+    return data.secondaryCharacters ? [...data.characters, ...data.secondaryCharacters] : data.characters;
+  }, [data]);
+
   const characterData = useMemo(() => {
     if (!data) return false;
-    return denormalize(data.characters, characters);
-  }, [data, characters]);
+    return denormalize(chars, characters);
+  }, [chars, characters]);
 
   const header = useMemo(() => {
     if (!data) return undefined;
@@ -65,7 +70,12 @@ const EventAside = () => {
         </div>
         <div className="aside__subtitle">{getLocalized(data, 'shortDescription', lang)}</div>
         {!relatedStory ? false : (
-          <div className="aside__subsubtitle">{getLocalized(relatedStory, 'name', lang)}</div>
+          <Link
+            className="aside__subsubtitle"
+            to={getStoryLink(relatedStory.id)}
+          >
+            {getLocalized(relatedStory, 'name', lang)}
+          </Link>
         )}
       </React.Fragment>
     );

@@ -27,7 +27,7 @@ const referenceOptions = [
   ['cousin_f', 'admin.character.relation.cousin_f'],
 ];
 
-const AdminCharacterRelationBlock = ({ name, value, currentId, onChange, idsOnly }) => {
+const AdminCharacterRelationBlock = ({ name, value, currentId, onChange, idsOnly, placeholder, label, excluded }) => {
   const lang = useLanguage();
   const { t } = useTranslation();
 
@@ -41,10 +41,15 @@ const AdminCharacterRelationBlock = ({ name, value, currentId, onChange, idsOnly
     return idsOnly ? value : value.map(r => r[0]); 
   }, [value, idsOnly]);
 
+  let excludedIds = useMemo(() => {
+    if (!excluded) return  idsOnly ? value : value.map(v => v.id);
+    return idsOnly ? excluded : excluded.map(e => e.id);
+  }, [excluded, idsOnly, value]);
+
   const characterOptions = useMemo(() => {
-    const filteredCharacters = characters.filter(c => ids.indexOf(c.id) < 0 && currentId !== c.id);
+    const filteredCharacters = characters.filter(c => excludedIds.indexOf(c.id) < 0 && currentId !== c.id);
     return filteredCharacters.map(c => [c.id, getLocalized(c, 'name', lang)]);
-  }, [ids, characters, lang, currentId]);
+  }, [ids, characters, lang, currentId, excludedIds]);
 
   const onChangeCharacter = useCallback((name, value) => {
     setCharacterId(value);
@@ -75,8 +80,8 @@ const AdminCharacterRelationBlock = ({ name, value, currentId, onChange, idsOnly
         onChange={onChangeCharacter}
         value={characterId}
         options={characterOptions}
-        placeholder="admin.character.relation.placeholder"
-        label="admin.character.relation"
+        placeholder={placeholder || "admin.character.relation.placeholder"}
+        label={label || "admin.character.relation"}
         integer
         noTranslation
         className="character-relation-block__character"

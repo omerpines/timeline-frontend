@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AdminPage from 'components/AdminPage';
@@ -7,6 +6,7 @@ import AdminPageTitle from 'components/AdminPageTitle';
 import AdminTable from 'components/AdminTable';
 import useLanguage from 'hooks/useLanguage';
 import useData from 'hooks/useData';
+import useDelete from 'hooks/useDelete';
 import { getLocalized } from 'helpers/util';
 import { formatYear } from 'helpers/time';
 import { requestDeletePeriod } from 'store/actionCreators/periods';
@@ -45,16 +45,12 @@ const renderRow = (t, lang, onDelete) => p => {
 };
 
 const AdminPeriodList = () => {
-  const dispatch = useDispatch();
-
   const { t } = useTranslation();
   
   const lang = useLanguage();
   const { periods } = useData();
 
-  const onDelete = useCallback(e => {
-    dispatch(requestDeletePeriod(e.currentTarget.dataset.id));
-  }, []);
+  const [deleteModal, onDelete] = useDelete(requestDeletePeriod);
 
   return (
     <AdminPage>
@@ -67,6 +63,7 @@ const AdminPeriodList = () => {
       <AdminTable headers={headers}>
         {periods.map(renderRow(t, lang, onDelete))}
       </AdminTable>
+      {deleteModal}
     </AdminPage>
   );
 };

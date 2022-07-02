@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React  from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AdminPage from 'components/AdminPage';
@@ -7,6 +6,7 @@ import AdminPageTitle from 'components/AdminPageTitle';
 import AdminTable from 'components/AdminTable';
 import useLanguage from 'hooks/useLanguage';
 import useData from 'hooks/useData';
+import useDelete from 'hooks/useDelete';
 import { getLocalized } from 'helpers/util';
 import { formatYear } from 'helpers/time';
 import { requestDeleteBook } from 'store/actionCreators/books';
@@ -47,16 +47,12 @@ const renderRow = (t, lang, onDelete) => c => {
 };
 
 const AdminBookList = () => {
-  const dispatch = useDispatch();
-
   const { t } = useTranslation();
   
   const lang = useLanguage();
   const { books } = useData();
 
-  const onDelete = useCallback(e => {
-    dispatch(requestDeleteBook(e.currentTarget.dataset.id));
-  }, []);
+  const [deleteModal, onDelete] = useDelete(requestDeleteBook);
 
   return (
     <AdminPage>
@@ -69,6 +65,7 @@ const AdminBookList = () => {
       <AdminTable headers={headers}>
         {books.map(renderRow(t, lang, onDelete))}
       </AdminTable>
+      {deleteModal}
     </AdminPage>
   );
 };

@@ -54,6 +54,8 @@ const AdminCharacterForm = ({ editMode }) => {
 
   const formTitle = editMode ? 'admin.event.title.edit' : 'admin.event.title.add';
 
+  const chars = useMemo(() => [...state.characters, ...state.secondaryCharacters], [state]);
+
   return showMedia ? (
     <AdminMediaLibrary form="event" onBack={moveToForm} />
   ) : (
@@ -94,13 +96,30 @@ const AdminCharacterForm = ({ editMode }) => {
             />
           </div>
         </div>
-        <AdminCharacterRelationBlock
-          name="characters"
-          value={state.characters}
-          onChange={onChange}
-          currentId=""
-          idsOnly
-        />
+        <div className="admin-form__columns">
+          <div className="admin-form__column">
+            <AdminCharacterRelationBlock
+              name="characters"
+              value={state.characters}
+              onChange={onChange}
+              currentId=""
+              idsOnly
+              excluded={chars}
+            />
+          </div>
+          <div className="admin-form__column">
+            <AdminCharacterRelationBlock
+              name="secondaryCharacters"
+              value={state.secondaryCharacters}
+              onChange={onChange}
+              currentId=""
+              idsOnly
+              label="admin.story.secondaryCharacters"
+              placeholder="admin.story.secondaryCharacters.placeholder"
+              excluded={chars}
+            />
+          </div>
+        </div>
         <AdminInput
           type="text"
           label="admin.shortDescription"

@@ -66,8 +66,8 @@ const CharacterAside = () => {
     return (
       <React.Fragment>
         <div className="character-aside__title">
-          <CharacterDot data={data} className="character-aside__dot" />
           {getLocalized(data, 'name', lang)}
+          <CharacterDot data={data} className="character-aside__dot" />
         </div>
         {checkLocalized(data, 'subtitle', lang) && (
           <div className="character-aside__subtitle">{getLocalized(data, 'subtitle', lang)}</div>

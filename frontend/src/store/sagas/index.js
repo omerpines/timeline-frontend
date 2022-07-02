@@ -43,6 +43,9 @@ import {
 import {
   onUploadCSV,
 } from 'store/sagas/csv';
+import {
+  onRequestEmail
+} from 'store/sagas/email';
 
 function* rootSaga() {
   yield all([
@@ -80,6 +83,7 @@ function* rootSaga() {
     call(onAddBook),
     call(onEditBook),
     call(onUploadCSV),
+    call(onRequestEmail),
   ]);
 }
 

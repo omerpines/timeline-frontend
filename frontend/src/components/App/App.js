@@ -14,6 +14,7 @@ import PeriodAside from 'components/PeriodAside';
 import SecuredPart from 'components/SecuredPart';
 import Logo from 'components/Logo';
 import Search from 'components/SearchBar';
+import Help from 'components/Help';
 import useData from 'hooks/useData';
 import config from 'constants/config';
 import { inRange } from 'helpers/util';
@@ -214,6 +215,7 @@ function App() {
         <div className="app">
           <Search/>
           <Logo />
+          <Help />
           <div className="app__layout-horizontal">
             <div className="app__layout-vertical">
               <DimensionalView

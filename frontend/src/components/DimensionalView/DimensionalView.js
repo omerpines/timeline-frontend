@@ -44,7 +44,7 @@ const calculateRoadPaths = ref => {
   const { width, height } = domElem.getBoundingClientRect();
 
   const firstPath = new Bezier([
-    { x: -50, y: Math.round(height * 0.4) },
+    { x: -50, y: Math.round(height * 0.400) },
     { x: Math.round(width * 0.78), y: Math.round(height * 0.5) },
     { x: width + 100, y: Math.round(height * 0.8) },
   ]);
@@ -170,26 +170,26 @@ const useRoad = (containerRef, roadRef, paths) => {
 
     window.addEventListener('resize', resize);
 
-    // paths.forEach(p => {
-    //   ctx.beginPath();
-    //   ctx.lineCap = 'round';
-    //   ctx.lineWidth = 3;
-    //   ctx.moveTo(p.points[0].x, p.points[0].y);
-    //   ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
-    //   ctx.stroke();
-    // });
+    paths.forEach(p => {
+      ctx.beginPath();
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 3;
+      ctx.moveTo(p.points[0].x, p.points[0].y);
+      ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
+      ctx.stroke();
+    });
 
     const roadPaths = calculateRoadPaths(containerRef);
 
-    // roadPaths.forEach(p => {
-    //   ctx.beginPath();
-    //   ctx.lineCap = 'round';
-    //   ctx.lineWidth = 1;
-    //   ctx.strokeStyle = '#fff';
-    //   ctx.moveTo(p.points[0].x, p.points[0].y);
-    //   ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
-    //   ctx.stroke();
-    // });
+    roadPaths.forEach(p => {
+      ctx.beginPath();
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#fff';
+      ctx.moveTo(p.points[0].x, p.points[0].y);
+      ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
+      ctx.stroke();
+    });
 
     const [rp1, rp2, rp3, rp4] = roadPaths;
     ctx.globalAlpha = 0.5;

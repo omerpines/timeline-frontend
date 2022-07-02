@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AdminPage from 'components/AdminPage';
@@ -7,7 +6,9 @@ import AdminPageTitle from 'components/AdminPageTitle';
 import AdminTable from 'components/AdminTable';
 import useLanguage from 'hooks/useLanguage';
 import useData from 'hooks/useData';
+import useDelete from 'hooks/useDelete';
 import { getLocalized } from 'helpers/util';
+import { formatYear } from 'helpers/time';
 import { requestDeleteEvent } from 'store/actionCreators/events';
 
 const headers = [
@@ -18,14 +19,20 @@ const headers = [
   '',
 ];
 
-const renderRow = (t, lang, onDelete) => c => {
+const renderRow = (t, lang, onDelete, stories) => c => {
+  const story = c.story ? stories.find(s => s.id === c.story) : false;
+
   return (
     <tr className="admin-event-row" key={c.id}>
       <td className="admin-event-row__name admin-table__name">
         {getLocalized(c, 'name', lang)}
       </td>
-      <td className="admin-event-row__story admin-table__story" />
-      <td className="admin-event-row__character admin-table__character" />
+      <td className="admin-event-row__story admin-table__story">
+        {story && getLocalized(story, 'name', lang)}
+      </td>
+      <td className="admin-event-row__years admin-table__years">
+        {`${formatYear(c.endDate, t)} - ${formatYear(c.fromDate, t)}`}
+      </td>
       <td className="admin-event-row__edit admin-table__edit">
         <Link className="admin-table__edit-link" to={`/admin/events/edit/${c.id}`}>{t('admin.edit')}</Link>
       </td>
@@ -37,16 +44,12 @@ const renderRow = (t, lang, onDelete) => c => {
 };
 
 const AdminEventList = () => {
-  const dispatch = useDispatch();
-
   const { t } = useTranslation();
   
   const lang = useLanguage();
-  const { events } = useData();
+  const { events, stories } = useData();
 
-  const onDelete = useCallback(e => {
-    dispatch(requestDeleteEvent(e.currentTarget.dataset.id));
-  }, []);
+  const [deleteModal, onDelete] = useDelete(requestDeleteEvent);
 
   return (
     <AdminPage>
@@ -57,8 +60,9 @@ const AdminEventList = () => {
         csvType="event"
       />
       <AdminTable headers={headers}>
-        {events.map(renderRow(t, lang, onDelete))}
+        {events.map(renderRow(t, lang, onDelete, stories))}
       </AdminTable>
+      {deleteModal}
     </AdminPage>
   );
 };
