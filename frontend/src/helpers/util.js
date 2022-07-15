@@ -112,3 +112,7 @@ export const getYoutubeId = link => {
   const a = link.match(youtubeRegexA);
   return a[1];
 };
+
+export const isAudioFormatSupported = link => {
+  return config.AUDIO_FORMATS.some(f => link.endsWith(f));
+}

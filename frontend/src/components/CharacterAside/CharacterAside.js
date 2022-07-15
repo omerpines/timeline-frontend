@@ -76,18 +76,33 @@ const CharacterAside = () => {
     );
   }, [data]);
 
+  const gallery = useMemo(() => {
+    if (!data) return false;
+
+    return (
+      <React.Fragment>
+        {data.tags ? (
+          <TagCloud tags={tags} />
+        ) : false}
+        <MediaGallery data={data.media} />
+        <QuoteBlock data={data} />
+        <div className="aside__characters">
+          {relatedCharacters.map(renderCharacter)}
+        </div>
+      </React.Fragment>
+    );
+  }, [data]);
+
   if (!data) return false;
 
   return (
-    <Aside header={header}>
-      {data.tags ? (
-        <TagCloud tags={tags} />
-      ) : false}
-      <MediaGallery data={data.media} />
-      <QuoteBlock data={data} />
-      <div className="aside__characters">
-        {relatedCharacters.map(renderCharacter)}
-      </div>
+    <Aside
+      header={header}
+      fullscreenGallery={gallery}
+      fullscreenContent={content}
+      data={data}
+    >
+      {gallery}
       {content}
     </Aside>
   );

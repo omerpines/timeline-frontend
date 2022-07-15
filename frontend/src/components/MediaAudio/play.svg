@@ -1,0 +1,16 @@
+<svg id="Group_353" data-name="Group 353" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52" height="52" viewBox="0 0 52 52">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.142" x2="-1.157" y2="4.281" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#dc1f57"/>
+      <stop offset="1" stop-color="#6e102c"/>
+    </linearGradient>
+  </defs>
+  <g id="Ellipse_53" data-name="Ellipse 53" fill="#fff" stroke="#dc1f57" stroke-width="4">
+    <circle cx="26" cy="26" r="26" stroke="none"/>
+    <circle cx="26" cy="26" r="24" fill="none"/>
+  </g>
+  <g id="Polygon_9" data-name="Polygon 9" transform="translate(34 20) rotate(90)" fill="url(#linear-gradient)">
+    <path d="M 12.16052436828613 11.5 L 0.8394758105278015 11.5 L 6.5 1.049801588058472 L 12.16052436828613 11.5 Z" stroke="none"/>
+    <path d="M 6.5 2.099584579467773 L 1.67894172668457 11 L 11.32105827331543 11 L 6.5 2.099584579467773 M 6.5 0 L 13 12 L 0 12 L 6.5 0 Z" stroke="none" fill="#c21b4d"/>
+  </g>
+</svg>

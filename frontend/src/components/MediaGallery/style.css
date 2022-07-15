@@ -48,3 +48,9 @@
   justify-content: center;
   width: 100%;
 }
+
+.media-gallery-audios {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}

@@ -170,14 +170,14 @@ const useRoad = (containerRef, roadRef, paths) => {
 
     window.addEventListener('resize', resize);
 
-    paths.forEach(p => {
-      ctx.beginPath();
-      ctx.lineCap = 'round';
-      ctx.lineWidth = 3;
-      ctx.moveTo(p.points[0].x, p.points[0].y);
-      ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
-      ctx.stroke();
-    });
+    // paths.forEach(p => {
+    //   ctx.beginPath();
+    //   ctx.lineCap = 'round';
+    //   ctx.lineWidth = 3;
+    //   ctx.moveTo(p.points[0].x, p.points[0].y);
+    //   ctx.quadraticCurveTo(p.points[1].x, p.points[1].y, p.points[2].x, p.points[2].y);
+    //   ctx.stroke();
+    // });
 
     const roadPaths = calculateRoadPaths(containerRef);
 
@@ -260,6 +260,7 @@ const renderDataPoint = (characters, paths, min, range) => data => {
     top: y,
     transform: `scale(${scale})`,
     backgroundColor: data.color,
+    zIndex: 9999999 - data.endDate,
   };
 
   const previewStyles = {
@@ -305,6 +306,7 @@ const DimensionalView = ({ data, min, max, onChangeCurrent, children }) => {
     <div className="dimensional">
       <canvas className="dimensional__canvas dimensional__canvas--road" ref={roadRef} style={{ transform: 'translate(0.5, 0.5)' }} />
       {periods.map(renderPeriod(min, max - min))}
+      <canvas className="dimensional__canvas" ref={canvasRef} />
       <ul
         className="dimensional__nodes"
         ref={containerRef}
@@ -314,7 +316,6 @@ const DimensionalView = ({ data, min, max, onChangeCurrent, children }) => {
       >
         {data.map(renderDataPoint(characters, paths, min, max - min))}
       </ul>
-      <canvas className="dimensional__canvas" ref={canvasRef} />
       {children}
     </div>
   );

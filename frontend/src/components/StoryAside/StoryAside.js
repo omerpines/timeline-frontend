@@ -83,16 +83,31 @@ const StoryAside = () => {
     );
   }, [data]);
 
-  if (!data) return false;
+  const gallery = useMemo(() => {
+    if (!data) return false;
 
-  return (
-    <Aside header={header} >
+    return (
       <div className="aside__characters">
         {data.tags ? (
           <TagCloud tags={data.tags} />
         ) : false}
         <MediaGallery data={data.media} />
       </div>
+    );
+  }, [data]);
+
+  if (!data) return false;
+
+  if (!data) return false;
+
+  return (
+    <Aside
+      header={header}
+      fullScreenContent={content}
+      fullScreenGallery={gallery}
+      data={data}
+    >
+      {gallery}
       {content}
     </Aside>
   );

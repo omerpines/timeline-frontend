@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useLanguage from 'hooks/useLanguage';
 import { getLocalized } from 'helpers/util';
 import { getBookLink } from 'helpers/urls';
+import { sortEntitiesByEndDate } from 'helpers/time';
 import './style.css';
 
 const renderBook = lang => b => {
@@ -16,7 +17,12 @@ const renderBook = lang => b => {
 const TimelineBookGroup = ({ group, width, min, max }) => {
   const lang = useLanguage();
 
-  const { fromDate, endDate, data } = group;
+  const { fromDate, endDate } = group;
+
+  const data = useMemo(() => {
+    if (!group || !group.data) return [];
+    return [...group.data].sort(sortEntitiesByEndDate).reverse();
+  }, [group]);
 
   const styles = useMemo(() => {
     const yearCost = width / (max - min);

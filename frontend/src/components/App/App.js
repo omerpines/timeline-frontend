@@ -215,7 +215,6 @@ function App() {
         <div className="app">
           <Search/>
           <Logo />
-          <Help />
           <div className="app__layout-horizontal">
             <div className="app__layout-vertical">
               <DimensionalView
@@ -240,6 +239,7 @@ function App() {
                 minimized={minimized}
               />
             </div>
+            <Help />
             {showWelcomeModal && !skipWelcomeModal && <WelcomeModal onClose={onCloseWelcomeModal} />}
             <Routes>
               <Route path={storyLink} element={<StoryAside />} />

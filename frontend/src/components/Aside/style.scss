@@ -44,6 +44,7 @@
 
 .aside {
   animation: slidein 0.2s ease-in-out forwards;
+  background: white;
   box-sizing: border-box;
   flex-grow: 0;
   text-align: right;
@@ -84,13 +85,27 @@
   width: 700px;
 }
 
+.aside__controls {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 .aside__back {
   color: #DC1F57;
   display: block;
   font: normal normal normal 24px/33px Assistant;
-  margin-bottom: 20px;
   position: relative;
   text-decoration: none;
+}
+
+.aside__fullscreen {
+  color: #DC1F57;
+  cursor: pointer;
+  font: normal normal normal 24px/33px Assistant;
+  letter-spacing: 0px;
+  text-align: right;
 }
 
 .aside__back-icon {
@@ -246,4 +261,73 @@ nav.admin__nav a {
   .media-gallery__gallery{
     right: -285px !important;
   }
+}
+
+.aside-modal__box {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 8px 13px #00000029;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  height: calc(100vh - 76px);
+  max-width: calc(100vw - 316px);
+  padding: 50px 74px 64px;
+  position: absolute;
+  text-align: right;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 20px);
+}
+
+.aside-modal__body, .aside-modal__columns {
+  height: 100%;
+}
+
+.aside-modal__columns {
+  direction: rtl;
+  display: flex;
+}
+
+.aside-modal__column {
+  height: 100%;
+  overflow: hidden;
+}
+
+.aside-modal__column--gallery {
+  padding-top: 47px;
+  width: 653px;
+}
+
+.aside-modal__column--content {
+  color: #474747;
+  flex-grow: 1;
+  font: normal normal normal 24px/35px Assistant;
+  letter-spacing: 0px;
+}
+
+.aside-modal__scrollarea--content {
+  transform: translateX(43px);
+}
+
+.aside-modal__close.fa {
+  color: #DC1F57;
+  cursor: pointer;
+  font-size: 25px;
+  left: 42px;
+  position: absolute;
+  top: 35px;
+}
+
+.aside-modal__title {
+  color: #474747;
+  font: normal normal 600 42px Assistant;
+  letter-spacing: 0px;
+}
+
+.aside-modal__subtitle {
+  color: #474747;
+  font: normal normal normal 36px/33px Assistant;
+  letter-spacing: 0px;
 }

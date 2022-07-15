@@ -73,14 +73,29 @@ const BookAside = () => {
     );
   }, [data]);
 
+  const gallery = useMemo(() => {
+    if (!data) return false;
+
+    return (
+      <React.Fragment>
+        {data.tags ? (
+          <TagCloud tags={data.tags} />
+        ) : false}
+        <MediaGallery data={data.media} />
+      </React.Fragment>
+    );
+  }, [data]);
+
   if (!data) return false;
 
   return (
-    <Aside header={header}>
-      {data.tags ? (
-        <TagCloud tags={data.tags} />
-      ) : false}
-      <MediaGallery data={data.media} />
+    <Aside
+      header={header}
+      fullscreenGallery={gallery}
+      fullscreenContent={content}
+      data={data}
+    >
+      {gallery}
       {content}
     </Aside>
   );

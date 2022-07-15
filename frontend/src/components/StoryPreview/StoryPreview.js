@@ -22,9 +22,9 @@ const useHover = () => {
   return [hovered, onMouseEnter, onMouseLeave];
 };
 
-const renderCharacter = data => (
+const renderCharacter = data => (!data ? false : (
   <CharacterDot key={data.id} data={data} className="story-preview__character" />
-);
+));
 
 const StoryPreview = ({ data, size, opacity, styles }) => {
   const lang = useLanguage();
@@ -58,7 +58,7 @@ const StoryPreview = ({ data, size, opacity, styles }) => {
   const containerStyles = {
     ...styles,
     opacity: hovered ? 1 : opacity,
-    zIndex: hovered ? 1000 : undefined,
+    zIndex: hovered ? 9999999 : 9999999 - data.endDate,
   };
 
   return (

@@ -8,7 +8,7 @@
   left: 0px;
   position: absolute;
   top: 0px;
-  transform: translateX(-50%);
+  transform: translate(-50%, -10%);
   transition-duration: 0.2s;
   transition-property: height, width, margin-top;
   transition-timing-function: ease-in;

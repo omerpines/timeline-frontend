@@ -247,5 +247,6 @@ export default {
     "sendEmail.email": "אימייל",
     "sendEmail.message": "גוף ההודעה",
     "sendEmail.confirm": "המשך",
+    "aside.fullscreen": "מסך מלא",
   },
 };

@@ -10,6 +10,7 @@ import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
 import { getBookLink } from 'helpers/urls';
 import { getLocalized } from 'helpers/util';
+import { sortEntitiesByEndDate } from 'helpers/time';
 import config from 'constants/config';
 
 const renderBook = data => (
@@ -37,14 +38,13 @@ const PeriodAside = () => {
   }, [data]);
 
   const relatedBooks = useMemo(() => {
-    return books.filter(b => b.period === pid);
+    return books.filter(b => b.period === pid).sort(sortEntitiesByEndDate);
   }, [books, pid]);
 
   const content = useMemo(() => {
     if (!data) return false;
     return (
       <React.Fragment>
-        <div className="aside__background" style={backgroundStyles} />
         <div className="aside__characters">
           {relatedBooks.map(renderBook)}
         </div>
@@ -70,13 +70,31 @@ const PeriodAside = () => {
     );
   }, [data]);
 
+  const gallery = useMemo(() => {
+    if (!data) return false;
+
+    return (
+      <React.Fragment>
+        {data.image && data.image.data ? (
+          <div className="aside__background" style={backgroundStyles} />
+        ) : false}
+        {data.tags ? (
+          <TagCloud tags={data.tags} />
+        ) : false}
+      </React.Fragment>
+    );
+  }, [data]);
+
   if (!data) return false;
 
   return (
-    <Aside header={header}>
-      {data.tags ? (
-        <TagCloud tags={data.tags} />
-      ) : false}
+    <Aside
+      header={header}
+      fullscreenGallery={gallery}
+      fullscreenContent={content}
+      data={data}
+    >
+      {gallery}
       {content}
     </Aside>
   );

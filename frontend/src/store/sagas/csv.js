@@ -9,7 +9,7 @@ import { requestAddCharacter } from 'store/actionCreators/characters';
 import { failureCSV, loadingCSV, successCSV } from 'store/actionCreators/csv';
 import { getData } from 'store/selectors/data';
 import { parseYear } from 'helpers/time';
-import { getYoutubeId } from 'helpers/util';
+import { getYoutubeId, isAudioFormatSupported } from 'helpers/util';
 
 const validateName = (x, y, name) => {
   if (!name) return [x, y, 'error.emptyName'];
@@ -192,11 +192,20 @@ const parseQuote = quote => {
 
 const parseMedia = media => {
   const isYoutube = media.includes('youtu.be') || media.includes('youtube.com');
+  const isAudio = isAudioFormatSupported(media);
 
   if (isYoutube) return {
     id: uuid(),
     type: 'youtube',
     youtubeId: getYoutubeId(media),
+    title: '',
+    description: '',
+  };
+
+  if (isAudio) return {
+    id: uuid(),
+    type: 'audio',
+    url: media,
     title: '',
     description: '',
   };

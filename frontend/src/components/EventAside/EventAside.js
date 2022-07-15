@@ -29,7 +29,6 @@ const EventAside = () => {
   }, [events, id]);
 
   const relatedStory = useMemo(() => {
-    console.log(data, stories);
     if (!data) return null;
     return stories.find(s => s.id === data.story);
   }, [data, stories]);
@@ -38,14 +37,14 @@ const EventAside = () => {
     if (!data) return false;
     return (
       <React.Fragment>
-      {ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
-      {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
-      {!data.links ? false : (
-        <React.Fragment>
-          <div className="aside__paragraph-title">{t('admin.forMoreInformation')}</div>
-          {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
-        </React.Fragment>
-      )}
+        {ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
+        {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
+        {!data.links ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-title">{t('admin.forMoreInformation')}</div>
+            {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
+          </React.Fragment>
+        )}
       </React.Fragment>
     );
   }, [data, lang]);
@@ -81,15 +80,31 @@ const EventAside = () => {
     );
   }, [data]);
 
+  const gallery = useMemo(() => {
+    if (!data) return false;
+
+    return (
+      <React.Fragment>
+        <MediaGallery data={data.media} />
+        <div className="aside__characters">
+          {characterData.map(renderCharacter)}
+        </div>
+        <QuoteBlock data={data} />
+      </React.Fragment>
+    );
+  }, [data]);
+
   if (!data) return false;
 
   return (
-    <Aside header={header} className="event__aside">
-      <MediaGallery data={data.media} />
-      <div className="aside__characters">
-        {characterData.map(renderCharacter)}
-      </div>
-      <QuoteBlock data={data} />
+    <Aside
+      className="event__aside"
+      header={header}
+      fullscreenGallery={gallery}
+      fullscreenContent={content}
+      data={data}
+    >
+      {gallery}
       {content}
     </Aside>
   );

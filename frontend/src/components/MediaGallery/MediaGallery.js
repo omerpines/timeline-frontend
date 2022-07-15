@@ -4,7 +4,7 @@ import Media from 'components/Media';
 import './style.css';
 
 const renderMedia = onClick => (media, i) => (
-  <li className="media-gallery__slide" key={media.id}>
+  <li className={media.type === 'audio' ? 'media-gallery__audio' : 'media-gallery__slide'} key={media.id}>
     <Media data={media} onClick={onClick} index={i + 1} />
   </li>
 );
@@ -43,24 +43,32 @@ const MediaGallery = ({ data }) => {
     setToggler(t => !t);
   }, []);
 
+  const [audioData, otherData] = useMemo(() => {
+    if (!data || !data.length) return [[], []];
+    return [
+      data.filter(d => d.type === 'audio'),
+      data.filter(d => d.type !== 'audio'),
+    ];
+  }, [data]);
+
   const [urls, types, attrs, captions] = useMemo(() => {
-    if (!data) return [[], [], [], []];
+    if (!otherData.length) return [[], [], [], []];
 
     return [
-      data.map(d => d.url || `https://youtu.be/${d.youtubeId}`),
-      data.map(d => d.type),
-      data.map(d => (d.description ? { alt: d.description } : null)),
-      data.map(d => (
+      otherData.map(d => d.url || `https://youtu.be/${d.youtubeId}`),
+      otherData.map(d => d.type),
+      otherData.map(d => (d.description ? { alt: d.description } : null)),
+      otherData.map(d => (
         <React.Fragment>
           <h2>{d.title}</h2>
           <div>{d.description}</div>
         </React.Fragment>
       ))
     ];
-  }, [data]);
+  }, [otherData]);
 
   let leftClasses = 'fa fa-chevron-left media-gallery__icon media-gallery__icon--left';
-  if (data && data.length && shift === data.length - 1) leftClasses += ' media-gallery__icon--hidden';
+  if (otherData && otherData.length && shift === otherData.length - 1) leftClasses += ' media-gallery__icon--hidden';
 
   let rightClasses = 'fa fa-chevron-right media-gallery__icon media-gallery__icon--right';
   if (shift === 0) rightClasses += ' media-gallery__icon--hidden';
@@ -68,23 +76,32 @@ const MediaGallery = ({ data }) => {
   if (!data || !data.length) return false;
 
   return (
-    <div className="media-gallery" ref={ref}>
-      <ul className="media-gallery__gallery" style={styles}>
-        {data.map(renderMedia(onToggle))}
-      </ul>
-      <i className={leftClasses} onClick={onLeft} />
-      <i className={rightClasses} onClick={onRight} />
-      {data ? (
-        <FsLightbox
-          toggler={toggler}
-          sources={urls}
-          types={types}
-          customAttributes={attrs}
-          captions={captions}
-          slide={slideIndex}
-        />
-      ) : null}
-    </div>
+    <React.Fragment>
+      <div className="media-gallery" ref={ref}>
+        {otherData.length > 0 && (
+          <React.Fragment>
+            <ul className="media-gallery__gallery" style={styles}>
+              {otherData.map(renderMedia(onToggle))}
+            </ul>
+            <i className={leftClasses} onClick={onLeft} />
+            <i className={rightClasses} onClick={onRight} />
+            <FsLightbox
+              toggler={toggler}
+              sources={urls}
+              types={types}
+              customAttributes={attrs}
+              captions={captions}
+              slide={slideIndex}
+            />
+          </React.Fragment>
+        )}
+      </div>
+      {audioData.length> 0 && (
+        <ul className="media-gallery-audios">
+          {audioData.map(renderMedia(onToggle))}
+        </ul>
+      )}
+    </React.Fragment>
   );
 };
 

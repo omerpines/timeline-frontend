@@ -34,7 +34,7 @@ function* processMediaQueries(data) {
   for (let i = 0, l = media.length; i < l; i += 1) {
     const m = media[i];
 
-    if (m.type !== 'newImage' && m.type !== 'newVideo') {
+    if (m.type !== 'newImage' && m.type !== 'newVideo' && m.type !== 'newAudio') {
       newMedia.push(m);
       continue;
     }
@@ -54,6 +54,7 @@ function* processMediaQueries(data) {
 
     let type = 'image';
     if (m.type === 'newVideo') type = 'video';
+    else if (m.type === 'newAudio') type = 'audio';
 
     newMedia.push({
       type,
