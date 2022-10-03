@@ -13,6 +13,10 @@ const AdminFileInput = ({ name, value, onChange, label, labelInside, noLabel, cl
     onChange(name, val);
   }, [name]);
 
+  const onDelete = useCallback(() => {
+    onChangeInput(null);
+  }, []);
+
   const styles = useMemo(() => {
     if (!value) return {};
     const url = getFileUrl(value);
@@ -40,6 +44,9 @@ const AdminFileInput = ({ name, value, onChange, label, labelInside, noLabel, cl
           <div className="admin-file-input__title">{t('admin.dragFiles')}</div>
           <div className="admin-file-input__subtitle">{t('admin.clickFiles')}</div>
         </FileUploader>
+        {value && (
+          <i className="admin-file-input__delete fa fa-trash-o" onClick={onDelete} />
+        )}
       </div>
     </div>
   );

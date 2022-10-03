@@ -177,7 +177,7 @@
 
 .aside__title {
   color: #474747;
-  font: normal normal 600 42px/10px Assistant;
+  font: normal normal 600 42px Assistant;
   letter-spacing: 0px;
   margin-bottom: 30px;
 }
@@ -227,7 +227,7 @@ nav.admin__nav a {
     width: 260px !important;
   }
   .aside__scrollarea{
-    padding-right: 0px !important;
+    padding-right: 20px !important;
   }
   .media-gallery__gallery{
     right: -500px !important;
@@ -328,6 +328,23 @@ nav.admin__nav a {
 
 .aside-modal__subtitle {
   color: #474747;
-  font: normal normal normal 36px/33px Assistant;
+  font: normal normal normal 36px Assistant;
   letter-spacing: 0px;
+}
+
+.aside__paragraph-label {
+  font-weight: bold;
+}
+
+.aside__books {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.entity-block.aside__block-book {
+  box-shadow: none;
+  display: inline-block;
+  height: auto;
+  padding-right: 0px;
+  width: auto;
 }

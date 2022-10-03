@@ -101,3 +101,12 @@
 .admin-file-input--small .admin-file-input__droparea {
   height: 240px;
 }
+
+.admin-file-input__delete {
+  bottom: 20px;
+  color: white;
+  cursor: pointer;
+  left: 20px;
+  position: absolute;
+  text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+}

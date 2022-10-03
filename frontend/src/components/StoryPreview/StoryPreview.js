@@ -39,8 +39,10 @@ const StoryPreview = ({ data, size, opacity, styles }) => {
   let classes = 'story-preview';
 
   if (size === 'large' || hovered) classes += ' story-preview--large';
-  else if (size === 'medium') classes += ' story-preview--medium';
-  else classes += ' story-preview--small';
+  else if (size === 'big') classes += ' story-preview--big';
+  else classes += ' story-preview--medium';
+  if (hovered && size === 'medium') classes += ' story-preview--medium-hovered';
+  if (hovered && size === 'big') classes += ' story-preview--big-hovered';
 
   const link = getEventLink(data.id);
 
@@ -61,6 +63,31 @@ const StoryPreview = ({ data, size, opacity, styles }) => {
     zIndex: hovered ? 9999999 : 9999999 - data.endDate,
   };
 
+  if (!hovered && (size === 'small' || size === 'cluster')) return false;
+
+  if (!hovered && size === 'medium') return (
+    <div className={classes} style={containerStyles} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <Link to={link} className="story-preview__header">
+        <div className="story-preview__titles">
+          <div className="story-preview__title">{getLocalized(data, 'name', lang)}</div>
+        </div>
+      </Link>
+    </div>
+  );
+  
+  if (!hovered && size === 'big') return (
+    <div className={classes} style={containerStyles} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <header className="story-preview__header">
+        <Link to={link} className="story-preview__more-arrow">
+          <i className="fa fa-chevron-left story-preview__more-arrow-icon" />
+        </Link>
+        <div className="story-preview__titles">
+          <div className="story-preview__title">{getLocalized(data, 'name', lang)}</div>
+        </div>
+      </header>
+    </div>
+  );
+
   return (
     <div className={classes} style={containerStyles} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {data.media && (size === 'large' || hovered || size === 'medium') && (
@@ -77,7 +104,7 @@ const StoryPreview = ({ data, size, opacity, styles }) => {
         )}
         <div className="story-preview__titles">
           <div className="story-preview__title">{getLocalized(data, 'name', lang)}</div>
-          <div className="story-preview__subtitle">{getLocalized(data, 'shortDescription', lang)}</div>
+          <div className="story-preview__subtitle">{getLocalized(data, 'summary', lang)}</div>
         </div>
       </header>
       {(size === 'large' || hovered) && (

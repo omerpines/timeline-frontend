@@ -16,11 +16,23 @@ const config = {
   MIN_RANGE: 100,
   MAX_RANGE: 4000,
   EMAIL: 'office@929.org.il',
-  API: 'https://timelineapi.testing.929.org.il',
+  EMAIL_SEND_TO: 'office@929.org.il',
+  // Any string like 'robot@929.org.il' or false to use the email from the form
+  EMAIL_SEND_FROM: false,
+  API: 'http://localhost:1337',
   // In percents. Determines the position of the red line
   FOCUS_POINT: 20,
   // In percents. Determines the distance from the red line where a period background starts to fade in/out
   PERIOD_TRANSITION_RANGE: 5,
+  AUDIO_FORMATS: ['.ogg', '.mp3'],
+  // The maximum amount of entity balls in the 3d view area. If there's more than that in the "cluster" area
+  // all balls inside are clustered
+  CLUSTER_TRESHOLD: 3,
+  // In percents from INITIAL_RANGE
+  ZOOM_INCREMENT: 10,
+  // In percents from INITIAL_RANGE on each mouse wheel event
+  MOUSE_ZOOM_INCREMENT: 5,
+  MOBILE_DRAG_SLOWDOWN: 10,
 };
 
 export default config;

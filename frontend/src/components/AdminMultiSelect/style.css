@@ -1,0 +1,127 @@
+.admin-multiselect {
+  align-items: center;
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 0px;
+  padding-left: 66px;
+  padding-top: 0px;
+  position: relative;
+  z-index: 500;
+}
+
+.admin-multiselect__selected {
+  display: flex;
+}
+
+.admin-multiselect__selected-option {
+  align-items: center;
+  background: rgba(157, 1, 1, 0.1) 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: flex;
+  height: 43px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-left: 8px;
+}
+
+.admin-multiselect__name {
+  color: #5B5B5B;
+  font: normal normal normal 22px Assistant;
+  letter-spacing: 0px;
+  margin-left: 7px;
+  opacity: 0.89;
+}
+
+.admin-multiselect__remove.fa {
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 14px;
+}
+
+.admin-multiselect__icon {
+  align-items: center;
+  display: flex;
+}
+
+.admin-multiselect__value {
+  border: 0px;
+  color: #474747;
+  font: normal normal normal 22px/31px Assistant;
+  letter-spacing: 0px;
+  margin-right: 14px;
+  outline: none !important;
+  padding: 0px;
+}
+
+.admin-multiselect__open {
+  color: #DC1F57;
+  cursor: pointer;
+  font-size: 16px;
+  left: 25px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease-in;
+}
+
+.admin-multiselect__open.admin-multiselect__open--opened {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.admin-multiselect__options {
+  background: white;
+  border-radius: 0px 0px 8px 8px;
+  box-shadow: 0px 12px 18px #00000029;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+  top: calc(100% - 5px);
+}
+
+.admin-multiselect__options-list {
+  padding-right: 0px;
+}
+
+.admin-multiselect__new {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 60px;
+  padding-right: 43px;
+}
+
+.admin-multiselect__new-label {
+  font: normal normal 600 22px Assistant;
+  margin-left: 14px;
+}
+
+.admin-multiselect__new-icon {
+  color: #DC1F57;
+  font-size: 15px;
+}
+
+.admin-multiselect__option {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 50px;
+  padding-left: 25px;
+  padding-right: 43px;
+}
+
+.admin-multiselect__option:hover {
+  background-color: #F5F5F5;
+}
+
+.admin-multiselect__option-name {
+  color: #000000;
+  font: normal normal normal 22px Assistant;
+  letter-spacing: 0px;
+  padding-left: 21px;
+}
+
+.admin-multiselect__option-gap {
+  flex-grow: 1;
+}

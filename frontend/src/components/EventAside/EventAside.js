@@ -33,22 +33,6 @@ const EventAside = () => {
     return stories.find(s => s.id === data.story);
   }, [data, stories]);
 
-  const content = useMemo(() => {
-    if (!data) return false;
-    return (
-      <React.Fragment>
-        {ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
-        {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
-        {!data.links ? false : (
-          <React.Fragment>
-            <div className="aside__paragraph-title">{t('admin.forMoreInformation')}</div>
-            {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
-          </React.Fragment>
-        )}
-      </React.Fragment>
-    );
-  }, [data, lang]);
-
   const chars = useMemo(() => {
     if (!data) return false;
     return data.secondaryCharacters ? [...data.characters, ...data.secondaryCharacters] : data.characters;
@@ -59,16 +43,49 @@ const EventAside = () => {
     return denormalize(chars, characters);
   }, [chars, characters]);
 
+  const gallery = useMemo(() => {
+    if (!data) return false;
+
+    return (
+      <React.Fragment>
+        <MediaGallery data={data.media} />
+      </React.Fragment>
+    );
+  }, [data]);
+
+  const content = useMemo(() => {
+    if (!data) return false;
+    return (
+      <React.Fragment>
+        {!data.summary ? false : ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
+        <QuoteBlock data={data} />
+        {gallery}
+        {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
+        {!characterData.length ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-label">{t('aside.label.characters')}</div>
+            <div className="aside__characters">
+              {characterData.map(renderCharacter)}
+            </div>
+          </React.Fragment>
+        )}
+        {!data.links ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-label">{t('aside.label.furtherReading')}</div>
+            {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
+          </React.Fragment>
+        )}
+      </React.Fragment>
+    );
+  }, [data, lang, gallery]);
+
   const header = useMemo(() => {
     if (!data) return undefined;
     return (
       <React.Fragment>
         <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
-        <div className='aside__header-img'>
-          <img src='/imagePreview.png'/>
-        </div>
-        <div className="aside__subtitle">{getLocalized(data, 'shortDescription', lang)}</div>
-        {!relatedStory ? false : (
+          {ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
+          {!relatedStory ? false : (
           <Link
             className="aside__subsubtitle"
             to={getStoryLink(relatedStory.id)}
@@ -78,21 +95,7 @@ const EventAside = () => {
         )}
       </React.Fragment>
     );
-  }, [data]);
-
-  const gallery = useMemo(() => {
-    if (!data) return false;
-
-    return (
-      <React.Fragment>
-        <MediaGallery data={data.media} />
-        <div className="aside__characters">
-          {characterData.map(renderCharacter)}
-        </div>
-        <QuoteBlock data={data} />
-      </React.Fragment>
-    );
-  }, [data]);
+  }, [data, lang]);
 
   if (!data) return false;
 

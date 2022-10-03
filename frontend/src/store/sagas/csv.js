@@ -235,10 +235,9 @@ const parsePeriod = row => {
     media,
     name: row[0],
     color: row[6] || '#ffffff',
-    shortDescription: row[7],
-    description: row[8],
-    majorEvents: row[9],
-    links: row[10],
+    description: row[7],
+    majorEvents: row[8],
+    links: row[9],
   };
 };
 
@@ -257,9 +256,8 @@ const parseBook = data => row => {
     name: row[0],
     age: row[9],
     location: row[10],
-    shortDescription: row[11],
-    content: row[12],
-    links: row[13],
+    content: row[11],
+    links: row[12],
   }
 };
 
@@ -279,11 +277,10 @@ const parseStory = data => row => {
     secondaryCharacters,
     name: row[0],
     age: row[6],
-    shortDescription: row[7],
-    summary: row[8],
-    plot: row[9],
-    references: row[10],
-    location: row[11],
+    summary: row[7],
+    plot: row[8],
+    references: row[9],
+    location: row[10],
     path: 1,
   };
 };
@@ -327,12 +324,11 @@ const parseCharacter = data => row => {
     area: row[6],
     role: row[8],
     nation: row[9],
-    shortDescription: row[12],
-    summary: row[13],
-    content: row[14],
-    biography: row[15],
-    appearances: row[16],
-    links: row[18],
+    summary: row[12],
+    content: row[13],
+    biography: row[14],
+    appearances: row[15],
+    links: row[16],
     characters: [],
   };
 }

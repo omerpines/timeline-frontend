@@ -24,25 +24,36 @@
 }
 
 .searchInputDiv {
-  margin-top: 30px;
-  width: 100%;
-  text-align: right;
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 8px;
   border: none;
+  border-radius: 8px;
+  box-shadow: 0px 3px 6px #00000029;
+  margin-top: 30px;
+  overflow: hidden;
   position: relative;
+  text-align: right;
+  width: 100%;
 }
 
-.searchInputDiv input {
-  padding: 20px 20px;
-  border: none;
-  width: 80%;
-  text-align: right;
+.search__no-results {
   color: #474747;
   font-size: 24px;
   font-family: Assistant;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.searchInputDiv input {
+  border: none;
+  color: #474747;
+  direction: rtl;
+  font-family: Assistant;
+  font-size: 24px;
   font-weight: 300;
+  outline: none !important;
+  padding: 20px 20px;
+  text-align: right;
+  width: 80%;
 }
 .tableBody thead th{
   font-family: Assistant;
@@ -56,11 +67,12 @@
 }
 
 .searchInputDiv i {
-  position: absolute;
-  left: 20px;
-  top: 20px;
   color: #DC1F57;
   font-size: 22px;
+  left: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .tableBody table {

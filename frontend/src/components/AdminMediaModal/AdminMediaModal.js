@@ -145,13 +145,13 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
                 </div>
                 <div className="admin-form__column">
                   <ScrollArea
-                  vertical
-                  smoothScrolling
-                  className="aside__scrollarea media-modal__uploads"
-                  contentClassName="aside__scrollable media-modal__uploads-content"
-                >
-                  {uploads.map(renderUpload(onDeleteUpload))}
-                </ScrollArea>
+                    vertical
+                    smoothScrolling
+                    className="aside__scrollarea media-modal__uploads"
+                    contentClassName="aside__scrollable media-modal__uploads-content"
+                  >
+                    {uploads.map(renderUpload(onDeleteUpload))}
+                  </ScrollArea>
                 </div>
               </div>
             </div>

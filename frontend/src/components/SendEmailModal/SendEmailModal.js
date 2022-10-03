@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import ScrollArea from 'react-scrollbar';
 import Modal from 'components/Modal';
 import { requestEmail } from 'store/actionCreators/email';
 import './style.css';
@@ -28,43 +29,50 @@ const SendEmailModal = ({ onClose }) => {
           <div className="modal__title send-email__title">{t('sendEmail.title')}</div>
           <i className="fa fa-times send-email__close" onClick={onClose} />
         </header>
-        <div className="modal__body send-email__body">
-          <div className="send-email__text">{t('sendEmail.text')}</div>
-          <div className="admin-form__columns">
-            <div className="admin-form__column">
-              <label className="send-email__label" htmlFor="name">{t('sendEmail.name')}</label>
-              <input
-                type="text"
-                value={name}
-                onChange={onChangeName}
-                name="name"
-                className="admin-form__text send-email__input"
-              />
+        <ScrollArea
+          vertical
+          smoothScrolling
+          className="aside__scrollarea"
+          contentClassName="aside__scrollable"
+        >
+          <div className="modal__body send-email__body">
+            <div className="send-email__text">{t('sendEmail.text')}</div>
+            <div className="admin-form__columns">
+              <div className="admin-form__column">
+                <label className="send-email__label" htmlFor="name">{t('sendEmail.name')}</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={onChangeName}
+                  name="name"
+                  className="admin-form__text send-email__input"
+                />
+              </div>
+              <div className="admin-form__column">
+                <label className="send-email__label" htmlFor="email">{t('sendEmail.email')}</label>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={onChangeEmail}
+                  name="email"
+                  className="admin-form__text send-email__input"
+                />
+              </div>
             </div>
-            <div className="admin-form__column">
-              <label className="send-email__label" htmlFor="email">{t('sendEmail.email')}</label>
-              <input
-                type="text"
-                value={email}
-                onChange={onChangeEmail}
-                name="email"
-                className="admin-form__text send-email__input"
-              />
-            </div>
+            <label className="send-email__label" htmlFor="message">{t('sendEmail.message')}</label>
+            <textarea
+              value={message}
+              onChange={onChangeMessage}
+              name="message"
+              className="send-email__input send-email__textarea admin-form__textarea"
+            />
           </div>
-          <label className="send-email__label" htmlFor="message">{t('sendEmail.message')}</label>
-          <textarea
-            value={message}
-            onChange={onChangeMessage}
-            name="message"
-            className="send-email__input send-email__textarea admin-form__textarea"
-          />
-        </div>
-        <footer className="modal__footer send-email__footer">
-          <button className="send-email__confirm" onClick={onConfirm}>
-            {t('sendEmail.confirm')}
-          </button>
-        </footer>
+          <footer className="modal__footer send-email__footer">
+            <button className="send-email__confirm" onClick={onConfirm}>
+              {t('sendEmail.confirm')}
+            </button>
+          </footer>
+        </ScrollArea>
       </div>
     </Modal>
   );

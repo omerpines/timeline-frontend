@@ -35,3 +35,15 @@
 .timeline--minimize .timeline__period-shadow {
   height: 0px;
 }
+
+@media (max-height: 800px) {
+  .timeline__period {
+    font-size: 22px;
+    height: 40px;
+  }
+
+  .timeline__period-image, .timeline__period-shadow {
+    bottom: 40px;
+    height: 212px;
+  }
+}

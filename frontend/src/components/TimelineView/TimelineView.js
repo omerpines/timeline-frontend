@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import TimelinePeriod from 'components/TimelinePeriod';
-import TimelineStory from 'components/TimelineStory';
 import TimelineCharacterGroup from 'components/TimelineCharacterGroup';
 import TimelineBookGroup from 'components/TimelineBookGroup';
+import TimelineStoryGroup from 'components/TimelineStoryGroup';
 import TimelineFocusPoint from 'components/TimelineFocusPoint';
-import useDrag from 'hooks/useDrag';
+import TimelineLegend from 'components/TimelineLegend';
+import useData from 'hooks/useData';
 import './style.css';
 
 const useSize = ref => {
@@ -42,10 +43,6 @@ const renderPeriod = (min, max, width, onChangePeriod) => data => {
   );
 };
 
-const renderStory = (min, max, width) => data => (
-  <TimelineStory key={data.id} min={min} max={max} width={width} data={data} />
-);
-
 const renderCharacterGroup = (min, max, width) => data => (
   <TimelineCharacterGroup key={data.fromDate} min={min} max={max} width={width} data={data} />
 );
@@ -54,13 +51,15 @@ const renderBookGroup = (min, max, width) => data => (
   <TimelineBookGroup group={data} min={min} max={max} width={width} />
 );
 
+const renderStoryGroup = (min, max, width) => data => (
+  <TimelineStoryGroup group={data} min={min} max={max} width={width} />
+);
+
 const TimelineView = ({
-  data,
   characterGroups,
   min,
   max,
   onChangePeriod,
-  onChangeCurrent,
   onMinimize,
   minimized,
   className,
@@ -68,10 +67,10 @@ const TimelineView = ({
 }) => {
   const { t } = useTranslation();
 
+  const data = useData();
+
   const containerRef = useRef(null);
   const width = useSize(containerRef);
-
-  const [onDragStart, onDrag, onDragEnd] = useDrag(containerRef, min, max, onChangeCurrent);
 
   useEffect(() => {
     if (minimize && !minimized) onMinimize();
@@ -91,15 +90,13 @@ const TimelineView = ({
       <div
         className="timeline__container"
         ref={containerRef}
-        onMouseDown={onDragStart}
-        onMouseMove={onDrag}
-        onMouseUp={onDragEnd}
       >
         {data.periods.map(renderPeriod(min, max, width, onChangePeriod))}
-        {data.stories.map(renderStory(min, max, width))}
+        {data.storyGroups.map(renderStoryGroup(min, max, width))}
         {characterGroups.map(renderCharacterGroup(min, max, width))}
         {data.bookGroups.map(renderBookGroup(min, max, width))}
       </div>
+      <TimelineLegend />
       <TimelineFocusPoint />
     </div>
   );

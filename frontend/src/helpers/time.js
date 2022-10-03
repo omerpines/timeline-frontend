@@ -1,9 +1,14 @@
 import moment from 'moment';
 
+// export const formatYear = (year, t) => {
+//   if (year > 100000) return t('common.dateAD', { date: year - 100000 });
+//   return t('common.dateBC', { date: 100001 - year });
+// };
+
 export const formatYear = (year, t) => {
-  if (year > 100000) return t('common.dateAD', { date: year - 100000 });
-  return t('common.dateBC', { date: 100001 - year });
-};
+  if (year > 100000) return year - 100000;
+  return (100001 - year) * -1;
+}
 
 export const renderYear = iYear => {
   const year = parseInt(iYear, 10);

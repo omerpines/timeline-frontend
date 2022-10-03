@@ -1,10 +1,12 @@
 import React, { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Bezier} from 'bezier-js/dist/bezier';
+import { CSSTransition } from 'react-transition-group';
+import Cluster from 'components/Cluster';
 import StoryPreview from 'components/StoryPreview';
 import DimensionalPeriod from 'components/DimensionalPeriod';
+import Arrow from 'components/Arrow';
 import useData from 'hooks/useData';
-import useDrag from 'hooks/useDrag';
 import config from 'constants/config';
 import { fromRange, inRange, easeShare, hexToRGBA } from 'helpers/util';
 import { getEventLink } from 'helpers/urls';
@@ -93,8 +95,20 @@ const usePaths = ref => {
   return [p1, p2, p3];
 }
 
-const useCanvas = (containerRef, canvasRef, data, min, max, paths) => {
-  const canvasData = useMemo(() => data.filter(dp => dp.fromDate && dp.endDate), [data]);
+const useCanvas = (containerRef, canvasRef, data, min, max, paths, clustered) => {
+  const range = max - min;
+  const canvasData = useMemo(
+    () => data
+      .filter(dp => dp.fromDate && dp.endDate)
+      .filter(dp => {
+        const date = dp.endDate || dp.date;
+        const position = (date - min) / range;
+        const easedPosition = easeShare(1 - position);
+        if (easedPosition > 0.35 && easedPosition <= 0.7 && clustered.length) return false;
+        return true;
+      }),
+    [data, min, max, clustered],
+  );
 
   const repaint = useCallback(() => {
     if (!canvasRef.current || !paths[0]) return;
@@ -235,7 +249,7 @@ const useRoad = (containerRef, roadRef, paths) => {
   }, [paths]);
 };
 
-const renderDataPoint = (characters, paths, min, range) => data => {
+const renderDataPoint = (characters, paths, min, range, clustered) => data => {
   if (!paths[0]) return false;
 
   const path = paths[data.path - 1];
@@ -251,9 +265,14 @@ const renderDataPoint = (characters, paths, min, range) => data => {
   const scale = easedPosition * (maxScale - minScale) + minScale;
 
   let size = 'small';
-  if (easedPosition > 0.5) size = 'medium';
+  if (easedPosition > 0.25) size = 'medium';
+  if (easedPosition > 0.35) size = 'cluster';
+  if (easedPosition > 0.7) size = 'big';
 
   const previewOpacity = easedPosition + 0.5;
+
+  if (size === 'cluster' && clustered.length) return false;
+  if (size === 'cluster') size = 'medium';
 
   const styles = {
     left: x,
@@ -290,32 +309,114 @@ const renderPeriod = (min, range) => period => (
   <DimensionalPeriod data={period} min={min} range={range} key={period.id} />
 );
 
-const DimensionalView = ({ data, min, max, onChangeCurrent, children }) => {
+const emptyArray = [];
+
+const DimensionalView = ({ data, min, max, onZoom, children }) => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const roadRef = useRef(null);
+  const focusPointRef = useRef(null);
 
   const { characters, periods } = useData();
 
+  const [clustered, setClustered] = useState(emptyArray);
+  const [visibleClustered, setVisibleClustered] = useState(emptyArray);
+
   const paths = usePaths(containerRef);
-  const [onDragStart, onDrag, onDragEnd] = useDrag(containerRef, min, max, onChangeCurrent);
-  useCanvas(containerRef, canvasRef, data, min, max, paths);
+  useCanvas(containerRef, canvasRef, data, min, max, paths, clustered);
   useRoad(containerRef, roadRef, paths);
+
+  useEffect(() => {
+    let timeoutHandle = null;
+
+    const temp = [];
+    const range = max - min;
+    data.forEach(d => {
+      const date = d.endDate || d.date;
+      const position = (date - min) / range;
+      const easedPosition = easeShare(1 - position);
+      if (easedPosition > 0.35 && easedPosition <= 0.7) temp.push(d);
+    });
+
+    if (temp.length > config.CLUSTER_TRESHOLD) {
+      setClustered(temp);
+      setVisibleClustered(temp);
+    } else {
+      setClustered(emptyArray);
+      timeoutHandle = setTimeout(() => setVisibleClustered(emptyArray), 200);
+    }
+
+    return () => {
+      if (timeoutHandle) clearTimeout(timeoutHandle);
+    };
+  }, [min, max]);
+
+  const [focusPointerStyle, setFocusPointerStyle] = useState(undefined);
+
+  const repaintFocusRef = useCallback(() => {
+    if (!focusPointRef.current || !paths || !paths[0]) return false;
+
+    const ctx = focusPointRef.current.getContext('2d');
+    const points = paths.map(p => p.get(easeShare(1 - config.FOCUS_POINT / 100)));
+    const curve = Bezier.quadraticFromPoints(points[0], points[1], points[2]);
+    
+    const start = curve.get(-0.25);
+    const end = curve.get(1.19);
+
+    ctx.beginPath();
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#DC1F57';
+    ctx.moveTo(start.x, start.y);
+    ctx.quadraticCurveTo(curve.points[1].x, curve.points[1].y, end.x, end.y);
+    ctx.stroke();
+
+    const { x, y } = end;
+    setFocusPointerStyle({
+      top: y,
+      left: x,
+    });
+    console.log('repainted');
+  }, [paths, config.FOCUS_POINT]);
+
+  useEffect(() => {
+    if (!focusPointRef.current || !containerRef.current) return;
+    const canvas = focusPointRef.current;
+
+    const resize = () => {
+      if (!focusPointRef.current) return;
+
+      const { width, height } = containerRef.current.getBoundingClientRect();
+      canvas.width = width;
+      canvas.height = height;
+      repaintFocusRef();
+    }
+
+    resize();
+
+    window.addEventListener('resize', resize);
+
+    return () => window.removeEventListener('resize', resize);
+  }, [focusPointRef.current]);
 
   return (
     <div className="dimensional">
       <canvas className="dimensional__canvas dimensional__canvas--road" ref={roadRef} style={{ transform: 'translate(0.5, 0.5)' }} />
       {periods.map(renderPeriod(min, max - min))}
       <canvas className="dimensional__canvas" ref={canvasRef} />
+      <canvas className="dimensional__canvas" ref={focusPointRef} />
+      <Arrow angle={-88} yAngle={51} style={focusPointerStyle} className="dimensional__focus-pointer" />
       <ul
         className="dimensional__nodes"
         ref={containerRef}
-        onMouseDown={onDragStart}
-        onMouseMove={onDrag}
-        onMouseUp={onDragEnd}
       >
-        {data.map(renderDataPoint(characters, paths, min, max - min))}
+        {data.map(renderDataPoint(characters, paths, min, max - min, clustered))}
       </ul>
+      <CSSTransition in={!!clustered.length} timeout={200} classNames="dimensional__cluster" appear>
+        <div className="dimensional__cluster">
+          <Cluster data={visibleClustered} onZoom={onZoom} />
+        </div>
+      </CSSTransition>
       {children}
     </div>
   );

@@ -71,7 +71,7 @@ const AdminCharacterForm = ({ editMode }) => {
               value={state.name}
               onChange={onChange}
             />
-            <AdminDateInput onChange={onChange} state={state} />
+            <AdminDateInput onChange={onChange} state={state} fromOnly />
             <AdminColorInput name="color" value={state.color} onChange={onChange} />
           </div>
           <div className="admin-form__column">
@@ -120,13 +120,6 @@ const AdminCharacterForm = ({ editMode }) => {
             />
           </div>
         </div>
-        <AdminInput
-          type="text"
-          label="admin.shortDescription"
-          name="shortDescription"
-          value={state.shortDescription}
-          onChange={onChange}
-        />
         <AdminInput
           type="text"
           label="admin.quotesource"

@@ -64,3 +64,26 @@
 .dimensional__canvas.dimensional__canvas--road {
   z-index: 80;
 }
+
+.dimensional__cluster {
+  opacity: 0;
+  transition: 0.2s ease-in opacity;
+}
+
+.dimensional__cluster-enter-active, .dimensional__cluster-enter-done {
+  opacity: 1;
+}
+
+.dimensional__cluster-exit {
+  opacity: 1;
+}
+
+.dimensional__cluster-exit-active, .dimensional__cluster-exit-done {
+  opacity: 0;
+}
+
+.dimensional__focus-pointer {
+  margin-left: -42px;
+  margin-top: -15px;
+  position: absolute;
+}

@@ -11,3 +11,4 @@ export { default as eventForm } from 'store/reducers/eventForm';
 export { default as books } from 'store/reducers/books';
 export { default as bookForm } from 'store/reducers/bookForm';
 export { default as csv } from 'store/reducers/csv';
+export { default as professions } from 'store/reducers/professions';

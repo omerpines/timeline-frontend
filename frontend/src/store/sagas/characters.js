@@ -33,6 +33,7 @@ export function* fetchCharacters() {
     const response = yield call(callApi, method, generatePath(emptyObject), { populate: '*' });
     yield put(successCharacters(cleanApiObjects(response.data.data)));
   } catch (e) {
+    console.log(e);
     yield put(failureCharacters(e));
   }
 }

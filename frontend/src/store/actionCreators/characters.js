@@ -4,9 +4,9 @@ export const requestCharacters = () => ({
   type: types.CHARACTERS_REQUEST,
 });
 
-export const successCharacters = periods => ({
+export const successCharacters = characters => ({
   type: types.CHARACTERS_SUCCESS,
-  periods,
+  characters,
 });
 
 export const failureCharacters = exception => ({

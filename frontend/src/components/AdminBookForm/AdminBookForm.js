@@ -101,13 +101,6 @@ const AdminBookForm = ({ editMode }) => {
           </div>
           <div className="admin-form__column">
             <AdminDateInput onChange={onChange} state={state} />
-            <AdminInput
-              type="text"
-              label="admin.shortDescription"
-              name="shortDescription"
-              value={state.shortDescription}
-              onChange={onChange}
-            />
             <AdminInput wrapOnly label="admin.book.media" className="admin-input--flex-container">
               <AdminFileInput
                 name="picture"

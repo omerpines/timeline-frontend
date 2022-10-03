@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import AdminPage from 'components/AdminPage';
 import AdminForm from 'components/AdminForm';
 import AdminFormTitle from 'components/AdminFormTitle';
@@ -9,8 +10,11 @@ import AdminInput from 'components/AdminInput';
 import AdminFormFooter from 'components/AdminFormFooter';
 import AdminDropdown from 'components/AdminDropdown';
 import AdminCharacterRelationBlock from 'components/AdminCharacterRelationBlock';
+import AdminMultiSelect from 'components/AdminMultiSelect';
 import AdminMediaLibrary from 'components/AdminMediaLibrary';
+import AdminAddProfessionModal from 'components/AdminAddProfessionModal';
 import useForm from 'hooks/useForm';
+import useData from 'hooks/useData';
 import useAdminTab from 'hooks/useAdminTab';
 import {
   resetCharacter,
@@ -20,7 +24,10 @@ import {
   requestEditCharacter,
 } from 'store/actionCreators/characters';
 import { characterForm } from 'store/selectors/characterForm';
+import { requestDeleteProfession } from 'store/actionCreators/professions';
 import './style.css';
+
+const emptyString = '';
 
 const genderOptions = [
   ['male', 'admin.gender.male'],
@@ -28,8 +35,11 @@ const genderOptions = [
 ];
 
 const AdminCharacterForm = ({ editMode }) => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const pid = parseInt(id, 10);
+
+  const { professions } = useData();
 
   const [state, onChange] = useForm(
     characterForm,
@@ -42,8 +52,21 @@ const AdminCharacterForm = ({ editMode }) => {
   );
 
   const [showMedia, moveToForm, moveToMedia] = useAdminTab();
+  
+  const [professionValue, setProfessionValue] = useState(emptyString);
+  const onChangeProfessionValue = useCallback((value) => {
+    setProfessionValue(value);
+  }, []);
+
+  const [showAddProfession, setShowAddProfession] = useState(false);
+  const onCloseAddProfession = useCallback(() => setShowAddProfession(false), []);
+  const onShowAddProfession = useCallback(() => setShowAddProfession(true), []);
 
   const formTitle = editMode ? 'admin.character.title.edit' : 'admin.character.title.add';
+
+  const onDeleteProfession = useCallback(id => {
+    dispatch(requestDeleteProfession(id));
+  }, []);
 
   return showMedia ? (
     <AdminMediaLibrary form="character" onBack={moveToForm} />
@@ -88,6 +111,18 @@ const AdminCharacterForm = ({ editMode }) => {
           </div>
         </div>
         <AdminInput type="text" label="admin.character.role" name="role" value={state.role} onChange={onChange} />
+        <AdminMultiSelect
+          options={professions}
+          selectedIds={state.profession_tags}
+          entities={professions}
+          onCreate={onShowAddProfession}
+          onDelete={onDeleteProfession}
+          onChange={onChange}
+          createLabel="admin.character.roles"
+          name="profession_tags"
+          value={professionValue}
+          onChangeValue={onChangeProfessionValue}
+        />
         <AdminInput type="text" label="admin.character.nation" name="nation" value={state.nation} onChange={onChange} />
         <div className="admin-form__columns admin-character-form__mb">
           <div className="admin-form__column">
@@ -107,13 +142,6 @@ const AdminCharacterForm = ({ editMode }) => {
             />
           </div>
         </div>
-        <AdminInput
-          type="text"
-          label="admin.shortDescription"
-          name="shortDescription"
-          value={state.shortDescription}
-          onChange={onChange}
-        />
         <AdminInput
           type="textarea"
           label="admin.character.summary"
@@ -165,6 +193,9 @@ const AdminCharacterForm = ({ editMode }) => {
         />
         <AdminFormFooter onSubmit={moveToMedia} />
       </AdminForm>
+      {showAddProfession && (
+        <AdminAddProfessionModal onClose={onCloseAddProfession} initialValue={professionValue} />
+      )}
     </AdminPage>
   );
 };

@@ -7,7 +7,11 @@ const characters = (state = initialValue, action) => {
     case types.CHARACTERS_REQUEST: {
       return { ...state, loading: true };
     } case types.CHARACTERS_SUCCESS: {
-      return { ...state, data: action.periods, loading: false };
+      return {
+        ...state,
+        loading: false,
+        data: action.characters.map(c => ({ ...c, roles: c.profession_tags.data.map(pt => pt.id )})),
+    };
     } case types.CHARACTERS_FAILURE: {
       return initialValue;
     } case types.CHARACTER_DELETE_SUCCESS: {

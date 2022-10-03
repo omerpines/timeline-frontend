@@ -60,12 +60,12 @@
 }
 
 .send-email__confirm {
-  background-color: transparent;
+  background-color: #DC1F57;
   border: 1px solid #DC1F57;
   border-radius: 25px;
-  box-shadow: 0px 3px 6px #00000000;
+  box-shadow: 0px 3px 6px #00000029;
   box-sizing: border-box;
-  color: black;
+  color: white;
   cursor: pointer;
   flex-grow: 0;
   font: normal normal normal 22px/49px Assistant;
@@ -73,16 +73,7 @@
   letter-spacing: 0px;
   outline: none;
   text-align: center;
-  transition-duration: 0.2s;
-  transition-property: color, background-color, box-shadow;
-  transition-timing-function: ease-in;
   width: 350px;
-}
-
-.send-email__confirm:hover {
-  background-color: #DC1F57;
-  box-shadow: 0px 3px 6px #00000029;
-  color: white;
 }
 
 .send-email__label {
@@ -95,6 +86,7 @@
 }
 
 .send-email__textarea {
+  direction: rtl;
   height: 187px;
   max-height: 187px;
   max-width: 100%;

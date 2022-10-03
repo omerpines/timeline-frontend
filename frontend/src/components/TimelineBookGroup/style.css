@@ -44,3 +44,22 @@
 .timeline-book-group__book:hover {
   background-color: #F3F3F3;
 }
+
+@media (max-height: 1050px) {
+  .timeline-book-group {
+    top: 143px;
+  }
+}
+
+@media (max-height: 800px) {
+  .timeline-book-group {
+    border-radius: 6px;
+    font-size: 18px;
+    height: 53px;
+    top: 137px;
+  }
+
+  .timeline-book-group__book {
+    font-size: 18px;
+  }
+}

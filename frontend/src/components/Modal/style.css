@@ -31,7 +31,25 @@
 .modal__box {
   pointer-events: auto;
 }
+
 .modal__title{
   font-family: Assistant;
   font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .modal__box {
+    border-radius: 0px !important;
+    bottom: 0px !important;
+    box-sizing: border-box !important;
+    height: 100% !important;
+    left: 0px !important;
+    max-height: none !important;
+    max-width: none !important;
+    position: fixed !important;
+    right: 0px !important;
+    top: 0px !important;
+    transform: none !important;
+    width: 100% !important;
+  }
 }

@@ -3,6 +3,7 @@
   height: 293px;
   position: relative;
   transition: height ease-in 0.2s;
+  z-index: 2000;
 }
 
 .timeline--admin {
@@ -14,7 +15,7 @@
 }
 
 .timeline--minimize {
-  height: 0px;
+  height: 0px !important;
 }
 
 .timeline__container {
@@ -47,4 +48,30 @@
   top: -58px;
   width: 363px;
   z-index: 200;
+}
+
+@media (max-height: 1050px) {
+  .timeline {
+    height: 263px;
+  }
+}
+
+@media (max-height: 800px) {
+  .timeline {
+    height: 252px;
+  }
+
+  .timeline__minimize {
+    font: normal normal 600 24px Assistant;
+    height: 51px;
+    top: -51px;
+    width: 239px;
+  }
+
+  .timeline__minimize {
+    font: normal normal 600 18px Assistant;
+    height: 42px;
+    top: -42px;
+    width: 254px;
+  }
 }

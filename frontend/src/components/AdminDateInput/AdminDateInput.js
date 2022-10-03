@@ -18,7 +18,8 @@ const AdminDateInput = ({ onChange, state, fromOnly }) => {
       parseYear(value, isBC(state.fromDate))
     );
     onChange('fromDate', newVal);
-  }, [onChange, state.endDate, state.fromDate]);
+    if (fromOnly) onChange('endDate', newVal);
+  }, [onChange, state.endDate, state.fromDate, fromOnly]);
 
   const onEndChange = useCallback(e => {
     const value = parseInt(e.currentTarget.value, 10);
@@ -36,7 +37,8 @@ const AdminDateInput = ({ onChange, state, fromOnly }) => {
 
   const onSwapStart = useCallback(() => {
     onChange('fromDate', swapBeforeAfter(state.fromDate)); 
-  }, [onChange, state.fromDate]);
+    if (fromOnly) onChange('endDate', swapBeforeAfter(state.fromDate));
+  }, [onChange, state.fromDate, fromOnly]);
 
   const onSwapEnd = useCallback(() => {
     onChange('endDate', swapBeforeAfter(state.endDate));

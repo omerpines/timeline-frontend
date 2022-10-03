@@ -1,0 +1,93 @@
+.add-profession__box {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 8px 13px #00000029;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  max-width: 658px;
+  padding: 35px 73px 36px 66px;
+  position: absolute;
+  text-align: right;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 20px);
+}
+
+.add-profession__header {
+  align-items: center;
+  direction: rtl;
+  display: flex;
+}
+
+.add-profession__title {
+  color: #474747;
+  flex-grow: 1;
+  font: normal normal 600 36px Assistant;
+  letter-spacing: 0px;
+}
+
+.add-profession__close.fa {
+  color: #DC1F57;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.add-profession__body {
+  color: #474747;
+  font: normal normal 600 36px/36px Assistant;
+  letter-spacing: 0px;
+  opacity: 1;
+  padding: 18px 0px 40px;
+  text-align: center;
+}
+
+.add-profession__caption {
+  font: normal normal normal 22px Assistant;
+  letter-spacing: 0px;
+  margin-bottom: 6px;
+  text-align: right;
+}
+
+.add-profession__footer {
+  display: flex;
+}
+
+.add-profession__confirm {
+  background-color: #DC1F57;
+  border: 1px solid #DC1F57;
+  border-radius: 25px;
+  box-shadow: 0px 3px 6px #00000029;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  flex-grow: 1;
+  font: normal normal normal 22px/49px Assistant;
+  height: 49px;
+  letter-spacing: 0px;
+  outline: none;
+  text-align: center;
+}
+
+.add-profession__cancel {
+  background-color: transparent;
+  border: 1px solid #DC1F57;
+  border-radius: 25px;
+  box-shadow: 0px 3px 6px #00000000;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  flex-grow: 1;
+  font: normal normal normal 22px/49px Assistant;
+  height: 49px;
+  letter-spacing: 0px;
+  margin-left: 20px;
+  outline: none;
+  text-align: center;
+}
+
+.add-profession__icon-input .admin-file-input__uploader, .add-profession__icon-input .admin-file-input__droparea {
+  height: 209px;
+  width: 100%;
+}

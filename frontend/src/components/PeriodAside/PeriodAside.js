@@ -14,7 +14,7 @@ import { sortEntitiesByEndDate } from 'helpers/time';
 import config from 'constants/config';
 
 const renderBook = data => (
-  <EntityBlock key={data.id} data={data} linkFn={getBookLink} />
+  <EntityBlock key={data.id} data={data} linkFn={getBookLink} className="aside__block-book" />
 );
 
 const PeriodAside = () => {
@@ -41,35 +41,6 @@ const PeriodAside = () => {
     return books.filter(b => b.period === pid).sort(sortEntitiesByEndDate);
   }, [books, pid]);
 
-  const content = useMemo(() => {
-    if (!data) return false;
-    return (
-      <React.Fragment>
-        <div className="aside__characters">
-          {relatedBooks.map(renderBook)}
-        </div>
-        {ReactHtmlParser(`<div>${getLocalized(data, 'description', lang)}</div>`)}
-        {ReactHtmlParser(`<div>${getLocalized(data, 'majorEvents', lang)}</div>`)}
-        {!data.links ? false : (
-          <React.Fragment>
-            <div className="aside__paragraph-title">{t('admin.forMoreInformation')}</div>
-            {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
-          </React.Fragment>
-        )}
-      </React.Fragment>
-    );
-  }, [data, lang, backgroundStyles]);
-
-  const header = useMemo(() => {
-    if (!data) return undefined;
-    return (
-      <React.Fragment>
-        <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
-        <div className="aside__subtitle">{getLocalized(data, 'shortDescription', lang)}</div>
-      </React.Fragment>
-    );
-  }, [data]);
-
   const gallery = useMemo(() => {
     if (!data) return false;
 
@@ -85,6 +56,45 @@ const PeriodAside = () => {
     );
   }, [data]);
 
+  const content = useMemo(() => {
+    if (!data) return false;
+    return (
+      <React.Fragment>
+        {ReactHtmlParser(`<div>${getLocalized(data, 'description', lang)}</div>`)}
+        {gallery}
+        {!data.majorEvents ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-label">{t('aside.label.majorEvents')}</div>
+            {ReactHtmlParser(`<div>${getLocalized(data, 'majorEvents', lang)}</div>`)}
+          </React.Fragment>
+        )}
+        {!data.links ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-label">{t('aside.label.furtherReading')}</div>
+            {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
+          </React.Fragment>
+        )}
+        {!relatedBooks.length ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-label">{t('aside.label.books')}</div>
+            <div className="aside__books">
+              {relatedBooks.map(renderBook)}
+            </div>
+          </React.Fragment>
+        )}
+      </React.Fragment>
+    );
+  }, [data, lang, backgroundStyles, gallery]);
+
+  const header = useMemo(() => {
+    if (!data) return undefined;
+    return (
+      <React.Fragment>
+        <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
+      </React.Fragment>
+    );
+  }, [data]);
+
   if (!data) return false;
 
   return (
@@ -94,7 +104,6 @@ const PeriodAside = () => {
       fullscreenContent={content}
       data={data}
     >
-      {gallery}
       {content}
     </Aside>
   );

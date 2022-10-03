@@ -48,6 +48,18 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
   let hoverClasses = 'timeline-character-group__hover';
   if (data.characters.length > 3) hoverClasses += ' timeline-character-group__hover--list';
 
+  if (data.characters.length === 1) {
+    const [character] = data.characters;
+    return (
+      <Link to={getCharacterLink(character.id)} className="timeline-character-group" style={styles}>
+        <div className="timeline-character-group__visible">
+          <div className="timeline-character-group__characters">{renderCharacter(character, 0)}</div>
+          <div className="timeline-character-group__text">{text}</div>
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <div className="timeline-character-group" style={styles}>
       <div className="timeline-character-group__visible">

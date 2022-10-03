@@ -1,4 +1,5 @@
 import React from 'react';
+import Arrow from 'components/Arrow';
 import config from 'constants/config';
 import './style.css';
 
@@ -9,9 +10,7 @@ const style = {
 const TimelineFocusPoint = () => {
   return (
     <div className="timeline-focus" style={style}>
-      <div className="timeline-focus__pointer-box">
-        <div className="timeline-focus__pointer" />
-      </div>
+      <Arrow className="timeline-focus__pointer" />
     </div>
   );
 };

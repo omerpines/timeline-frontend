@@ -1,0 +1,19 @@
+.arrow {
+  height: 28px;
+  overflow: hidden;
+  pointer-events: none;
+  width: 41px;
+}
+
+.arrow__inner {
+  border-radius: 5px;
+  background-color: #DC1F57;
+  content: '';
+  height: 29px;
+  left: 50%;
+  position: absolute;
+  top: -9px;
+  transform: scaleY(1.2) translateX(-50%) rotate(45deg);
+  transform-origin: center center;
+  width: 29px;
+}

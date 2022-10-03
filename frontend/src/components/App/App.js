@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import mergeRanges from 'merge-ranges';
@@ -15,9 +15,11 @@ import SecuredPart from 'components/SecuredPart';
 import Logo from 'components/Logo';
 import Search from 'components/SearchBar';
 import Help from 'components/Help';
+import Zoom from 'components/Zoom';
 import useData from 'hooks/useData';
+import useDrag from 'hooks/useDrag';
 import config from 'constants/config';
-import { inRange } from 'helpers/util';
+import { inRange, fromRange } from 'helpers/util';
 import { getStoryLink, getCharacterLink, getEventLink, getBookLink, getPeriodLink } from 'helpers/urls';
 import { isDataLoading } from 'store/selectors/data';
 import './style.scss';
@@ -74,8 +76,11 @@ const useScroll = data => {
 
     const handleScroll = (e) => {
       if (isAdmin) return;
-      if (e.deltaY > 0) setRange(a => inRange(config.MIN_RANGE, config.MAX_RANGE, a + 100));
-      else setRange(a => inRange(config.MIN_RANGE, config.MAX_RANGE, a - 100));
+
+      const delta = Math.round(config.INITIAL_RANGE / 100 * config.MOUSE_ZOOM_INCREMENT);
+
+      if (e.deltaY > 0) setRange(a => inRange(config.MIN_RANGE, config.MAX_RANGE, a + delta));
+      else setRange(a => inRange(config.MIN_RANGE, config.MAX_RANGE, a - delta));
     };
 
     window.addEventListener('wheel', handleScroll);
@@ -95,7 +100,7 @@ const useScroll = data => {
     });
   }, [range]);
 
-  return [filteredData, min, max, current, onChangeCurrent];
+  return [filteredData, min, max, current, onChangeCurrent, setCurrent, setRange];
 }
 
 const useFilters = data => {
@@ -155,10 +160,11 @@ const useWelcomeModal = () => {
 
 function App() {
   const data = useData();
+  const verticalRef = useRef(null);
 
   const isLoading = useSelector(isDataLoading);
 
-  const [rangeData, min, max, current, setCurrent] = useScroll(data);
+  const [rangeData, min, max, current, setCurrent, setCurrentDirectly, setRangeDirectly] = useScroll(data);
   const [filteredData, onChangePeriod] = useFilters(rangeData);
   const characterGroups = useCharacterGroups(filteredData);
   const [showWelcomeModal, onCloseWelcomeModal] = useWelcomeModal();
@@ -191,6 +197,64 @@ function App() {
     
   }, [minimized]);
 
+  const [
+    onDragStart,
+    onDrag,
+    onDragEnd,
+    onDragTouchStart,
+    onDragTouch,
+    onDragTouchEnd,
+  ] = useDrag(verticalRef, min, max, setCurrent);
+
+  const [zoomTo, setZoomTo] = useState(null);
+  const onZoom = useCallback((min, max) => {
+    setZoomTo([min, max]);
+  }, []);
+
+  useEffect(() => {
+    let frameHandle = null;
+
+    if (zoomTo) {
+      const [zoomMin, zoomMax] = zoomTo;
+      const newRange = zoomMax - zoomMin;
+      const newCurrent = Math.round((zoomMin + zoomMax) / 2);
+
+      const initCurrent = current;
+      const initRange = range;
+      const currentDiff = newCurrent - initCurrent;
+      const rangeDiff = newRange - initRange;
+
+      let start = null;
+      let end = null;
+
+      const zoomTick = () => {
+        frameHandle = window.requestAnimationFrame(ts => {
+          if (!start) {
+            start = ts;
+            end = ts + 200;
+          }
+
+          if (ts >= end) {
+            setCurrentDirectly(newCurrent);
+            setRangeDirectly(newRange);
+            setZoomTo(null);
+            return;
+          }
+          const share = fromRange(start, end, ts);
+          setCurrentDirectly(initCurrent + currentDiff * share);
+          setRangeDirectly(initRange + rangeDiff * share);
+          zoomTick();
+        });
+      };
+
+      zoomTick();
+    }
+
+    return () => {
+      if (frameHandle) cancelAnimationFrame(frameHandle);
+    };
+  }, [zoomTo]);
+
   if (isLoading) return 'loading';
 
   return (
@@ -216,17 +280,17 @@ function App() {
           <Search/>
           <Logo />
           <div className="app__layout-horizontal">
-            <div className="app__layout-vertical">
-              <DimensionalView
-                data={filteredData.events}
-                min={min}
-                max={max}
-                onChangeCurrent={setCurrent}
-              >
-                <YearDisplay
-                  className="year-display--in-dimensional"
-                  current={min + Math.round(range / 100 * config.FOCUS_POINT)}
-                />
+            <div
+              className="app__layout-vertical"
+              ref={verticalRef}
+              onMouseDown={onDragStart}
+              onMouseMove={onDrag}
+              onMouseUp={onDragEnd}
+              onTouchStart={onDragTouchStart}
+              onTouchMove={onDragTouch}
+              onTouchEnd={onDragTouchEnd}
+            >
+              <DimensionalView data={filteredData.events} min={min} max={max} onZoom={onZoom}>
               </DimensionalView>
               <TimelineView
                 data={filteredData}
@@ -234,12 +298,17 @@ function App() {
                 min={min}
                 max={max}
                 onChangePeriod={onChangePeriod}
-                onChangeCurrent={setCurrent}
                 onMinimize={onMinimize}
                 minimized={minimized}
               />
             </div>
+            <YearDisplay
+              className="year-display--in-dimensional"
+              min={min}
+              max={max}
+            />
             <Help />
+            <Zoom range={max - min} min={min} max={max} zoomTo={onZoom} />
             {showWelcomeModal && !skipWelcomeModal && <WelcomeModal onClose={onCloseWelcomeModal} />}
             <Routes>
               <Route path={storyLink} element={<StoryAside />} />

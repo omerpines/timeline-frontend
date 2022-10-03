@@ -1,14 +1,20 @@
 .year-display {
-  color: white;
-  font-family: Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 36px;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  color: #007EB4;
+  display: flex;
+  font: normal normal bold 24px Assistant;
+  height: 40px;
+  justify-content: center;
   pointer-events: none;
+  width: 100px;
 }
 
 .year-display.year-display--in-dimensional {
-  bottom: 20px;
-  left: 20px;
+  left: 50%;
   position: absolute;
+  top: 84px;
+  transform: translateX(-50%);
   z-index: 400;
 }

@@ -46,6 +46,12 @@ import {
 import {
   onRequestEmail
 } from 'store/sagas/email';
+import {
+  fetchProfessions,
+  onFetchProfessions,
+  onAddProfession,
+  onDeleteProfession,
+} from 'store/sagas/professions';
 
 function* rootSaga() {
   yield all([
@@ -84,6 +90,10 @@ function* rootSaga() {
     call(onEditBook),
     call(onUploadCSV),
     call(onRequestEmail),
+    call(fetchProfessions),
+    call(onFetchProfessions),
+    call(onAddProfession),
+    call(onDeleteProfession),
   ]);
 }
 

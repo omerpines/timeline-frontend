@@ -1,0 +1,71 @@
+.cluster {
+  height: 165px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 165px;
+  z-index: 1000;
+}
+
+.cluster__body {
+  background: white;
+  border-radius: 90px;
+  cursor: pointer;
+  display: flex;
+  font: normal normal 600 15px Assistant;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+  z-index: 1000;
+}
+
+.cluster::before {
+  background: #000000A1 0% 0% no-repeat padding-box;
+  bottom: -12px;
+  content: '';
+  filter: blur(14px);
+  height: 26px;
+  left: 8px;
+  opacity: 1;
+  position: absolute;
+  width: 148px;
+  z-index: -100;
+}
+
+.cluster__zoom-icon {
+  margin-top: 7px;
+}
+
+.cluster__zoom-text {
+  font: normal normal 600 12px Assistant;
+  margin-bottom: 7px;
+}
+
+.cluster__points {
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0px;
+  width: 86px;
+}
+
+.cluster__points .dimensional__item-link {
+  box-shadow: -4px -12px 26px -12px inset rgb(0 0 0 / 75%);
+  height: 38px;
+  margin-bottom: 10px;
+  position: static;
+  transform: translateX(-50%);
+  width: 38px;
+}
+
+.cluster__more {
+  font: normal normal 600 15px Assistant;
+  left: 50%;
+  margin-top: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

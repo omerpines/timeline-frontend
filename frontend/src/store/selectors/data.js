@@ -5,8 +5,9 @@ import { getCharacters, isCharactersLoading } from 'store/selectors/characters';
 import { getStories, isStoriesLoading } from 'store/selectors/stories';
 import { getEvents, isEventsLoading } from 'store/selectors/events';
 import { getBooks, isBooksLoading } from 'store/selectors/books';
+import { getProfessions } from 'store/selectors/professions';
 import { groupEntities } from 'helpers/util';
-import { sortEntitiesByUpdatedAt, sortEntitiesByEndDate } from 'helpers/time';
+import { sortEntitiesByUpdatedAt, sortEntitiesByFromDate } from 'helpers/time';
 
 export const getData = createSelector(
   getPeriods,
@@ -14,14 +15,17 @@ export const getData = createSelector(
   getStories,
   getEvents,
   getBooks,
-  (periods, characters, stories, events, books) => ({
-    periods: periods.map(p => ({ ...p, type: 'period' })).sort(sortEntitiesByEndDate),
-    characters: characters.map(c => ({ ...c, type: 'character' })).sort(sortEntitiesByEndDate),
-    stories: stories.map(s => ({ ...s, type: 'story' })).sort(sortEntitiesByEndDate),
-    events: events.map(e => ({ ...e, type: 'event' })).sort(sortEntitiesByEndDate),
-    books: books.map(b => ({ ...b, type: 'book' })).sort(sortEntitiesByEndDate),
+  getProfessions,
+  (periods, characters, stories, events, books, professions) => ({
+    periods: periods.map(p => ({ ...p, type: 'period' })).sort(sortEntitiesByFromDate),
+    characters: characters.map(c => ({ ...c, type: 'character' })).sort(sortEntitiesByFromDate),
+    stories: stories.map(s => ({ ...s, type: 'story' })).sort(sortEntitiesByFromDate),
+    events: events.map(e => ({ ...e, type: 'event' })).sort(sortEntitiesByFromDate),
+    books: books.map(b => ({ ...b, type: 'book' })).sort(sortEntitiesByFromDate),
     bookGroups: groupEntities(books),
+    storyGroups: groupEntities(stories),
     tags: tagData,
+    professions,
   }),
 );
 

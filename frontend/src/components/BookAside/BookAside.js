@@ -67,7 +67,6 @@ const BookAside = () => {
     return (
       <React.Fragment>
         <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
-        <div className="aside__subtitle">{getLocalized(data, 'shortDescription', lang)}</div>
         <div className="aside__subsubtitle">{getLocalized(data, 'age', lang)}</div>
       </React.Fragment>
     );

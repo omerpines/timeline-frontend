@@ -104,13 +104,6 @@ const AdminStoryForm = ({ editMode }) => {
           </div>
         </div>
         <AdminInput
-          type="text"
-          label="admin.shortDescription"
-          name="shortDescription"
-          value={state.shortDescription}
-          onChange={onChange}
-        />
-        <AdminInput
           type="textarea"
           label="admin.story.summary"
           name="summary"

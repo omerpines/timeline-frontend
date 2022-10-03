@@ -9,7 +9,7 @@ const initialValue = {
   gender: 'male',
   area: '',
   nation: '',
-  role: '',
+  profession_tags: [],
   tags: '',
   image: null,
   summary: '',
@@ -30,7 +30,10 @@ const characterForm = (state = initialValue, action) => {
     } case types.CHARACTER_UPDATE: {
       return { ...state, [action.param]: action.value };
     } case types.CHARACTER_FETCH_SUCCESS: {
-      return action.data;
+      return {
+        ...action.data,
+        profession_tags: action.data.profession_tags.data.map(pt => pt.id),
+      };
     } default:
       return state;
   }

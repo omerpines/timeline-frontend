@@ -72,25 +72,32 @@ const SearchInput = ({ onClose }) => {
             <input placeholder={t('search.placeholder')} onChange={onChange} value={search} />
           </div>
           <div className="tableBody">
-          <ScrollArea
-            vertical
-            smoothScrolling
-            className="aside__scrollarea media-modal__links"
-            contentClassName="aside__scrollable media-modal__links-content"
-          >
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>{t("search.name")}</th>
-                  <th>{t("search.type")}</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {entries.map(renderEntry(t, lang, onClose))}
-              </tbody>
-            </table>
-            </ScrollArea>
+            {search.length >= 3 && !entries.length && (
+              <div className="search__no-results">
+                {t('search.noResults')}
+              </div>
+            )}
+            {entries.length > 0 && (
+              <ScrollArea
+                vertical
+                smoothScrolling
+                className="aside__scrollarea media-modal__links"
+                contentClassName="aside__scrollable media-modal__links-content"
+              >
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>{t("search.name")}</th>
+                      <th>{t("search.type")}</th>
+                      <th />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {entries.map(renderEntry(t, lang, onClose))}
+                  </tbody>
+                </table>
+              </ScrollArea>
+            )}
           </div>
         </div>
       </div>
