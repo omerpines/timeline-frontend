@@ -8,6 +8,7 @@ import EntityBlock from 'components/EntityBlock';
 import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
+import useEntityZoom from 'hooks/useEntityZoom';
 import { getBookLink } from 'helpers/urls';
 import { getLocalized } from 'helpers/util';
 import { sortEntitiesByEndDate } from 'helpers/time';
@@ -17,7 +18,7 @@ const renderBook = data => (
   <EntityBlock key={data.id} data={data} linkFn={getBookLink} className="aside__block-book" />
 );
 
-const PeriodAside = () => {
+const PeriodAside = ({ zoomTo, min, max }) => {
   const { id } = useParams();
   const lang = useLanguage();
   const { t } = useTranslation();
@@ -94,6 +95,8 @@ const PeriodAside = () => {
       </React.Fragment>
     );
   }, [data]);
+
+  useEntityZoom(data, zoomTo, min, max);
 
   if (!data) return false;
 

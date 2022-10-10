@@ -73,16 +73,12 @@ const calculateRoadPaths = ref => {
 }
 
 const usePaths = ref => {
-  const [p1, setP1] = useState(null);
-  const [p2, setP2] = useState(null);
-  const [p3, setP3] = useState(null);
+  const [paths, setPaths] = useState([]);
 
   useEffect(() => {
     const updatePaths = () => {
-      const [newP1, newP2, newP3] = calculatePaths(ref);
-      setP1(newP1);
-      setP2(newP2);
-      setP3(newP3);
+      const newPaths = calculatePaths(ref);
+      setPaths(newPaths);
     };
 
     updatePaths();
@@ -92,7 +88,7 @@ const usePaths = ref => {
     return () => window.removeEventListener('resize', updatePaths);
   }, []);
 
-  return [p1, p2, p3];
+  return paths;
 }
 
 const useCanvas = (containerRef, canvasRef, data, min, max, paths, clustered) => {
@@ -206,11 +202,14 @@ const useRoad = (containerRef, roadRef, paths) => {
     });
 
     const [rp1, rp2, rp3, rp4] = roadPaths;
-    ctx.globalAlpha = 0.5;
+
+    const grad1 = ctx.createLinearGradient(rp1.points[0].x, rp1.points[0].y, rp1.points[2].x, rp1.points[2].y);
+    grad1.addColorStop(0, '#704e4f');
+    grad1.addColorStop(1, '#DC1F57');
 
     ctx.beginPath();
-    ctx.fillStyle = '#DE8909';
-    ctx.strokeStyle = '#DE8909';
+    ctx.fillStyle = grad1;
+    ctx.strokeStyle = grad1;
     ctx.lineWidth = 2;
     ctx.moveTo(rp1.points[0].x, rp1.points[0].y);
     ctx.quadraticCurveTo(rp1.points[1].x, rp1.points[1].y, rp1.points[2].x, rp1.points[2].y);
@@ -220,9 +219,13 @@ const useRoad = (containerRef, roadRef, paths) => {
     ctx.fill();
     ctx.stroke();
 
+    const grad2 = ctx.createLinearGradient(rp2.points[0].x, rp2.points[0].y, rp2.points[2].x, rp2.points[2].y);
+    grad2.addColorStop(0, '#836648');
+    grad2.addColorStop(1, '#e8963a');
+
     ctx.beginPath();
-    ctx.fillStyle = '#DC1F57';
-    ctx.strokeStyle = '#DC1F57';
+    ctx.fillStyle = grad2;
+    ctx.strokeStyle = grad2;
     ctx.lineWidth = 2;
     ctx.moveTo(rp2.points[0].x, rp2.points[0].y);
     ctx.quadraticCurveTo(rp2.points[1].x, rp2.points[1].y, rp2.points[2].x, rp2.points[2].y);
@@ -232,15 +235,44 @@ const useRoad = (containerRef, roadRef, paths) => {
     ctx.fill();
     ctx.stroke();
 
+    const grad3 = ctx.createLinearGradient(rp3.points[0].x, rp3.points[0].y, rp3.points[2].x, rp3.points[2].y);
+    grad3.addColorStop(0, '#4d6271');
+    grad3.addColorStop(1, '#40799c');
+
     ctx.beginPath();
-    ctx.fillStyle = '#0F739E';
-    ctx.strokeStyle = '#0F739E';
+    ctx.fillStyle = grad3;
+    ctx.strokeStyle = grad3;
     ctx.moveTo(rp3.points[0].x, rp3.points[0].y);
     ctx.quadraticCurveTo(rp3.points[1].x, rp3.points[1].y, rp3.points[2].x, rp3.points[2].y);
     ctx.lineTo(rp4.points[2].x - 2, rp4.points[2].y);
     ctx.quadraticCurveTo(rp4.points[1].x, rp4.points[1].y, rp4.points[0].x, rp4.points[0].y);
     ctx.lineTo(rp3.points[0].x, rp3.points[0].y);
     ctx.fill();
+    ctx.stroke();
+
+    const grad4 = ctx.createLinearGradient(rp3.points[0].x, rp3.points[0].y, rp3.points[2].x, rp3.points[2].y);
+    grad4.addColorStop(0, '#4e718b');
+    grad4.addColorStop(1, '#2382b1');
+
+    ctx.beginPath();
+    ctx.fillStyle = grad4;
+    ctx.strokeStyle = grad4;
+    ctx.moveTo(rp4.points[0].x, rp4.points[0].y + 3);
+    ctx.quadraticCurveTo(rp4.points[1].x - 4, rp4.points[1].y + 4, rp4.points[2].x - 8, rp4.points[2].y);
+    ctx.lineTo(rp4.points[2].x, rp4.points[2].y);
+    ctx.quadraticCurveTo(rp4.points[1].x, rp4.points[1].y, rp4.points[0].x, rp4.points[0].y);
+    ctx.lineTo(rp4.points[0].x, rp4.points[0].y + 3);
+    ctx.fill();
+    ctx.stroke();
+
+    const grad5 = ctx.createLinearGradient(rp4.points[0].x, rp4.points[0].y, rp4.points[2].x, rp4.points[2].y);
+    grad5.addColorStop(0, '#458fbb00');
+    grad5.addColorStop(1, '#458fbb');
+
+    ctx.beginPath();
+    ctx.strokeStyle = grad5;
+    ctx.moveTo(rp4.points[0].x, rp4.points[0].y);
+    ctx.quadraticCurveTo(rp4.points[1].x, rp4.points[1].y, rp4.points[2].x, rp4.points[2].y);
     ctx.stroke();
 
     ctx.globalAlpha = 1;
@@ -363,20 +395,21 @@ const DimensionalView = ({ data, min, max, onZoom, children }) => {
     const start = curve.get(-0.25);
     const end = curve.get(1.19);
 
+    const grad = ctx.createLinearGradient(end.x, end.y, start.x, start.y);
+    grad.addColorStop(0, '#DC1F57');
+    grad.addColorStop(1, '#FFFFFF40');
+
+    ctx.imageSmoothingEnabled = true;
+
     ctx.beginPath();
     ctx.lineCap = 'round';
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#DC1F57';
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = grad;
     ctx.moveTo(start.x, start.y);
     ctx.quadraticCurveTo(curve.points[1].x, curve.points[1].y, end.x, end.y);
     ctx.stroke();
 
-    const { x, y } = end;
-    setFocusPointerStyle({
-      top: y,
-      left: x,
-    });
-    console.log('repainted');
+    return end;
   }, [paths, config.FOCUS_POINT]);
 
   useEffect(() => {
@@ -389,15 +422,19 @@ const DimensionalView = ({ data, min, max, onZoom, children }) => {
       const { width, height } = containerRef.current.getBoundingClientRect();
       canvas.width = width;
       canvas.height = height;
-      repaintFocusRef();
+      const { x, y } = repaintFocusRef();
+      setFocusPointerStyle({
+        top: y,
+        left: x,
+      });
     }
 
     resize();
 
-    window.addEventListener('resize', resize);
+    // window.addEventListener('resize', resize);
 
-    return () => window.removeEventListener('resize', resize);
-  }, [focusPointRef.current]);
+    // return () => window.removeEventListener('resize', resize);
+  }, [repaintFocusRef]);
 
   return (
     <div className="dimensional">

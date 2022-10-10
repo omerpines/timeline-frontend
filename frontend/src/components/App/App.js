@@ -311,11 +311,11 @@ function App() {
             <Zoom range={max - min} min={min} max={max} zoomTo={onZoom} />
             {showWelcomeModal && !skipWelcomeModal && <WelcomeModal onClose={onCloseWelcomeModal} />}
             <Routes>
-              <Route path={storyLink} element={<StoryAside />} />
-              <Route path={characterLink} element={<CharacterAside />} />
-              <Route path={eventLink} element={<EventAside />} />
-              <Route path={bookLink} element={<BookAside />} />
-              <Route path={periodLink} element={<PeriodAside />} />
+              <Route path={storyLink} element={<StoryAside zoomTo={onZoom} min={min} max={max} />} />
+              <Route path={characterLink} element={<CharacterAside zoomTo={onZoom} min={min} max={max} />} />
+              <Route path={eventLink} element={<EventAside zoomTo={onZoom} min={min} max={max} />} />
+              <Route path={bookLink} element={<BookAside zoomTo={onZoom} min={min} max={max} />} />
+              <Route path={periodLink} element={<PeriodAside zoomTo={onZoom} min={min} max={max} />} />
             </Routes>
           </div>
         </div>

@@ -8,6 +8,7 @@ import QuoteBlock from 'components/QuoteBlock';
 import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
+import useEntityZoom from 'hooks/useEntityZoom';
 import { getLocalized, denormalize } from 'helpers/util';
 import { getStoryLink } from 'helpers/urls';
 import './style.css';
@@ -16,7 +17,7 @@ const renderCharacter = data => (data ? (
   <CharacterBlock key={data.id} data={data} className="story-aside__character" />
 ) : false);
 
-const EventAside = () => {
+const EventAside = ({ zoomTo, min, max }) => {
   const { id } = useParams();
   const lang = useLanguage();
   const { t } = useTranslation();
@@ -96,6 +97,8 @@ const EventAside = () => {
       </React.Fragment>
     );
   }, [data, lang]);
+
+  useEntityZoom(data, zoomTo, min, max);
 
   if (!data) return false;
 

@@ -9,6 +9,7 @@ import TagCloud from 'components/TagCloud';
 import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
+import useEntityZoom from 'hooks/useEntityZoom';
 import { getLocalized } from 'helpers/util';
 import { getStoryLink } from 'helpers/urls';
 
@@ -20,7 +21,7 @@ const renderStory = data => (
   <EntityBlock key={data.id} data={data} linkFn={getStoryLink} />
 );
 
-const BookAside = () => {
+const BookAside = ({ zoomTo, min, max }) => {
   const { id } = useParams();
   const pid = parseInt(id, 10);
   const lang = useLanguage();
@@ -84,6 +85,8 @@ const BookAside = () => {
       </React.Fragment>
     );
   }, [data]);
+
+  useEntityZoom(data, zoomTo, min, max);
 
   if (!data) return false;
 

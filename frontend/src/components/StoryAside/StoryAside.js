@@ -8,6 +8,7 @@ import TagCloud from 'components/TagCloud';
 import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
+import useEntityZoom from 'hooks/useEntityZoom';
 import { getLocalized, denormalize } from 'helpers/util';
 import { getBookLink } from 'helpers/urls';
 import './style.css';
@@ -16,7 +17,7 @@ const renderCharacter = data => (
   <CharacterBlock key={data.id} data={data} />
 );
 
-const StoryAside = () => {
+const StoryAside = ({ zoomTo, min, max }) => {
   const { id } = useParams();
   const lang = useLanguage();
   const { t } = useTranslation();
@@ -116,7 +117,7 @@ const StoryAside = () => {
     );
   }, [data]);
 
-  if (!data) return false;
+  useEntityZoom(data, zoomTo, min, max);
 
   if (!data) return false;
 

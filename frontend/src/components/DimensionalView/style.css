@@ -47,10 +47,10 @@
   border-radius: 25px;
   box-shadow: -4px -12px 26px -12px inset rgb(0 0 0 / 75%), 0px 1px 2px 0px inset rgb(255 255 255 / 75%);
   display: block;
-  height: 50px;
+  height: 30px;
   position: absolute;
   transform: translate(-50%, -90%);
-  width: 50px;
+  width: 30px;
 }
 
 .dimensional__canvas {

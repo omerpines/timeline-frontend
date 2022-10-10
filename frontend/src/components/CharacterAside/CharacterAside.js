@@ -10,6 +10,7 @@ import QuoteBlock from 'components/QuoteBlock';
 import MediaGallery from 'components/MediaGallery';
 import useData from 'hooks/useData';
 import useLanguage from 'hooks/useLanguage';
+import useEntityZoom from 'hooks/useEntityZoom';
 import { checkLocalized, getLocalized } from 'helpers/util';
 import './style.css';
 
@@ -17,7 +18,7 @@ const renderCharacter = data => (data ? (
   <CharacterBlock key={data.id} data={data} className="character-aside__character" />
 ) : false);
 
-const CharacterAside = () => {
+const CharacterAside = ({ zoomTo, min, max }) => {
   const { id } = useParams();
   const lang = useLanguage();
   const { t } = useTranslation();
@@ -92,6 +93,8 @@ const CharacterAside = () => {
       </React.Fragment>
     );
   }, [data]);
+
+  useEntityZoom(data, zoomTo, min, max);
 
   if (!data) return false;
 
