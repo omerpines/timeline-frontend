@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './style.css';
 
-const AdminFormFooter = ({ onSubmit, onCancel }) => {
+const AdminFormFooter = ({ onSubmit, onCancel, disableSubmit }) => {
+  console.log(disableSubmit);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -16,7 +17,7 @@ const AdminFormFooter = ({ onSubmit, onCancel }) => {
       <button className="admin-form-footer__button admin-form-footer__cancel" onClick={onCancel || onCancelInner}>
         {t('admin.cancel')}
       </button>
-      <button className="admin-form-footer__button admin-form-footer__save" onClick={onSubmit}>
+      <button className="admin-form-footer__button admin-form-footer__save" onClick={onSubmit} disabled={disableSubmit}>
         {t('admin.saveAndContinue')}
       </button>
     </footer>

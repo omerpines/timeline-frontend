@@ -1,78 +1,63 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import AdminInput from 'components/AdminInput';
-import AdminCheckbox from 'components/AdminCheckbox';
-import { inRange } from 'helpers/util';
-import { renderYear, parseYear, swapBeforeAfter, isBC } from 'helpers/time';
-import config from 'constants/config';
+import { parseYear, renderYear } from 'helpers/time';
 import './style.css';
 
 const AdminDateInput = ({ onChange, state, fromOnly }) => {
   const { t } = useTranslation();
 
+  const [start, setStart] = useState(renderYear(state.fromDate));
+  const [end, setEnd] = useState(renderYear(state.endDate));
+
   const onStartChange = useCallback(e => {
-    const value = parseInt(e.currentTarget.value, 10);
-    let newVal = inRange(
-      config.MIN_INPUT_YEAR,
-      config.MAX_INPUT_YEAR,
-      parseYear(value, isBC(state.fromDate))
-    );
+    let value = parseInt(e.currentTarget.value, 10);
+    setStart(e.currentTarget.value);
+    if (!value || value === 0 || Number.isNaN(value)) {
+      onChange('fromDate', null);
+      return;
+    }
+    let newVal = parseYear(value);
     onChange('fromDate', newVal);
     if (fromOnly) onChange('endDate', newVal);
   }, [onChange, state.endDate, state.fromDate, fromOnly]);
 
   const onEndChange = useCallback(e => {
-    const value = parseInt(e.currentTarget.value, 10);
-    let newVal = inRange(
-      config.MIN_INPUT_YEAR,
-      config.MAX_INPUT_YEAR,
-      parseYear(value, isBC(state.endDate))
-    );
+    let value = parseInt(e.currentTarget.value, 10);
+    setEnd(e.currentTarget.value);
+    if (!value || value === 0 || Number.isNaN(value)) {
+      onChange('endDate', null);
+      return;
+    }
+    let newVal = parseYear(value);
     onChange('endDate', newVal);
   }, [onChange, state.fromDate, state.endDate]);
 
-  const onShowChange = useCallback(() => {
-    onChange('showTimeOnSite', !state.showTimeOnSite);
-  }, [onChange, state.showTimeOnSite]);
+  useEffect(() => {
+    if (state.fromDate) setStart(renderYear(state.fromDate));
+  }, [state.fromDate]);
 
-  const onSwapStart = useCallback(() => {
-    onChange('fromDate', swapBeforeAfter(state.fromDate)); 
-    if (fromOnly) onChange('endDate', swapBeforeAfter(state.fromDate));
-  }, [onChange, state.fromDate, fromOnly]);
-
-  const onSwapEnd = useCallback(() => {
-    onChange('endDate', swapBeforeAfter(state.endDate));
-  }, [onChange, state.endDate]);
-
-  let startTogglerClasses = 'admin-form__input-toggler';
-  if (state.fromDate > 100000) startTogglerClasses += ' admin-form__input-toggler--ad';
-
-  let endTogglerClasses = 'admin-form__input-toggler';
-  if (state.endDate > 100000) endTogglerClasses += ' admin-form__input-toggler--ad';
+  useEffect(() => {
+    if (state.endDate) setEnd(renderYear(state.endDate));
+  }, [state.endDate]);
 
   return (
     <AdminInput label="admin.duration" className="admin-date-input" wrapOnly>
       <input
-        className="admin-form__text admin-form__text--cut-left"
+        className="admin-form__text"
         placeholder={t('admin.duration.from.placeholder')}
-        value={renderYear(state.fromDate)}
+        value={start}
         onChange={onStartChange}
       />
-      <div className={startTogglerClasses} onClick={onSwapStart}>
-        {t(isBC(state.fromDate) ? 'common.dateBC' : 'common.dateAD', { date: '' })}
-      </div>
       {!fromOnly && (
         <React.Fragment>
           <div className="admin-form__between">{t('admin.until')}</div>
           <input
-            className="admin-form__text admin-form__text--cut-left"
+            className="admin-form__text"
             placeholder={t('admin.duration.to.placeholder')}
-            value={renderYear(state.endDate)}
+            value={end}
             onChange={onEndChange}
           />
-          <div className={endTogglerClasses} onClick={onSwapEnd}>
-            {t(isBC(state.endDate) ? 'common.dateBC' : 'common.dateAD', { date: '' })}
-          </div>
         </React.Fragment>
       )}
       {/* <AdminCheckbox

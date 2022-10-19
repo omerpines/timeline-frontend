@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import ReactHtmlParser from 'react-html-parser';
+import { throttle } from 'throttle-debounce';
 import CharacterDot from 'components/CharacterDot';
 import useLanguage from 'hooks/useLanguage';
 import useData from 'hooks/useData';
@@ -11,13 +13,13 @@ import './style.css';
 const useHover = () => {
   const [hovered, setHovered] = useState(false);
 
-  const onMouseEnter = useCallback(() => {
+  const onMouseEnter = useCallback(throttle(200, () => {
     setHovered(true);
-  }, []);
+  }, []));
 
-  const onMouseLeave = useCallback(() => {
+  const onMouseLeave = useCallback(throttle(200, () => {
     setHovered(false);
-  }, []);
+  }, []));
 
   return [hovered, onMouseEnter, onMouseLeave];
 };
@@ -104,7 +106,9 @@ const StoryPreview = ({ data, size, opacity, styles }) => {
         )}
         <div className="story-preview__titles">
           <div className="story-preview__title">{getLocalized(data, 'name', lang)}</div>
-          <div className="story-preview__subtitle">{getLocalized(data, 'summary', lang)}</div>
+          <div className="story-preview__subtitle">
+            {ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
+          </div>
         </div>
       </header>
       {(size === 'large' || hovered) && (

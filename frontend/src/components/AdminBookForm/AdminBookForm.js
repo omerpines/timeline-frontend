@@ -156,7 +156,7 @@ const AdminBookForm = ({ editMode }) => {
           value={state.links}
           onChange={onChange}
         />
-        <AdminFormFooter onSubmit={moveToMedia} />
+        <AdminFormFooter onSubmit={moveToMedia} disableSubmit={state.fromDate === null || state.endDate === null || !state.name} />
       </AdminForm>
     </AdminPage>
   );

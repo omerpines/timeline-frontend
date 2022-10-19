@@ -2,8 +2,8 @@ import types from 'store/actionTypes';
 
 const initialValue = {
   name: '',
-  fromDate: '100001',
-  endDate: '100001',
+  fromDate: null,
+  endDate: null,
   showTimeOnSite: false,
   age: '',
   quote: '',

@@ -162,7 +162,7 @@ const AdminCharacterForm = ({ editMode }) => {
           value={state.links}
           onChange={onChange}
         />
-        <AdminFormFooter onSubmit={moveToMedia} />
+        <AdminFormFooter onSubmit={moveToMedia} disableSubmit={state.fromDate === null || !state.name} />
       </AdminForm>
     </AdminPage>
   );

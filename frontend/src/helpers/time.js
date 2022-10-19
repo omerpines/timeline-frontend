@@ -11,15 +11,17 @@ export const formatYear = (year, t) => {
 }
 
 export const renderYear = iYear => {
+  if (iYear === null) return '';
   const year = parseInt(iYear, 10);
   if (year > 100000) return year - 100000;
-  return 100001 - year;
+  return (100001 - year) * -1;
 }
 
-export const parseYear = (iYear, bc) => {
+export const parseYear = iYear => {
   const year = parseInt(iYear, 10);
-  if (bc) return 100001 - year;
-  return 100000 + year;
+  if (year === 0) return 100001;
+  if (year > 0) return 100000 + year;
+  return 100001 + year;
 }
 
 export const swapBeforeAfter = iYear => {

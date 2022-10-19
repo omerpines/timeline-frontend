@@ -31,7 +31,7 @@ const renderRow = (t, lang, onDelete, stories) => c => {
         {story && getLocalized(story, 'name', lang)}
       </td>
       <td className="admin-event-row__years admin-table__years">
-        {`${formatYear(c.endDate, t)} - ${formatYear(c.fromDate, t)}`}
+        {formatYear(c.fromDate, t)}
       </td>
       <td className="admin-event-row__edit admin-table__edit">
         <Link className="admin-table__edit-link" to={`/admin/events/edit/${c.id}`}>{t('admin.edit')}</Link>

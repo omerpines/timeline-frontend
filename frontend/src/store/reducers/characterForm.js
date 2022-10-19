@@ -2,8 +2,8 @@ import types from 'store/actionTypes';
 
 const initialValue = {
   name: '',
-  endDate: '100001',
-  fromDate: '100001',
+  endDate: null,
+  fromDate: null,
   showTimeOnSite: false,
   attribution: '',
   gender: 'male',

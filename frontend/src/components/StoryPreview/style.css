@@ -189,6 +189,11 @@
   overflow: hidden;
 }
 
+.story-preview__subtitle p {
+  margin: 0px;
+  padding: 0px;
+}
+
 .story-preview--large .story-preview__subtitle {
   margin-bottom: 30px;
 }
