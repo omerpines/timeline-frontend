@@ -69,7 +69,6 @@ const StoryAside = ({ zoomTo, min, max }) => {
             {ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
           </React.Fragment>
         )}
-        {gallery}
         {!data.plot ? false : (
           <React.Fragment>
             <div className="aside__paragraph-label">{t('aside.label.plot')}</div>
@@ -120,12 +119,13 @@ const StoryAside = ({ zoomTo, min, max }) => {
   useEntityZoom(data, zoomTo, min, max);
 
   if (!data) return false;
+  console.log(content, gallery);
 
   return (
     <Aside
       header={header}
-      fullScreenContent={content}
-      fullScreenGallery={gallery}
+      fullscreenContent={content}
+      fullscreenGallery={gallery}
       data={data}
     >
       {gallery}
