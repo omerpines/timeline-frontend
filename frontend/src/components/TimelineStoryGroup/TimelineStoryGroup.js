@@ -11,16 +11,18 @@ import { formatYear } from 'helpers/time';
 import { joinHebrew } from 'helpers/lang';
 import './style.css';
 
-const renderHoverStory = showStory => s => (
+const renderHoverStory = (showStory, eventsByStories) => s => (
   <li key={s.id} className="timeline-story-group__hover-story">
-    <i className="fa fa-eye timeline-story-group__hover-story-view" onClick={() => showStory(s.id)} />
+    {eventsByStories[s.id] && eventsByStories[s.id].length > 0 && (
+      <i className="fa fa-eye timeline-story-group__hover-story-view" onClick={() => showStory(s.id)} />
+    )}
     <Link to={getStoryLink(s.id)} className="timeline-story-group__hover-link">
       <div className="timeline-story-group__hover-name">{s.name}</div>
     </Link>
   </li>
 );
 
-const renderStoryListHover = (data, showStory) => (
+const renderStoryListHover = (data, eventsByStories, showStory) => (
   <ScrollArea
     vertical
     smoothScrolling
@@ -29,7 +31,7 @@ const renderStoryListHover = (data, showStory) => (
     contentClassName="aside__scrollable"
   >
     <ul className="timeline-story-group__hover-list">
-      {data.map(renderHoverStory(showStory))}
+      {data.map(renderHoverStory(showStory, eventsByStories))}
     </ul>
   </ScrollArea>
 );
@@ -80,12 +82,19 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
     setViewStory(false);
   }, []);
 
-  const viewedEvents = useMemo(() => {
-    if (data.length === 1) return events.filter(e => e.story === data[0].id);
-    if (!viewStory) return [];
+  const eventsByStories = useMemo(() => {
+    return events.reduce((acc, e) => {
+      const sid = e.story;
+      if (!acc[sid]) acc[sid] = [];
+      acc[sid].push(e);
+      return acc;
+    }, {});
+  }, [events, data]);
 
-    return events.filter(e => e.story === viewStory);
-  }, [events, viewStory]);
+  const viewedEvents = useMemo(() => {
+    if (!viewStory) return [];
+    return eventsByStories[viewStory];
+  }, [eventsByStories, viewStory]);
 
   const viewedStory = useMemo(() => {
     if (data.length === 1) return data[0];
@@ -116,6 +125,7 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
 
   let hoverClasses = 'timeline-story-group__hover';
   if (viewedStory) hoverClasses += ' timeline-story-group__hover--events';
+  if (viewedStory && viewedEvents.length < 1) hoverClasses += ' timeline-story-group__hover--invisible';
 
   return (
     <div className="timeline-story-group" style={styles}>
@@ -124,7 +134,7 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
       </div>
       <div className={hoverClasses}>
         <div className="timeline-story-group__hover-wrapper">
-          {!viewedStory && renderStoryListHover(data, showStory)}
+          {!viewedStory && renderStoryListHover(data, eventsByStories, showStory)}
           {viewedStory && renderEventListHover(t, showStories, viewedEvents, viewedStory)}
         </div>
       </div>

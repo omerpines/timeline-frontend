@@ -191,6 +191,10 @@
   padding: 0px 43px 0px 20px;
 }
 
+.timeline-story-group__hover--invisible {
+  display: none;
+}
+
 @media (max-height: 1050px) {
   .timeline-story-group {
     top: 65px;

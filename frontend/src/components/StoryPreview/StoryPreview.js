@@ -28,13 +28,14 @@ const renderCharacter = data => (!data ? false : (
   <CharacterDot key={data.id} data={data} className="story-preview__character" />
 ));
 
-const StoryPreview = ({ data, size, opacity, styles }) => {
+const StoryPreview = ({ data, size, opacity, styles, hoverable }) => {
   const lang = useLanguage();
   const { t } = useTranslation();
 
   const { characters } = useData();
 
-  const [hovered, onMouseEnter, onMouseLeave] = useHover();
+  const [hoveredInner, onMouseEnter, onMouseLeave] = useHover();
+  const hovered = hoveredInner && hoverable;
 
   const dataCharacters = useMemo(() => denormalize(data.characters, characters), [data, characters]);
 

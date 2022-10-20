@@ -281,7 +281,7 @@ const useRoad = (containerRef, roadRef, paths) => {
   }, [paths]);
 };
 
-const renderDataPoint = (characters, paths, min, range, clustered) => data => {
+const renderDataPoint = (characters, paths, min, range, clustered, earliest) => data => {
   if (!paths[0]) return false;
 
   const path = paths[data.path - 1];
@@ -331,6 +331,7 @@ const renderDataPoint = (characters, paths, min, range, clustered) => data => {
           data={data}
           opacity={previewOpacity}
           styles={previewStyles}
+          hoverable={earliest.id === data.id}
         />
       )}
     </React.Fragment>
@@ -436,6 +437,14 @@ const DimensionalView = ({ data, min, max, onZoom, children }) => {
     // return () => window.removeEventListener('resize', resize);
   }, [repaintFocusRef]);
 
+  const earliestPoint = useMemo(() => {
+    return data.reduce((a, b) => {
+      if (!a) return b;
+      if (b.endDate > a.endDate) return a;
+      return b;
+    }, null);
+  }, [data]);
+
   return (
     <div className="dimensional">
       <canvas className="dimensional__canvas dimensional__canvas--road" ref={roadRef} style={{ transform: 'translate(0.5, 0.5)' }} />
@@ -447,7 +456,7 @@ const DimensionalView = ({ data, min, max, onZoom, children }) => {
         className="dimensional__nodes"
         ref={containerRef}
       >
-        {data.map(renderDataPoint(characters, paths, min, max - min, clustered))}
+        {data.map(renderDataPoint(characters, paths, min, max - min, clustered, earliestPoint))}
       </ul>
       <CSSTransition in={!!clustered.length} timeout={200} classNames="dimensional__cluster" appear>
         <div className="dimensional__cluster">
