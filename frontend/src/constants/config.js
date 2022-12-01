@@ -10,16 +10,16 @@ const config = {
   INITIAL_YEAR: 97041,
   INITIAL_RANGE: 1600,
   MIN_YEAR: 96241,
-  MAX_YEAR: 99833,
+  MAX_YEAR: 125833,
   MIN_INPUT_YEAR: 96241,
   MAX_INPUT_YEAR: 120000,
   MIN_RANGE: 100,
   MAX_RANGE: 4000,
   EMAIL: 'office@929.org.il',
-  EMAIL_SEND_TO: 'office@929.org.il',
+  EMAIL_SEND_TO: 'yasenfire@gmail.com',
   // Any string like 'robot@929.org.il' or false to use the email from the form
   EMAIL_SEND_FROM: false,
-  API: 'http://localhost:1337',
+  API: 'http://timelineapi.testing.929.org.il',
   // In percents. Determines the position of the red line
   FOCUS_POINT: 20,
   // In percents. Determines the distance from the red line where a period background starts to fade in/out
@@ -27,7 +27,7 @@ const config = {
   AUDIO_FORMATS: ['.ogg', '.mp3'],
   // The maximum amount of entity balls in the 3d view area. If there's more than that in the "cluster" area
   // all balls inside are clustered
-  CLUSTER_TRESHOLD: 3,
+  CLUSTER_TRESHOLD: 9,
   // In percents from INITIAL_RANGE
   ZOOM_INCREMENT: 10,
   // In percents from INITIAL_RANGE on each mouse wheel event
