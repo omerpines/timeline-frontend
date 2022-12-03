@@ -11,3 +11,8 @@
 .admin-input--flex-container .admin-form__label {
   width: 100%;
 }
+
+.admin-input--ltr {
+  direction: ltr;
+  text-align: right;
+}

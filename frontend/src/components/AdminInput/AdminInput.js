@@ -10,11 +10,12 @@ const richTextConfig = {
   removePlugins: ['Heading'],
 };
 
-const AdminInput = ({ children, label, type, placeholder, name, value, onChange, className, wrapOnly }) => {
+const AdminInput = ({ children, label, type, placeholder, name, value, onChange, className, wrapOnly, ltr }) => {
   const { t } = useTranslation();
 
   let classes = 'admin-input';
   if (className) classes += ` ${className}`;
+  if (ltr) classes += ' admin-input--ltr';
 
   const ph = placeholder || `${label}.placeholder`;
 

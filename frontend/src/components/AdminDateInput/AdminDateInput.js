@@ -44,7 +44,7 @@ const AdminDateInput = ({ onChange, state, fromOnly }) => {
   return (
     <AdminInput label="admin.duration" className="admin-date-input" wrapOnly>
       <input
-        className="admin-form__text"
+        className="admin-form__text admin-input--ltr"
         placeholder={t('admin.duration.from.placeholder')}
         value={start}
         onChange={onStartChange}
@@ -53,7 +53,7 @@ const AdminDateInput = ({ onChange, state, fromOnly }) => {
         <React.Fragment>
           <div className="admin-form__between">{t('admin.until')}</div>
           <input
-            className="admin-form__text"
+            className="admin-form__text admin-input--ltr"
             placeholder={t('admin.duration.to.placeholder')}
             value={end}
             onChange={onEndChange}
