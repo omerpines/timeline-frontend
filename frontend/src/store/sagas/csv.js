@@ -1,5 +1,6 @@
 import { take, fork, put, select } from 'redux-saga/effects';
 import { v4 as uuid } from 'uuid';
+import config from 'constants/config';
 import types from 'store/actionTypes';
 import { requestAddPeriod } from 'store/actionCreators/periods';
 import { requestAddBook } from 'store/actionCreators/books';
@@ -9,7 +10,7 @@ import { requestAddCharacter } from 'store/actionCreators/characters';
 import { failureCSV, loadingCSV, successCSV } from 'store/actionCreators/csv';
 import { getData } from 'store/selectors/data';
 import { parseYear } from 'helpers/time';
-import { getYoutubeId, isAudioFormatSupported } from 'helpers/util';
+import { getYoutubeId, isAudioFormatSupported, getRandomElem } from 'helpers/util';
 
 const validateName = (x, y, name) => {
   if (!name) return [x, y, 'error.emptyName'];
@@ -208,7 +209,7 @@ const parsePeriod = row => {
     endDate,
     media,
     name: row[0],
-    color: row[4] || '#ffffff',
+    color: row[4] || getRandomElem(config.BALL_COLORS),
     description: row[5],
     majorEvents: row[6],
     links: row[7],
@@ -278,7 +279,7 @@ const parseEvent = data => row => {
     characters,
     secondaryCharacters,
     name: row[0],
-    color: row[4],
+    color: row[4] || getRandomElem(config.BALL_COLORS),
     quotesource: row[7],
     quote: row[8],
     summary: row[9],

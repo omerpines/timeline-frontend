@@ -116,3 +116,5 @@ export const getYoutubeId = link => {
 export const isAudioFormatSupported = link => {
   return config.AUDIO_FORMATS.some(f => link.endsWith(f));
 }
+
+export const getRandomElem = list => list[Math.floor((Math.random() * list.length))];

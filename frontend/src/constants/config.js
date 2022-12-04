@@ -33,6 +33,17 @@ const config = {
   // In percents from INITIAL_RANGE on each mouse wheel event
   MOUSE_ZOOM_INCREMENT: 5,
   MOBILE_DRAG_SLOWDOWN: 10,
+  // The palette to choose from randomly when new events/periods are created through CSV and no color is provided
+  BALL_COLORS: [
+    '#FF0000',
+    '#008000',
+    '#0000FF',
+    '#DE3163',
+    '#FFFFFF',
+    '#000000',
+    '#FFFF00',
+    '#FF7F50',
+  ],
 };
 
 export default config;
