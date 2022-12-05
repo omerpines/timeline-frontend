@@ -46,3 +46,7 @@
 .admin-table__delete {
   cursor: pointer;
 }
+
+.admin-table__start, .admin-table__end, .admin-table__years {
+  direction: ltr;
+}
