@@ -8,7 +8,7 @@ const renderPoint = data => {
   const styles = { backgroundColor: data.color };
 
   return (
-      <Link to={getEventLink(data.id)} className="dimensional__item-link" style={styles} />
+      <span className="dimensional__item-link" style={styles} />
   );
 }
 

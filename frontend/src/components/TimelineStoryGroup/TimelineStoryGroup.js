@@ -126,6 +126,10 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
   let hoverClasses = 'timeline-story-group__hover';
   if (viewedStory) hoverClasses += ' timeline-story-group__hover--events';
   if (viewedStory && viewedEvents.length < 1) hoverClasses += ' timeline-story-group__hover--invisible';
+  if (
+    (!viewedStory && data.length > 3) 
+    || (viewedStory && viewedEvents.length > 3)
+  ) hoverClasses += ' timeline-story-group__hover--list';
 
   return (
     <div className="timeline-story-group" style={styles}>
