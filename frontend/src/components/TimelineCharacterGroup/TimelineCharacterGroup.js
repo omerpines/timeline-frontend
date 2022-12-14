@@ -67,7 +67,7 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
           {data.characters.map(renderCharacter)}
           {data.characters.length > 3 && (
             <div className="timeline-character-group__more">
-              {`+ ${data.characters.length - 3}`}
+              {`+${data.characters.length - 3}`}
             </div>
           )}
         </div>

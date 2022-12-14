@@ -296,6 +296,7 @@ nav.admin__nav a {
 }
 
 .aside-modal__column--gallery {
+  flex-shrink: 0;
   padding-top: 47px;
   width: 653px;
 }

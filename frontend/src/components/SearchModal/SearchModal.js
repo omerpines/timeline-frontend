@@ -60,7 +60,7 @@ const SearchInput = ({ onClose }) => {
   }, [data, search]);
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} stopScrollPropagation>
       <div className="modal__box auth__box search__box">
         <header className="modal__header search__header">
           <i className="fa fa-times search__close" onClick={onClose} />
@@ -83,6 +83,7 @@ const SearchInput = ({ onClose }) => {
                 smoothScrolling
                 className="aside__scrollarea media-modal__links"
                 contentClassName="aside__scrollable media-modal__links-content"
+                stopScrollPropagation
               >
                 <table className="table table-striped">
                   <thead>

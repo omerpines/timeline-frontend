@@ -51,7 +51,7 @@ const Aside = ({ children, header, className, fullscreenGallery, fullscreenConte
   if (className) classes += ` ${className}`;
 
   if (isFullscreen) return (
-    <Modal onClose={toggleFullscreen}>
+    <Modal onClose={toggleFullscreen} stopScrollPropagation>
       <div className="modal__box aside-modal__box">
         <div className="modal__body aside-modal__body">
           <i className="fa fa-times aside-modal__close" onClick={toggleFullscreen} />

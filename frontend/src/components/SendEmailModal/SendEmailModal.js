@@ -36,7 +36,8 @@ const SendEmailModal = ({ onClose }) => {
           contentClassName="aside__scrollable"
         >
           <div className="modal__body send-email__body">
-            <div className="send-email__text">{t('sendEmail.text')}</div>
+            <div className="send-email__text">{t('sendEmail.text1')}</div>
+            <div className="send-email__text">{t('sendEmail.text2')}</div>
             <div className="admin-form__columns">
               <div className="admin-form__column">
                 <label className="send-email__label" htmlFor="name">{t('sendEmail.name')}</label>

@@ -92,6 +92,7 @@ const PeriodAside = ({ zoomTo, min, max }) => {
     return (
       <React.Fragment>
         <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
+        <div className="aside__subsubtitle">{getLocalized(data, 'shortDescription', lang)}</div>
       </React.Fragment>
     );
   }, [data]);

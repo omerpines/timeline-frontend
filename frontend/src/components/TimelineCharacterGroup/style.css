@@ -1,5 +1,6 @@
 .timeline-character-group {
   direction: rtl;
+  min-width: 36px;
   position: absolute;
   right: 0px;
   top: 50px;
