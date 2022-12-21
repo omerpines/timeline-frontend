@@ -68,7 +68,7 @@ const CharacterAside = ({ zoomTo, min, max }) => {
       <React.Fragment>
         <div className="character-aside__title">
           {getLocalized(data, 'name', lang)}
-          <CharacterDot data={data} className="character-aside__dot" />
+          <CharacterDot data={data} className="character-aside__dot" ignorable />
         </div>
         {checkLocalized(data, 'subtitle', lang) && (
           <div className="character-aside__subtitle">{getLocalized(data, 'subtitle', lang)}</div>

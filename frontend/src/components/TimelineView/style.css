@@ -3,6 +3,7 @@
   height: 293px;
   position: relative;
   transition: height ease-in 0.2s;
+  user-select: none;
   z-index: 2000;
 }
 

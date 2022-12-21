@@ -53,6 +53,7 @@ const PeriodAside = ({ zoomTo, min, max }) => {
         {data.tags ? (
           <TagCloud tags={data.tags} />
         ) : false}
+        <MediaGallery data={data.media} />
       </React.Fragment>
     );
   }, [data]);
@@ -62,7 +63,6 @@ const PeriodAside = ({ zoomTo, min, max }) => {
     return (
       <React.Fragment>
         {ReactHtmlParser(`<div>${getLocalized(data, 'description', lang)}</div>`)}
-        {gallery}
         {!data.majorEvents ? false : (
           <React.Fragment>
             <div className="aside__paragraph-label">{t('aside.label.majorEvents')}</div>
@@ -108,6 +108,7 @@ const PeriodAside = ({ zoomTo, min, max }) => {
       fullscreenContent={content}
       data={data}
     >
+      {gallery}
       {content}
     </Aside>
   );

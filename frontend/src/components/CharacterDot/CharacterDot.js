@@ -7,7 +7,7 @@ import { getCharacterLink } from 'helpers/urls';
 import config from 'constants/config';
 import './style.css';
 
-const CharacterDot = ({ data, className }) => {
+const CharacterDot = ({ data, className, ignorable }) => {
   const lang = useLanguage();
 
   const { characters } = useData();
@@ -28,6 +28,8 @@ const CharacterDot = ({ data, className }) => {
   }, [innerData]);
 
   if (!innerData) return false;
+
+  if (ignorable && (!innerData.image || !innerData.image.data)) return false;
 
   return (
     <div
