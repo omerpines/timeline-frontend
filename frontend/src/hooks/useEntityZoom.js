@@ -13,13 +13,14 @@ const useEntityZoom = (entity, zoomTo, min, max) => {
     const newDate = entity.endDate;
     const newMin = newDate - config.FOCUS_POINT * percent;
     const newMax = newDate + (100 - config.FOCUS_POINT) * percent;
+    console.log(newMin, newMax);
 
     zoomTo(newMin, newMax);
 
     return () => {
       zoomTo(clsMin, clsMax);
     };
-  }, []);
+  }, [entity]);
 };
 
 export default useEntityZoom;
