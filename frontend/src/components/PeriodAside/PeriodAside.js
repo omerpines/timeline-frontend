@@ -15,7 +15,7 @@ import { sortEntitiesByEndDate } from 'helpers/time';
 import config from 'constants/config';
 
 const renderBook = data => (
-  <EntityBlock key={data.id} data={data} linkFn={getBookLink} className="aside__block-book" />
+  <EntityBlock key={data.id} data={data} linkFn={getBookLink} />
 );
 
 const PeriodAside = ({ zoomTo, min, max }) => {

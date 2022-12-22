@@ -339,13 +339,6 @@ nav.admin__nav a {
 
 .aside__books {
   display: flex;
-  justify-content: flex-start;
-}
-
-.entity-block.aside__block-book {
-  box-shadow: none;
-  display: inline-block;
-  height: auto;
-  padding-right: 0px;
-  width: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
