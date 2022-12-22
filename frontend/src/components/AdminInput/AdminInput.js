@@ -8,6 +8,7 @@ const richTextConfig = {
   fontFamily: 'Assistant',
   language: 'he',
   removePlugins: ['Heading'],
+  link: { addTargetToExternalLinks: true },
 };
 
 const AdminInput = ({ children, label, type, placeholder, name, value, onChange, className, wrapOnly, ltr }) => {
