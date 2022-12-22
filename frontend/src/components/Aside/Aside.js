@@ -58,7 +58,7 @@ const Aside = ({ children, header, className, fullscreenGallery, fullscreenConte
           <div className="aside-modal__columns">
             <div className="aside-modal__column aside-modal__column--content">
               <header className="modal__header aside-modal__header">
-                <div className="aside-modal__title">{getLocalized(data, 'name', lang)}</div>
+                {header}
               </header>
               <ScrollArea
                vertical
