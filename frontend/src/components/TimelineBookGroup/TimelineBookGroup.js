@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useLanguage from 'hooks/useLanguage';
 import { getLocalized } from 'helpers/util';
 import { getBookLink } from 'helpers/urls';
-import { sortEntitiesByEndDate } from 'helpers/time';
+import { sortEntitiesByFromDate } from 'helpers/time';
 import './style.css';
 
 const renderBook = lang => b => {
@@ -21,7 +21,7 @@ const TimelineBookGroup = ({ group, width, min, max }) => {
 
   const data = useMemo(() => {
     if (!group || !group.data) return [];
-    return [...group.data].sort(sortEntitiesByEndDate).reverse();
+    return [...group.data].sort(sortEntitiesByFromDate).reverse();
   }, [group]);
 
   const styles = useMemo(() => {
