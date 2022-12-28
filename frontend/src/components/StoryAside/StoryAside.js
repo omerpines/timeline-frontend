@@ -83,7 +83,7 @@ const StoryAside = ({ zoomTo, min, max }) => {
         )}
         {!characterData.length ? false : (
           <React.Fragment>
-            <div className="aside__pargraph-label">{t('aside.label.characters')}</div>
+            <div className="aside__paragraph-label">{t('aside.label.characters')}</div>
             <div className="aside__characters">
               {characterData.map(renderCharacter)}
             </div>
