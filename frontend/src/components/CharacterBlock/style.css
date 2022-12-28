@@ -11,7 +11,7 @@
   height: 80px;
   letter-spacing: 0px;
   margin-bottom: 30px;
-  padding: 0px 30px;
+  padding: 0px 10px;
   text-align: right;
   text-decoration: none;
   width: 256px;
@@ -37,4 +37,10 @@
   font-weight: bold;
   line-height: 20px;
   text-align: center;
+}
+
+.character-block__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

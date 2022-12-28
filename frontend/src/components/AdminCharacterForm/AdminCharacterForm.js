@@ -158,13 +158,6 @@ const AdminCharacterForm = ({ editMode }) => {
         />
         <AdminInput
           type="textarea"
-          label="admin.character.biography"
-          name="biography"
-          value={state.biography}
-          onChange={onChange}
-        />
-        <AdminInput
-          type="textarea"
           label="admin.character.appearances"
           name="appearances"
           value={state.appearances}

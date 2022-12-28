@@ -19,7 +19,7 @@ const CharacterBlock = ({ data, className }) => {
       to={getCharacterLink(data.id)}
       className={classes}
     >
-      <CharacterDot data={data} className="character-block__dot" /> 
+      {/*<CharacterDot data={data} className="character-block__dot" />*/} 
       <div className="character-block__data">
         <div className="character-block__name">{getLocalized(data, 'name', lang)}</div>
         {data.relation ? (

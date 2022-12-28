@@ -60,7 +60,6 @@ const EventAside = ({ zoomTo, min, max }) => {
       <React.Fragment>
         {!data.summary ? false : ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
         <QuoteBlock data={data} />
-        {gallery}
         {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
         {!characterData.length ? false : (
           <React.Fragment>
@@ -78,7 +77,7 @@ const EventAside = ({ zoomTo, min, max }) => {
         )}
       </React.Fragment>
     );
-  }, [data, lang, gallery]);
+  }, [data, lang]);
 
   const header = useMemo(() => {
     if (!data) return undefined;

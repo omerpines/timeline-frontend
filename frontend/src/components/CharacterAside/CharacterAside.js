@@ -50,7 +50,6 @@ const CharacterAside = ({ zoomTo, min, max }) => {
     return (
       <React.Fragment>
         {ReactHtmlParser(`<div>${getLocalized(data, 'content', lang)}</div>`)}
-        {ReactHtmlParser(`<div>${getLocalized(data, 'timeline', lang)}</div>`)}
         {ReactHtmlParser(`<div>${getLocalized(data, 'appearances', lang)}</div>`)}
         {!data.links ? false : (
           <React.Fragment>
@@ -70,8 +69,8 @@ const CharacterAside = ({ zoomTo, min, max }) => {
           {getLocalized(data, 'name', lang)}
           <CharacterDot data={data} className="character-aside__dot" ignorable />
         </div>
-        {checkLocalized(data, 'subtitle', lang) && (
-          <div className="character-aside__subtitle">{getLocalized(data, 'subtitle', lang)}</div>
+        {checkLocalized(data, 'summary', lang) && (
+          <div className="character-aside__subsubtitle">{ReactHtmlParser(getLocalized(data, 'summary', lang))}</div>
         )}
       </React.Fragment>
     );

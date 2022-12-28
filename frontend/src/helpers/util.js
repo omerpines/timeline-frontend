@@ -25,7 +25,7 @@ export const inRange = (min, max, value) => {
 // export const getLocalized = (obj, field, lang) => obj[`${field}_${lang}`] || '';
 export const getLocalized = (obj, field) => obj[field];
 
-export const checkLocalized = (obj, field, lang) => (obj[`${field}_${lang}`] ? true : false);
+export const checkLocalized = (obj, field, lang) => (obj[`${field}`] ? true : false);
 
 export const easeShare = share => easeInCubic(share, 0, 1, 1);
 

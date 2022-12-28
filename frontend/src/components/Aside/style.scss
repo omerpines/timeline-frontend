@@ -108,6 +108,12 @@
   text-align: right;
 }
 
+@media screen and (max-width: 600px) {
+  .aside__fullscreen {
+    display: none;
+  }
+}
+
 .aside__back-icon {
   font-size: 22px !important;
   position: absolute;
@@ -223,6 +229,11 @@ nav.admin__nav a {
     width: 100%;
     background-color: #fff;
   }
+
+  .aside__container {
+    padding-right: 10px;
+  }
+
   .media-image__image{
     width: 260px !important;
   }
