@@ -77,7 +77,7 @@ const StoryAside = ({ zoomTo, min, max }) => {
         )}
         {!data.location ? false : (
           <React.Fragment>
-            <div className="aside__paragraph-label">{t('aside.label.location')}</div>
+            <div className="aside__paragraph-label">{t('aside.label.storyLocation')}</div>
             {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
           </React.Fragment>
         )}
@@ -91,7 +91,7 @@ const StoryAside = ({ zoomTo, min, max }) => {
         )}
         {!data.links ? false : (
           <React.Fragment>
-            <div className="aside__paragraph-label">{t('aside.label.wantToKnowMore')}</div>
+            <div className="aside__paragraph-label">{t('aside.label.furtherReading')}</div>
             {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
           </React.Fragment>
         )}

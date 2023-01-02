@@ -10,7 +10,7 @@ import { requestAddCharacter } from 'store/actionCreators/characters';
 import { failureCSV, loadingCSV, successCSV } from 'store/actionCreators/csv';
 import { getData } from 'store/selectors/data';
 import { parseYear } from 'helpers/time';
-import { getYoutubeId, isAudioFormatSupported, getRandomElem } from 'helpers/util';
+import { getYoutubeId, isYoutubeUrl, isAudioFormatSupported, getRandomElem } from 'helpers/util';
 
 const validateName = (x, y, name) => {
   if (!name) return [x, y, 'error.emptyName'];
@@ -58,6 +58,7 @@ const validateCharacterRelations = (x, y, characterStr, data) => {
 const colorRegex = /^#[0-9a-f]{3,6}$/i;
 
 const validateColor = (x, y, color) => {
+  if (!color) return true;
   if (colorRegex.test(color)) return true;
   return [x, y, 'error.wrongColor'];
 }
@@ -166,7 +167,7 @@ const parseGender = gender => {
 }
 
 const parseMedia = media => {
-  const isYoutube = media.includes('youtu.be') || media.includes('youtube.com');
+  const isYoutube = isYoutubeUrl(media);
   const isAudio = isAudioFormatSupported(media);
 
   if (isYoutube) return {

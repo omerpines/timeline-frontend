@@ -103,6 +103,12 @@ export const cleanStringList = s => s.split(',').map(ss => ss.trim()).filter(ss 
 const youtubeRegexA = /youtube\.com\/watch\?v=([a-zA-Z0-9\-]+)/;
 const youtubeRegexB = /youtu\.be\/([a-zA-Z0-9\-]+)/;
 
+export const isYoutubeUrl = url => {
+  const p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  if(url.match(p)) return true;
+  return false;
+}
+
 export const getYoutubeId = link => {
   if (youtubeRegexB.test(link)) {
     const a = link.split('/').pop();
