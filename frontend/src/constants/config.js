@@ -10,11 +10,13 @@ const config = {
   INITIAL_YEAR: 97041,
   INITIAL_RANGE: 1600,
   MIN_YEAR: 96241,
-  MAX_YEAR: 120834,
+  MAX_YEAR: 99834,
   MIN_INPUT_YEAR: 96241,
   MAX_INPUT_YEAR: 99837,
   MIN_RANGE: 100,
   MAX_RANGE: 4000,
+  EMAIL: 'noreply@timeline.testing.929.org.il',
+  EMAIL_SEND_TO: 'omerpines@gmail.com',
   // Zoom is set in percents
   MIN_DESKTOP_ZOOM: 1,
   MIN_MOBILE_ZOOM: 1,
@@ -26,14 +28,14 @@ const config = {
   EMAIL_SEND_TO: 'yasenfire@gmail.com',
   // Any string like 'robot@929.org.il' or false to use the email from the form
   EMAIL_SEND_FROM: false,
-  API: 'http://localhost:1337',
+  API: 'http://timelineapi.testing.929.org.il',
   // In percents. Determines the position of the red line
   FOCUS_POINT: 20,
   // In percents. Determines the distance from the red line where a period background starts to fade in/out
   PERIOD_TRANSITION_RANGE: 5,
   // The maximum amount of entity balls in the 3d view area. If there's more than that in the "cluster" area
   // all balls inside are clustered
-  CLUSTER_TRESHOLD: 4,
+  CLUSTER_TRESHOLD: 9,
   // In percents from INITIAL_RANGE
   ZOOM_INCREMENT: 10,
   // In percents from INITIAL_RANGE on each mouse wheel event
