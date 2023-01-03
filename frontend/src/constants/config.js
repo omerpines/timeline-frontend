@@ -15,8 +15,8 @@ const config = {
   MAX_INPUT_YEAR: 120000,
   MIN_RANGE: 100,
   MAX_RANGE: 4000,
-  EMAIL: 'office@929.org.il',
-  EMAIL_SEND_TO: 'yasenfire@gmail.com',
+  EMAIL: 'noreply@timeline.testing.929.org.il',
+  EMAIL_SEND_TO: 'omerpines@gmail.com',
   // Any string like 'robot@929.org.il' or false to use the email from the form
   EMAIL_SEND_FROM: false,
   API: 'http://timelineapi.testing.929.org.il',
