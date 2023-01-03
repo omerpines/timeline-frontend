@@ -7,6 +7,12 @@
   z-index: 2000;
 }
 
+.timeline a {
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  user-drag: none;
+}
+
 .timeline--admin {
   bottom: 0px;
   left: 0px;

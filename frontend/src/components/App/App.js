@@ -18,6 +18,7 @@ import Help from 'components/Help';
 import Zoom from 'components/Zoom';
 import useData from 'hooks/useData';
 import useDrag from 'hooks/useDrag';
+import useMobile from 'hooks/useMobile';
 import config from 'constants/config';
 import { inRange, fromRange } from 'helpers/util';
 import { getStoryLink, getCharacterLink, getEventLink, getBookLink, getPeriodLink } from 'helpers/urls';
@@ -32,7 +33,15 @@ const eventLink = getEventLink(':id');
 const bookLink = getBookLink(':id');
 const periodLink = getPeriodLink(':id');
 
-const useScroll = data => {
+const percentCost = config.INITIAL_RANGE / 100;
+const zoomDiff = config.INITIAL_RANGE / 200 * config.MOUSE_ZOOM_INCREMENT;
+
+const minDesktopRange = Math.round(config.INITIAL_RANGE * config.MIN_DESKTOP_ZOOM / 100);
+const maxDesktopRange = Math.round(config.INITIAL_RANGE * config.MAX_DESKTOP_ZOOM / 100);
+const minMobileRange =  Math.round(config.INITIAL_RANGE * config.MIN_MOBILE_ZOOM / 100);
+const maxMobileRange =  Math.round(config.INITIAL_RANGE * config.MAX_MOBILE_ZOOM / 100);
+
+const useScroll = (data, zoomTo) => {
   const [current, setCurrent] = useState(config.INITIAL_YEAR);
   const [range, setRange] = useState(config.INITIAL_RANGE);
 
@@ -71,21 +80,47 @@ const useScroll = data => {
     };
   }, [data, min, max]);
 
+  const isMobile = useMobile();
+
   useEffect(() => {
     const isAdmin = pathname.startsWith('/admin');
+
+    const inc = () => {
+      const maxRange = isMobile ? maxMobileRange : maxDesktopRange;
+      const newMin = min - zoomDiff;
+      const newMax = max + zoomDiff;
+      const newRange = newMax - newMin;
+      if (newRange > maxRange) {
+        const fix = (maxRange - (max - min)) / 2;
+        zoomTo(Math.floor(min - fix), Math.ceil(max + fix));
+      }
+      else zoomTo(newMin, newMax);
+    };
+
+    const dec = () => {
+      const minRange = isMobile ? minMobileRange : minDesktopRange;
+      const newMin = min + zoomDiff;
+      const newMax = max - zoomDiff;
+      const newRange = newMax - newMin;
+      if (newRange < minRange) {
+        const fix = (max - min - minRange) / 2;
+        zoomTo(Math.ceil(min + fix), Math.floor(max - fix));
+      }
+      else zoomTo(newMin, newMax);
+    };
 
     const handleScroll = (e) => {
       if (isAdmin) return;
 
       const delta = Math.round(config.INITIAL_RANGE / 100 * config.MOUSE_ZOOM_INCREMENT);
 
-      if (e.deltaY > 0) setRange(a => inRange(config.MIN_RANGE, config.MAX_RANGE, a + delta));
-      else setRange(a => inRange(config.MIN_RANGE, config.MAX_RANGE, a - delta));
+      if (e.deltaY > 0) inc();
+      else dec();
     };
 
     window.addEventListener('wheel', handleScroll);
     return () => window.removeEventListener('wheel', handleScroll);
-  }, [pathname]);
+  }, [pathname, min, max, isMobile]);
 
   const onChangeCurrent = useCallback(diff => {
     setCurrent(current => {
@@ -164,7 +199,12 @@ function App() {
 
   const isLoading = useSelector(isDataLoading);
 
-  const [rangeData, min, max, current, setCurrent, setCurrentDirectly, setRangeDirectly] = useScroll(data);
+  const [zoomTo, setZoomTo] = useState(null);
+  const onZoom = useCallback((min, max) => {
+    setZoomTo([min, max]);
+  }, []);
+
+  const [rangeData, min, max, current, setCurrent, setCurrentDirectly, setRangeDirectly] = useScroll(data, onZoom);
   const [filteredData, onChangePeriod] = useFilters(rangeData);
   const characterGroups = useCharacterGroups(filteredData);
   const [showWelcomeModal, onCloseWelcomeModal] = useWelcomeModal();
@@ -205,11 +245,6 @@ function App() {
     onDragTouch,
     onDragTouchEnd,
   ] = useDrag(verticalRef, min, max, setCurrent);
-
-  const [zoomTo, setZoomTo] = useState(null);
-  const onZoom = useCallback((min, max) => {
-    setZoomTo([min, max]);
-  }, []);
 
   useEffect(() => {
     let frameHandle = null;

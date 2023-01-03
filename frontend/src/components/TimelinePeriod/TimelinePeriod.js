@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useLanguage from 'hooks/useLanguage';
-import { getLocalized } from 'helpers/util';
+import { getLocalized, noop } from 'helpers/util';
 import { getPeriodLink } from 'helpers/urls';
 import config from 'constants/config';
 import './style.css';

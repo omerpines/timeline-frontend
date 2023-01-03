@@ -5,7 +5,7 @@ import Modal from 'components/Modal';
 import ModalTabs from 'components/ModalTabs';
 import AdminFileInput from 'components/AdminFileInput';
 import { v4 as uuid } from 'uuid';
-import { getYoutubeId, isYoutubeUrl, getFileUrl, isAudioFormatSupported } from 'helpers/util';
+import { getYoutubeId, isYoutubeUrl, getFileUrl, isAudioFormatSupported, isImgFormatSupported } from 'helpers/util';
 import './style.css';
 
 const emptyList = [];
@@ -66,6 +66,7 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
   const onSubmitInner = useCallback(() => {
     const objectLinks = links.map(link => {
       const isYoutube = isYoutubeUrl(link);
+      const isImg = isImgFormatSupported(link);
       const isAudio = isAudioFormatSupported(link);
       if (isYoutube) return {
         id: uuid(),
@@ -83,14 +84,16 @@ const AdminMediaModal = ({ onClose, onSubmit }) => {
         description: '',
       };
       
-      return {
+      if (isImg) return {
         id: uuid(),
         type: 'image',
         url: link,
         title: '',
         description: '',
       };
-    });
+
+      return false;
+    }).filter(o => o);
 
     const objectUploads = uploads.map(upload => {
       const [type] = upload.type.split('/');

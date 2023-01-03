@@ -123,4 +123,10 @@ export const isAudioFormatSupported = link => {
   return config.AUDIO_FORMATS.some(f => link.endsWith(f));
 }
 
+export const isImgFormatSupported = link => {
+  return config.IMG_FORMATS.some(f => link.endsWith(f));
+};
+
 export const getRandomElem = list => list[Math.floor((Math.random() * list.length))];
+
+export const noop = () => false;
