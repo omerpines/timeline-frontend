@@ -2,11 +2,11 @@ import { take, fork, put, select } from 'redux-saga/effects';
 import { v4 as uuid } from 'uuid';
 import config from 'constants/config';
 import types from 'store/actionTypes';
-import { requestAddPeriod } from 'store/actionCreators/periods';
-import { requestAddBook } from 'store/actionCreators/books';
-import { requestAddStory } from 'store/actionCreators/stories';
-import { requestAddEvent } from 'store/actionCreators/events';
-import { requestAddCharacter } from 'store/actionCreators/characters';
+import { requestAddPeriod, requestEditPeriod } from 'store/actionCreators/periods';
+import { requestAddBook, requestEditBook } from 'store/actionCreators/books';
+import { requestAddStory, requestEditStory } from 'store/actionCreators/stories';
+import { requestAddEvent, requestEditEvent } from 'store/actionCreators/events';
+import { requestAddCharacter, requestEditCharacter } from 'store/actionCreators/characters';
 import { failureCSV, loadingCSV, successCSV } from 'store/actionCreators/csv';
 import { getData } from 'store/selectors/data';
 import { parseYear } from 'helpers/time';
@@ -331,7 +331,10 @@ function* uploadCSV({ csvType, content }) {
     yield put(loadingCSV());
     const periods = rows.map(parsePeriod);
     for (let i = 0, l = periods.length; i < l; i += 1) {
-      yield put(requestAddPeriod(periods[i]));
+      const period = periods[i];
+      const dbPeriod = data.periods.find(p => p.name === period.name);
+      if (dbPeriod) yield put(requestEditPeriod(dbPeriod.id, { ...dbPeriod, ...period }));
+      else yield put(requestAddPeriod(periods[i]));
     }
     yield put(successCSV());
   } else if (csvType === 'book') {
@@ -344,7 +347,10 @@ function* uploadCSV({ csvType, content }) {
     yield put(loadingCSV());
     const books = rows.map(parseBook(data));
     for (let i = 0, l = books.length; i < l; i += 1) {
-      yield put(requestAddBook(books[i]));
+      const book = books[i];
+      const dbBook = data.books.find(b => b.name === book.name);
+      if (dbBook) yield put(requestEditBook(dbBook.id, { ...dbBook, ...book }));
+      else yield put(requestAddBook(books[i]));
     }
     yield put(successCSV());
   } else if (csvType === 'story') {
@@ -357,7 +363,10 @@ function* uploadCSV({ csvType, content }) {
     yield put(loadingCSV());
     const stories = rows.map(parseStory(data));
     for (let i = 0, l = stories.length; i < l; i += 1) {
-      yield put(requestAddStory(stories[i]));
+      const story = stories[i];
+      const dbStory = data.stories.find(s => s.name === story.name);
+      if (dbStory) yield put(requestEditStory(dbStory.id, { ...dbStory, ...story }));
+      else yield put(requestAddStory(stories[i]));
     }
     yield put(successCSV());
   } else if (csvType === 'event') {
@@ -370,7 +379,10 @@ function* uploadCSV({ csvType, content }) {
     yield put(loadingCSV());
     const events = rows.map(parseEvent(data));
     for (let i = 0, l = events.length; i < l; i += 1) {
-      yield put(requestAddEvent(events[i]));
+      const event = events[i];
+      const dbEvent = data.events.find(e => e.name === event.name);
+      if (dbEvent) yield put(requestEditEvent(dbEvent.id, { ...dbEvent, ...event }));
+      else yield put(requestAddEvent(events[i]));
     }
     yield put(successCSV());
   } else if (csvType === 'character') {
@@ -383,7 +395,10 @@ function* uploadCSV({ csvType, content }) {
     yield put(loadingCSV());
     const characters = rows.map(parseCharacter(data));
     for (let i = 0, l = characters.length; i < l; i += 1) {
-      yield put(requestAddCharacter(characters[i]));
+      const character = characters[i];
+      const dbCharacter = data.characters.find(c => c.name === character.name);
+      if (dbCharacter) yield put(requestEditCharacter(dbCharacter.id, { ...dbCharacter, ...character }));
+      else yield put(requestAddCharacter(characters[i]));
     }
     yield put(successCSV());
   }

@@ -82,7 +82,6 @@ export function* onDeletePeriod() {
 export function* addPeriod({ data }) {
   try {
     const [method, generatePath] = endpoints.CREATE;
-    console.log(data);
     const response = yield call(
       callAuthenticatedApi,
       method,

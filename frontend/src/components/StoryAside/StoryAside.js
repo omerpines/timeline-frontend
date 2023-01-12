@@ -65,7 +65,7 @@ const StoryAside = ({ zoomTo, min, max }) => {
         {!data.references ? false : ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
         {!data.summary ? false : (
           <React.Fragment>
-            <div className="aside__paragraph-label">{t('aside.label.summary')}</div>
+            {/* <div className="aside__paragraph-label">{t('aside.label.summary')}</div> */}
             {ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
           </React.Fragment>
         )}
@@ -119,7 +119,6 @@ const StoryAside = ({ zoomTo, min, max }) => {
   useEntityZoom(data, zoomTo, min, max);
 
   if (!data) return false;
-  console.log(content, gallery);
 
   return (
     <Aside

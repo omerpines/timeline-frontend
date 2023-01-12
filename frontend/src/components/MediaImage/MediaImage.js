@@ -15,6 +15,12 @@ const MediaImage = ({ data, width, height, className, onClick, index }) => {
     <React.Fragment>
       <div className={classes}>
         <div className="media-image__image" style={styles} onClick={onClick} data-index={index} />
+        {(data.title !== ''  || data.description !== '') && (
+          <div className="media-image__data">
+            <div className="media-image__title">{data.title}</div>
+            <div className="media-image__description">{data.description}</div>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

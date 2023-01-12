@@ -25,3 +25,34 @@
 .media-image:hover .lg-fullscreen {
   font-weight: bold;
 }
+
+.media-image__data {
+  background: linear-gradient(360deg, #FFFFFF 0%, rgba(255, 255, 255, 0.77) 78.35%, rgba(255, 255, 255, 0) 100%);
+  bottom: 0px;
+  height: 112px;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+}
+
+.media-image__title {
+  font-family: 'Assistant';
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 35px;
+  margin-top: 18px;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media-image__description {
+  font-family: 'Assistant';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+}

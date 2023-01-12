@@ -250,9 +250,11 @@ nav.admin__nav a {
     font-size: 24px;
   }
   .aside__subtitle,
-  .aside__subsubtitle{
+  .aside__subsubtitle {
+    font-family: Assistant;
     font-size: 22px;
   }
+
   .aside__content p {
     font-size: 16px;
     line-height: 24px;
@@ -303,7 +305,6 @@ nav.admin__nav a {
 
 .aside-modal__column {
   height: 100%;
-  overflow: hidden;
 }
 
 .aside-modal__column--gallery {
@@ -314,6 +315,8 @@ nav.admin__nav a {
 
 .aside-modal__column--content {
   color: #474747;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   font: normal normal normal 24px/35px Assistant;
   letter-spacing: 0px;
