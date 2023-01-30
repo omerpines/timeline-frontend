@@ -70,7 +70,9 @@ const CharacterAside = ({ zoomTo, min, max }) => {
           <CharacterDot data={data} className="character-aside__dot" ignorable />
         </div>
         {checkLocalized(data, 'summary', lang) && (
-          <div className="character-aside__subsubtitle">{ReactHtmlParser(getLocalized(data, 'summary', lang))}</div>
+          <div className="character-aside__subsubtitle aside__subsubtitle">
+            {ReactHtmlParser(getLocalized(data, 'summary', lang))}
+          </div>
         )}
       </React.Fragment>
     );

@@ -55,12 +55,18 @@ const EventAside = ({ zoomTo, min, max }) => {
   }, [data]);
 
   const content = useMemo(() => {
-    if (!data) return false;
-    return (
+    if (!data) return () => false;
+    return withMedia => (
       <React.Fragment>
         {!data.summary ? false : ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
         <QuoteBlock data={data} />
-        {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
+        {withMedia && gallery}
+        {!data.location ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-label yt">{t('aside.label.eventLocation')}</div>
+            {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
+          </React.Fragment>
+        )}
         {!characterData.length ? false : (
           <React.Fragment>
             <div className="aside__paragraph-label">{t('aside.label.characters')}</div>
@@ -77,15 +83,20 @@ const EventAside = ({ zoomTo, min, max }) => {
         )}
       </React.Fragment>
     );
-  }, [data, lang]);
+  }, [data, gallery, lang]);
+
+  const fullscreenContent = useMemo(() => content(false), [content]);
+  const asideContent = useMemo(() => content(true), [content]);
 
   const header = useMemo(() => {
     if (!data) return undefined;
     return (
       <React.Fragment>
         <div className="aside__title">{getLocalized(data, 'name', lang)}</div>
+        <div className="aside__subtitle">
           {ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
-          {!relatedStory ? false : (
+        </div>
+        {!relatedStory ? false : (
           <Link
             className="aside__subsubtitle"
             to={getStoryLink(relatedStory.id)}
@@ -106,11 +117,10 @@ const EventAside = ({ zoomTo, min, max }) => {
       className="event__aside"
       header={header}
       fullscreenGallery={gallery}
-      fullscreenContent={content}
+      fullscreenContent={fullscreenContent}
       data={data}
     >
-      {gallery}
-      {content}
+      {asideContent}
     </Aside>
   );
 };

@@ -149,6 +149,10 @@ const useCanvas = (containerRef, canvasRef, data, min, max, paths, clustered) =>
       if (!containerRef.current) return;
 
       const { width, height } = containerRef.current.getBoundingClientRect();
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+      if (width === canvasWidth && height === canvasHeight) return;
+
       canvas.width = width;
       canvas.height = height;
       repaint();
@@ -307,16 +311,15 @@ const renderDataPoint = (characters, paths, min, range, clustered, earliest) => 
   if (size === 'cluster') size = 'medium';
 
   const styles = {
-    left: x,
-    top: y,
-    transform: `scale(${scale})`,
+    transform: `translate(${x}px, ${y}px) scale(${scale})`,
     backgroundColor: data.color,
     zIndex: 9999999 - data.endDate,
   };
 
   const previewStyles = {
-    left: x,
-    top: y,
+    // left: x,
+    // top: y,
+    transform: `translate(${x}px, ${y}px)`,
   };
   
   return (

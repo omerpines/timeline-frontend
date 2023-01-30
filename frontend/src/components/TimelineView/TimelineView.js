@@ -30,7 +30,7 @@ const useSize = ref => {
   return width;
 };
 
-const renderPeriod = (min, max, width, onChangePeriod) => data => {
+const renderPeriod = (min, max, width) => data => {
   return (
     <TimelinePeriod
       key={data.id}
@@ -38,7 +38,6 @@ const renderPeriod = (min, max, width, onChangePeriod) => data => {
       max={max}
       width={width}
       data={data}
-      onChangePeriod={onChangePeriod}
     />
   );
 };
@@ -59,7 +58,6 @@ const TimelineView = ({
   characterGroups,
   min,
   max,
-  onChangePeriod,
   onMinimize,
   minimized,
   className,
@@ -91,9 +89,9 @@ const TimelineView = ({
         className="timeline__container"
         ref={containerRef}
       >
-        {data.periods.map(renderPeriod(min, max, width, onChangePeriod))}
+        {data.periods.map(renderPeriod(min, max, width))}
         {data.storyGroups.map(renderStoryGroup(min, max, width))}
-        {characterGroups.map(renderCharacterGroup(min, max, width))}
+        {data.characterGroups.map(renderCharacterGroup(min, max, width))}
         {data.bookGroups.map(renderBookGroup(min, max, width))}
       </div>
       <TimelineLegend />

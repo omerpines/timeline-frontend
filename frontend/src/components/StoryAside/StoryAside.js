@@ -59,8 +59,8 @@ const StoryAside = ({ zoomTo, min, max }) => {
   }, [data]);
 
   const content = useMemo(() => {
-    if (!data) return false;
-    return (
+    if (!data) return () => false;
+    return withMedia => (
       <React.Fragment>
         {!data.references ? false : ReactHtmlParser(`<div>${getLocalized(data, 'references', lang)}</div>`)}
         {!data.summary ? false : (
@@ -81,6 +81,7 @@ const StoryAside = ({ zoomTo, min, max }) => {
             {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
           </React.Fragment>
         )}
+        {withMedia && gallery}
         {!characterData.length ? false : (
           <React.Fragment>
             <div className="aside__paragraph-label">{t('aside.label.characters')}</div>
@@ -98,6 +99,9 @@ const StoryAside = ({ zoomTo, min, max }) => {
       </React.Fragment>
     );
   }, [data, characterData, gallery, lang]);
+
+  const fullscreenContent = useMemo(() => content(false), [content]);
+  const asideContent = useMemo(() => content(true), [content]);
 
   const header = useMemo(() => {
     if (!data) return false;
@@ -123,12 +127,11 @@ const StoryAside = ({ zoomTo, min, max }) => {
   return (
     <Aside
       header={header}
-      fullscreenContent={content}
+      fullscreenContent={fullscreenContent}
       fullscreenGallery={gallery}
       data={data}
     >
-      {gallery}
-      {content}
+      {asideContent}
     </Aside>
   );
 };

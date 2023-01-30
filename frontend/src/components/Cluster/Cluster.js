@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { getEventLink } from 'helpers/urls';
 import './style.css';
 
-const renderPoint = data => {
+const renderPoint = (data, i) => {
   const styles = { backgroundColor: data.color };
 
   return (
-      <span className="dimensional__item-link" style={styles} />
+      <span className="dimensional__item-link" style={styles} key={i} />
   );
 }
 

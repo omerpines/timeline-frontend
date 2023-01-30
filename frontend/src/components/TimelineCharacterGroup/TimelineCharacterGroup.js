@@ -27,10 +27,12 @@ const renderHoverCharacter = c => (
 const TimelineCharacterGroup = ({ data, width, min, max }) => {
   const lang = useLanguage();
 
+  const characters = data.data;
+
   const text = useMemo(() => {
     let text = '';
-    if (lang === 'he') text = joinHebrew(data.characters.map(c => getLocalized(c, 'name', 'he')));
-    else text = data.characters.join(', ');
+    if (lang === 'he') text = joinHebrew(characters.map(c => getLocalized(c, 'name', 'he')));
+    else text = characters.join(', ');
     return text;
   }, [data]);
 
@@ -46,10 +48,10 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
   }, [width, data, min, max]);
 
   let hoverClasses = 'timeline-character-group__hover';
-  if (data.characters.length > 3) hoverClasses += ' timeline-character-group__hover--list';
+  if (characters.length > 3) hoverClasses += ' timeline-character-group__hover--list';
 
-  if (data.characters.length === 1) {
-    const [character] = data.characters;
+  if (characters.length === 1) {
+    const [character] = characters;
     return (
       <Link to={getCharacterLink(character.id)} className="timeline-character-group" style={styles}>
         <div className="timeline-character-group__visible">
@@ -64,10 +66,10 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
     <div className="timeline-character-group" style={styles}>
       <div className="timeline-character-group__visible">
         <div className="timeline-character-group__characters">
-          {data.characters.map(renderCharacter)}
-          {data.characters.length > 3 && (
+          {characters.map(renderCharacter)}
+          {characters.length > 3 && (
             <div className="timeline-character-group__more">
-              {`+${data.characters.length - 3}`}
+              {`+${characters.length - 3}`}
             </div>
           )}
         </div>
@@ -83,7 +85,7 @@ const TimelineCharacterGroup = ({ data, width, min, max }) => {
             contentClassName="aside__scrollable"
           >
             <ul className="timeline-character-group__hover-list">
-              {data.characters.map(renderHoverCharacter)}
+              {characters.map(renderHoverCharacter)}
             </ul>
           </ScrollArea>
         </div>

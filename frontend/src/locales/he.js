@@ -257,6 +257,7 @@ export default {
     "aside.label.plot": "תוכן:",
     "aside.label.location": "איפה במפה:",
     "aside.label.storyLocation": "מיקום הסיפור",
+    "aside.label.eventLocation": "מקום האירוע",
     "aside.label.characters": "דמויות",
     "aside.label.wantToKnowMore": "רוצים לדעת עוד?",
     "cluster.zoom": "הגדל",

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import mergeRanges from 'merge-ranges';
 import DimensionalView from 'components/DimensionalView';
 import TimelineView from 'components/TimelineView';
 import YearDisplay from 'components/YearDisplay';
@@ -22,6 +21,7 @@ import useMobile from 'hooks/useMobile';
 import config from 'constants/config';
 import { inRange, fromRange } from 'helpers/util';
 import { getStoryLink, getCharacterLink, getEventLink, getBookLink, getPeriodLink } from 'helpers/urls';
+import { filterSortedByRange } from 'helpers/time';
 import { isDataLoading } from 'store/selectors/data';
 import './style.scss';
 
@@ -33,8 +33,10 @@ const eventLink = getEventLink(':id');
 const bookLink = getBookLink(':id');
 const periodLink = getPeriodLink(':id');
 
-const percentCost = config.INITIAL_RANGE / 100;
 const zoomDiff = config.INITIAL_RANGE / 200 * config.MOUSE_ZOOM_INCREMENT;
+
+const LEFT_RANGE = config.FOCUS_POINT / 100;
+const RIGHT_RANGE = 1 - config.FOCUS_POINT / 100;
 
 const minDesktopRange = Math.round(config.INITIAL_RANGE * config.MIN_DESKTOP_ZOOM / 100);
 const maxDesktopRange = Math.round(config.INITIAL_RANGE * config.MAX_DESKTOP_ZOOM / 100);
@@ -47,38 +49,36 @@ const useScroll = (data, zoomTo) => {
 
   const { pathname } = useLocation();
 
-  const min = Math.ceil(current - range / 2);
-  const max = Math.floor(current + range / 2);
+  const min = Math.ceil(current - range * LEFT_RANGE);
+  const max = Math.floor(current + range * RIGHT_RANGE);
 
   const filteredData = useMemo(() => {
-    const filteredEvents = data.events.filter(dp => dp.fromDate <= max && dp.endDate >= min);
-
-    const filteredStories = data.stories.filter(dp => {
-      if (dp.fromDate && dp.endDate) return dp.fromDate <= max && dp.endDate >= min;
-
-      return dp.date >= min && dp.date <= max;
-    });
-
-    const filteredPeriods = data.periods.filter(dp => {
-      return dp.fromDate <= max && dp.endDate >= min;
-    });
-
-    const filteredCharacters = data.characters.filter(dp => {
-      return dp.fromDate <= max && dp.endDate >= min;
-    });
-
-    const filteredBookGroups = data.bookGroups.filter(dp => {
-      return dp.fromDate <= max && dp.endDate >= min;
-    });
-
     return {
-      stories: filteredStories.sort((a, b) => b.endDate - a.endDate),
-      periods: filteredPeriods,
-      characters: filteredCharacters,
-      events: filteredEvents,
-      bookGroups: filteredBookGroups,
+      characters: data.characters,
+      events: filterSortedByRange(min, max, data.events),
+      stories: filterSortedByRange(min, max, data.stories),
+      periods: filterSortedByRange(min, max, data.periods),
+      storyGroups: filterSortedByRange(min, max, data.storyGroups),
+      characterGroups: filterSortedByRange(min, max, data.characterGroups),
+      bookGroups: filterSortedByRange(min, max, data.bookGroups),
     };
   }, [data, min, max]);
+
+  const timelineRange = Math.ceil(range * config.BOTTOM_RATIO);
+  const tMin = Math.ceil(current - timelineRange * LEFT_RANGE);
+  const tMax = Math.floor(current + timelineRange * RIGHT_RANGE);
+
+  const filteredTimelineData = useMemo(() => {
+    return {
+      characters: data.characters,
+      events: filterSortedByRange(tMin, tMax, data.events),
+      stories: filterSortedByRange(tMin, tMax, data.stories),
+      periods: filterSortedByRange(tMin, tMax, data.periods),
+      storyGroups: filterSortedByRange(tMin, tMax, data.storyGroups),
+      characterGroups: filterSortedByRange(tMin, tMax, data.characterGroups),
+      bookGroups: filterSortedByRange(tMin, tMax, data.bookGroups),
+    };
+  }, [data, tMin, tMax]);
 
   const isMobile = useMobile();
 
@@ -135,53 +135,8 @@ const useScroll = (data, zoomTo) => {
     });
   }, [range]);
 
-  return [filteredData, min, max, current, onChangeCurrent, setCurrent, setRange];
+  return [filteredData, min, max, filteredTimelineData, tMin, tMax, current, onChangeCurrent, setCurrent, setRange];
 }
-
-const useFilters = data => {
-  const [period, setPeriod] = useState(null);
-
-  const periodData = useMemo(() => {
-    if (!period) return data;
-
-    return {
-      periods: data.periods,
-      stories: data.stories.filter(dp => dp.periodId === period),
-      characters: data.characters.filter(dp => dp.periodId === period),
-      bookGroups: data.bookGroups,
-    };
-  }, [period, data]);
-
-  const onChangePeriod = useCallback(newPeriod => {
-    if (newPeriod === period) setPeriod(null);
-    else setPeriod(newPeriod);
-  }, [period]);
-
-  // return [periodData, onChangePeriod];
-  return [data, onChangePeriod];
-};
-
-const useCharacterGroups = data => {
-  const groups = useMemo(() => {
-    const ranges = data.characters.map(c => [c.fromDate, c.endDate]);
-    const groupedRanges = mergeRanges(ranges);
-    
-    const groups = groupedRanges.map(gr => ({ fromDate: gr[0], endDate: gr[1], characters: [] }));
-    data.characters.forEach(c => {
-      for (let i = 0, l = groupedRanges.length; i < l; i += 1) {
-        const g = groups[i];
-        if (c.fromDate >= g.fromDate && c.endDate <= g.endDate) {
-          groups[i].characters.push(c);
-          break;
-        }
-      }
-    });
-
-    return groups;
-  }, [data.characters]);
-
-  return groups || [];
-};
 
 const useWelcomeModal = () => {
   const [showModal, setShowModal] = useState(true);
@@ -204,9 +159,12 @@ function App() {
     setZoomTo([min, max]);
   }, []);
 
-  const [rangeData, min, max, current, setCurrent, setCurrentDirectly, setRangeDirectly] = useScroll(data, onZoom);
-  const [filteredData, onChangePeriod] = useFilters(rangeData);
-  const characterGroups = useCharacterGroups(filteredData);
+  const [
+    rangeData, min, max,
+    rangeTimelineData, timelineMin, timelineMax,
+    current, setCurrent, setCurrentDirectly,
+    setRangeDirectly
+  ] = useScroll(data, onZoom);
   const [showWelcomeModal, onCloseWelcomeModal] = useWelcomeModal();
 
   const range = max - min;
@@ -297,11 +255,9 @@ function App() {
       <Route path="/admin/*" element={
         <React.Fragment>
           <TimelineView
-            data={filteredData}
-            characterGroups={characterGroups}
+            data={rangeData}
             min={min}
             max={max}
-            onChangePeriod={onChangePeriod}
             onMinimize={onMinimize}
             minimized={minimized}
             className="timeline--admin"
@@ -325,14 +281,12 @@ function App() {
               onTouchMove={onDragTouch}
               onTouchEnd={onDragTouchEnd}
             >
-              <DimensionalView data={filteredData.events} min={min} max={max} onZoom={onZoom}>
+              <DimensionalView data={rangeData.events} min={min} max={max} onZoom={onZoom}>
               </DimensionalView>
               <TimelineView
-                data={filteredData}
-                characterGroups={characterGroups}
-                min={min}
-                max={max}
-                onChangePeriod={onChangePeriod}
+                data={rangeTimelineData}
+                min={timelineMin}
+                max={timelineMax}
                 onMinimize={onMinimize}
                 minimized={minimized}
               />

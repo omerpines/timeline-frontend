@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import tagData from 'constants/tags';
 import { getPeriods, isPeriodsLoading } from 'store/selectors/periods';
 import { getCharacters, isCharactersLoading } from 'store/selectors/characters';
 import { getStories, isStoriesLoading } from 'store/selectors/stories';
@@ -9,23 +8,64 @@ import { getProfessions } from 'store/selectors/professions';
 import { groupEntities } from 'helpers/util';
 import { sortEntitiesByUpdatedAt, sortEntitiesByFromDate } from 'helpers/time';
 
-export const getData = createSelector(
+export const sortedPeriods = createSelector(
   getPeriods,
+  periods => periods.map(p => ({ ...p, type: 'period' })).sort(sortEntitiesByFromDate),
+);
+
+export const sortedCharacters = createSelector(
   getCharacters,
+  characters => characters.map(c => ({ ...c, type: 'character' })).sort(sortEntitiesByFromDate),
+);
+
+export const sortedStories = createSelector(
   getStories,
+  stories => stories.map(s => ({ ...s, type: 'story' })).sort(sortEntitiesByFromDate),
+);
+
+export const sortedEvents = createSelector(
   getEvents,
+  events => events.map(e => ({ ...e, type: 'event' })).sort(sortEntitiesByFromDate),
+);
+
+export const sortedBooks = createSelector(
   getBooks,
-  getProfessions,
-  (periods, characters, stories, events, books, professions) => ({
-    periods: periods.map(p => ({ ...p, type: 'period' })).sort(sortEntitiesByFromDate),
-    characters: characters.map(c => ({ ...c, type: 'character' })).sort(sortEntitiesByFromDate),
-    stories: stories.map(s => ({ ...s, type: 'story' })).sort(sortEntitiesByFromDate),
-    events: events.map(e => ({ ...e, type: 'event' })).sort(sortEntitiesByFromDate),
-    books: books.map(b => ({ ...b, type: 'book' })).sort(sortEntitiesByFromDate),
-    bookGroups: groupEntities(books),
-    storyGroups: groupEntities(stories),
-    tags: tagData,
-    professions,
+  books => books.map(b => ({ ...b, type: 'book' })).sort(sortEntitiesByFromDate),
+);
+
+export const sortedBookGroups = createSelector(
+  sortedBooks,
+  books => groupEntities(books).sort(sortEntitiesByFromDate),
+);
+
+export const sortedStoryGroups = createSelector(
+  sortedStories,
+  stories => groupEntities(stories).sort(sortEntitiesByFromDate),
+);
+
+export const sortedCharacterGroups = createSelector(
+  sortedCharacters,
+  characters => groupEntities(characters).sort(sortEntitiesByFromDate),
+);
+
+export const getData = createSelector(
+  sortedPeriods,
+  sortedCharacters,
+  sortedStories,
+  sortedEvents,
+  sortedBooks,
+  sortedBookGroups,
+  sortedStoryGroups,
+  sortedCharacterGroups,
+  (p, c, s, e, b, bg, sg, cg) => ({
+    periods: p,
+    characters: c,
+    stories: s,
+    events: e,
+    books: b,
+    bookGroups: bg,
+    storyGroups: sg,
+    characterGroups: cg,
   }),
 );
 
