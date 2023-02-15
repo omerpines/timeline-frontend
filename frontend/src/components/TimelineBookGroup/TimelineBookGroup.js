@@ -1,44 +1,71 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import ScrollArea from 'react-scrollbar';
+import TimelineGroup from 'components/TimelineGroup';
 import useLanguage from 'hooks/useLanguage';
 import { getLocalized } from 'helpers/util';
 import { getBookLink } from 'helpers/urls';
-import { sortEntitiesByFromDate } from 'helpers/time';
+import { joinHebrew } from 'helpers/lang';
 import './style.css';
 
-const renderBook = lang => b => {
-  return (
-    <Link key={b.id} to={getBookLink(b.id)} className="timeline-book-group__book">
-      {getLocalized(b, 'name', lang)}
+const renderHoverBook = c => (
+  <li key={c.id} className="timeline-group__hover-element">
+    <Link to={getBookLink(c.id)} className="timeline-group__hover-link">
+      <span className="timeline-group__hover-name">{c.name}</span>
     </Link>
-  );
-};
+  </li>
+);
 
 const TimelineBookGroup = ({ group, width, min, max }) => {
   const lang = useLanguage();
 
-  const { fromDate, endDate } = group;
+  const { data, fromDate, endDate } = group;
 
-  const data = useMemo(() => {
-    if (!group || !group.data) return [];
-    return [...group.data].sort(sortEntitiesByFromDate).reverse();
-  }, [group]);
+  const text = useMemo(() => {
+    let text = '';
+    if (lang === 'he') text = joinHebrew(data.map(b => getLocalized(b, 'name', 'he')));
+    else text = data.join(', ');
+    return text;
+  }, [data]);
 
-  const styles = useMemo(() => {
-    const yearCost = width / (max - min);
-    const length = endDate - fromDate + 1;
+  let hoverClasses = 'timeline-group__hover';
+  if (data.length > 3) hoverClasses += ' timeline-group__hover--list';
 
-    const start = Math.floor((fromDate - min) * yearCost);
-    return {
-      width: Math.round(yearCost * length),
-      transform: `translateX(${start * -1}px)`,
-    };
-  }, [width, fromDate, endDate, min, max]);
+  const renderTooltip = useCallback(() => {
+    return (
+      <div className={hoverClasses}>
+        <div className="timeline-group__hover-wrapper">
+          <ScrollArea
+            vertical
+            smoothScrolling
+            stopScrollPropagation
+            className="aside__scrollarea timeline-group__scrollarea"
+            contentClassName="aside__scrollable"
+          >
+            <ul className="timeline-group__hover-list">
+              {data.map(renderHoverBook)}
+            </ul>
+          </ScrollArea>
+        </div>
+      </div>
+    );
+  }, []);
 
   return (
-    <div className="timeline-book-group" style={styles}>
-      {data.map(renderBook(lang))}
-    </div>
+    <TimelineGroup
+      data={data}
+      fromDate={fromDate}
+      endDate={endDate}
+      min={min}
+      max={max}
+      width={width}
+      className="timeline-book-group"
+      visibleClassName="timeline-book-group__visible"
+      visibleContent={(
+        <div className="timeline-book-group__text">{text}</div>
+      )}
+      renderTooltip={renderTooltip}
+    />
   );
 };
 

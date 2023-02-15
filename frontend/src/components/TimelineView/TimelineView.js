@@ -43,15 +43,15 @@ const renderPeriod = (min, max, width) => data => {
 };
 
 const renderCharacterGroup = (min, max, width) => data => (
-  <TimelineCharacterGroup key={data.fromDate} min={min} max={max} width={width} data={data} />
+  <TimelineCharacterGroup key={data.fromDate} group={data} min={min} max={max} width={width} />
 );
 
 const renderBookGroup = (min, max, width) => data => (
-  <TimelineBookGroup group={data} min={min} max={max} width={width} />
+  <TimelineBookGroup group={data} key={data.fromDate} min={min} max={max} width={width} />
 );
 
 const renderStoryGroup = (min, max, width) => data => (
-  <TimelineStoryGroup group={data} min={min} max={max} width={width} />
+  <TimelineStoryGroup group={data} key={data.fromDate} min={min} max={max} width={width} />
 );
 
 const TimelineView = ({

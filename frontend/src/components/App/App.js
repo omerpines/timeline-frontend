@@ -19,7 +19,7 @@ import useData from 'hooks/useData';
 import useDrag from 'hooks/useDrag';
 import useMobile from 'hooks/useMobile';
 import config from 'constants/config';
-import { inRange, fromRange } from 'helpers/util';
+import { fromRange } from 'helpers/util';
 import { getStoryLink, getCharacterLink, getEventLink, getBookLink, getPeriodLink } from 'helpers/urls';
 import { filterSortedByRange } from 'helpers/time';
 import { isDataLoading } from 'store/selectors/data';
@@ -49,8 +49,8 @@ const useScroll = (data, zoomTo) => {
 
   const { pathname } = useLocation();
 
-  const min = Math.ceil(current - range * LEFT_RANGE);
-  const max = Math.floor(current + range * RIGHT_RANGE);
+  const min = current - range * LEFT_RANGE;
+  const max = current + range * RIGHT_RANGE;
 
   const filteredData = useMemo(() => {
     return {
@@ -92,7 +92,7 @@ const useScroll = (data, zoomTo) => {
       const newRange = newMax - newMin;
       if (newRange > maxRange) {
         const fix = (maxRange - (max - min)) / 2;
-        zoomTo(Math.floor(min - fix), Math.ceil(max + fix));
+        zoomTo(min - fix, max + fix);
       }
       else zoomTo(newMin, newMax);
     };
@@ -104,7 +104,7 @@ const useScroll = (data, zoomTo) => {
       const newRange = newMax - newMin;
       if (newRange < minRange) {
         const fix = (max - min - minRange) / 2;
-        zoomTo(Math.ceil(min + fix), Math.floor(max - fix));
+        zoomTo(min + fix, max - fix);
       }
       else zoomTo(newMin, newMax);
     };
@@ -210,7 +210,7 @@ function App() {
     if (zoomTo) {
       const [zoomMin, zoomMax] = zoomTo;
       const newRange = zoomMax - zoomMin;
-      const newCurrent = Math.round((zoomMin + zoomMax) / 2);
+      const newCurrent = (zoomMin + zoomMax) / 2;
 
       const initCurrent = current;
       const initRange = range;

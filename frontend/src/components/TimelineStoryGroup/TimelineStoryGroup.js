@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollArea from 'react-scrollbar';
 import { useTranslation } from 'react-i18next';
-import TimelineStory from 'components/TimelineStory/TimelineStory';
+import TimelineGroup from 'components/TimelineGroup';
 import useLanguage from 'hooks/useLanguage';
 import useData from 'hooks/useData';
 import { getLocalized } from 'helpers/util';
@@ -70,7 +70,7 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
   const { t } = useTranslation();
 
   const { events } = useData();
-  const { data } = group;
+  const { data, fromDate, endDate } = group;
 
   const [viewStory, setViewStory] = useState(false);
 
@@ -110,19 +110,6 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
     return text;
   }, [data, lang]);
 
-  const styles = useMemo(() => {
-    const yearCost = width / (max - min);
-    const length = group.endDate - group.fromDate + 1;
-
-    const start = Math.floor((group.fromDate - min) * yearCost);
-    return {
-      width: Math.round(yearCost * length),
-      transform: `translateX(${start * -1}px)`,
-    };
-  }, [width, group, min, max]);
-
-  if (!data.length) return false;
-
   let hoverClasses = 'timeline-story-group__hover';
   if (viewedStory) hoverClasses += ' timeline-story-group__hover--events';
   if (viewedStory && viewedEvents.length < 1) hoverClasses += ' timeline-story-group__hover--invisible';
@@ -131,19 +118,34 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
     || (viewedStory && viewedEvents.length > 3)
   ) hoverClasses += ' timeline-story-group__hover--list';
 
-  return (
-    <div className="timeline-story-group" style={styles}>
-      <div className="timeline-story-group__visible timeline__story">
-        <div className="timeline-story-group__text">{text}</div>
-      </div>
+  const renderTooltip = useCallback(() => {
+    return (
       <div className={hoverClasses}>
         <div className="timeline-story-group__hover-wrapper">
           {!viewedStory && renderStoryListHover(data, eventsByStories, showStory)}
           {viewedStory && renderEventListHover(t, showStories, viewedEvents, viewedStory)}
         </div>
       </div>
-      <div className="timeline-story-group__hover-bridge" />
-    </div>
+    );
+  }, [data, eventsByStories, viewedEvents, viewedStory, hoverClasses]);
+
+  if (!data.length) return false;
+  
+  return (
+    <TimelineGroup
+      data={data}
+      fromDate={fromDate}
+      endDate={endDate}
+      min={min}
+      max={max}
+      width={width}
+      className="timeline-story-group"
+      visibleClassName="timeline-story-group__visible"
+      visibleContent={(
+        <div className="timeline-story-group__text">{text}</div>
+      )}
+      renderTooltip={renderTooltip}
+    />
   );
 };
 

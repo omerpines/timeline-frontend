@@ -66,8 +66,15 @@
 }
 
 .dimensional__cluster {
+  bottom: 0px;
+  left: 0px;
   opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0px;
+  top: 0px;
   transition: 0.2s ease-in opacity;
+  z-index: 1000;
 }
 
 .dimensional__cluster-enter-active, .dimensional__cluster-enter-done {
@@ -80,6 +87,10 @@
 
 .dimensional__cluster-exit-active, .dimensional__cluster-exit-done {
   opacity: 0;
+}
+
+.dimensional__cluster-exit-done {
+  z-index: 0;
 }
 
 .dimensional__focus-pointer {

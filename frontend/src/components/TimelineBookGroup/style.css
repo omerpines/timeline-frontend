@@ -1,43 +1,31 @@
 .timeline-book-group {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0px 3px 8px #0000000D;
-  box-sizing: border-box;
-  color: #474747;
-  display: flex;
-  font: normal normal 300 24px/10px Assistant;
-  height: 63px;
-  letter-spacing: 0px;
-  line-height: 33px;
-  overflow: hidden;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 6px;
-  position: absolute;
-  right: 0px;
-  text-align: right;
-  text-decoration: none;
-  text-overflow: ellipsis;
   top: 164px;
+}
+
+.timeline-book-group__visible {
+  padding-right: 63px;
+  position: relative;
+}
+
+.timeline-book-group__text {
+  color: #474747;
+  font: normal normal normal 18px/32px Assistant;
+  letter-spacing: 0px;
+  margin-right: 10px;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.timeline-book-group__book {
-  background-color: white;
-  border-radius: 15px 15px 0px 0px;
-  color: #474747;
-  direction: rtl;
-  flex-grow: 1;
-  flex-shrink: 1;
-  font: normal normal 600 20px/51px Assistant;
-  overflow: hidden;
-  padding: 0px 5px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  text-overflow: ellipsis;
-  transition: 0.2s ease-in background-color;
-  white-space: nowrap;
+.timeline-book-group__visible::after {
+  background: url(./icon.png) no-repeat center center;
+  bottom: 0px;
+  content: '';
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 78px;
 }
 
 .timeline-book-group__book:hover {

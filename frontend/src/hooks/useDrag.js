@@ -3,10 +3,15 @@ import config from 'constants/config';
 
 const useDrag = (ref, min, max, onChangeCurrent) => {
   let isDragged = useRef(false);
+  let isTimelineDragged = useRef(false);
   let startTouch = useRef(0);
 
-  const onDragStart = useCallback(() => {
+  const onDragStart = useCallback(e => {
+    if (!ref.current) return;
     isDragged.current = true;
+    const { height } = ref.current.getBoundingClientRect();
+    const { screenY } = e;
+    isTimelineDragged.current = height - screenY <= config.TIMELINE_HEIGHT;
   }, []);
 
   const onDrag = useCallback(e => {
@@ -18,18 +23,25 @@ const useDrag = (ref, min, max, onChangeCurrent) => {
     const { width } = ref.current.getBoundingClientRect();
 
     const yearCost = width / range * -1;
-    const yearDelta = Math.round(e.movementX * -1 / yearCost);
+    let yearDelta = e.movementX * -1 / yearCost;
+    if (isTimelineDragged.current) yearDelta *= config.BOTTOM_RATIO;
 
     onChangeCurrent(yearDelta);
   }, [min, max, onChangeCurrent]);
 
   const onDragEnd = useCallback(() => {
     isDragged.current = false;
+    isTimelineDragged.current = false;
   }, []);
 
   const onDragTouchStart = useCallback(e => {
+    if (!ref.current) return;
     isDragged.current = true;
     startTouch.current = e.targetTouches[0].screenX;
+
+    const { height } = ref.current.getBoundingClientRect();
+    const { screenY } = e.targetTouches[0];
+    isTimelineDragged.current = height - screenY <= config.TIMELINE_HEIGHT;
   }, []);
 
   const onDragTouch = useCallback(e => {
@@ -42,8 +54,8 @@ const useDrag = (ref, min, max, onChangeCurrent) => {
     
     const yearCost = width / range * config.MOBILE_DRAG_SLOWDOWN * -1;
     const screenDelta = e.targetTouches[0].screenX - startTouch.current;
-    const yearDelta = Math.round(screenDelta * -1 / yearCost);
-    console.log({ yearCost, range, width, screenDelta, yearDelta });
+    let yearDelta = screenDelta * -1 / yearCost;
+    if (isTimelineDragged.current) yearDelta *= config.BOTTOM_RATIO;
 
     onChangeCurrent(yearDelta);
   }, [min, max, onChangeCurrent]);

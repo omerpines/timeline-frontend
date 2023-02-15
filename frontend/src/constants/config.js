@@ -9,6 +9,7 @@ const config = {
   // The year 100000 is 1BC
   INITIAL_YEAR: 97041,
   INITIAL_RANGE: 400,
+  // For each year in the 3d part this amount of years will be shown in timeline
   BOTTOM_RATIO: 12.5,
   MIN_YEAR: 96241,
   MAX_YEAR: 102519,
@@ -65,6 +66,8 @@ const config = {
     '.jpeg',
     '.png',
   ],
+  // Height of 2d part in px
+  TIMELINE_HEIGHT: 293,
 };
 
 export default config;

@@ -1,6 +1,7 @@
 .cluster {
   height: 165px;
   left: 50%;
+  pointer-events: auto;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
