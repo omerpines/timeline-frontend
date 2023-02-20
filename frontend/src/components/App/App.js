@@ -54,13 +54,7 @@ const useScroll = (data, zoomTo) => {
 
   const filteredData = useMemo(() => {
     return {
-      characters: data.characters,
       events: filterSortedByRange(min, max, data.events),
-      stories: filterSortedByRange(min, max, data.stories),
-      periods: filterSortedByRange(min, max, data.periods),
-      storyGroups: filterSortedByRange(min, max, data.storyGroups),
-      characterGroups: filterSortedByRange(min, max, data.characterGroups),
-      bookGroups: filterSortedByRange(min, max, data.bookGroups),
     };
   }, [data, min, max]);
 

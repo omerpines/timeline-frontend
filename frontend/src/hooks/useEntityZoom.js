@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import config from 'constants/config';
 
 const useEntityZoom = (entity, zoomTo, min, max) => {
+
   useEffect(() => {
     const clsMin = min;
     const clsMax = max;

@@ -10,8 +10,8 @@ const useDrag = (ref, min, max, onChangeCurrent) => {
     if (!ref.current) return;
     isDragged.current = true;
     const { height } = ref.current.getBoundingClientRect();
-    const { screenY } = e;
-    isTimelineDragged.current = height - screenY <= config.TIMELINE_HEIGHT;
+    const { clientY } = e;
+    isTimelineDragged.current = height - clientY <= config.TIMELINE_HEIGHT;
   }, []);
 
   const onDrag = useCallback(e => {

@@ -20,7 +20,6 @@ const Zoom = ({ range, min, max, zoomTo }) => {
   }, [range]);
 
   const inc = useCallback(() => {
-    console.log(isMobile);
     const maxRange = isMobile ? maxMobileRange : maxDesktopRange;
     const newMin = min - zoomDiff;
     const newMax = max + zoomDiff;

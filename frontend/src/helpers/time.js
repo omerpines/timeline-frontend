@@ -57,5 +57,5 @@ export const filterSortedByRange = (min, max, arr) => {
   if (firstIndex < 0 && lastIndex < 0) return [];
   if (firstIndex < 0) firstIndex = 0;
   if (lastIndex < 0) lastIndex = arr.length - 1;
-  return arr.slice(firstIndex, lastIndex - firstIndex + 1);
+  return arr.slice(firstIndex, lastIndex + 1);
 };
