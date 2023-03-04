@@ -56,6 +56,10 @@
   text-align: right;
 }
 
+.timeline-character-group__hover-positioning {
+  top: 50px;
+}
+
 @media (max-height: 1050px) {
   .timeline-character-group {
     top: 21px;

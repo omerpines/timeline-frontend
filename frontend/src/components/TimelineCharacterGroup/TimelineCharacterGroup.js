@@ -52,9 +52,9 @@ const TimelineCharacterGroup = ({ group, width, min, max }) => {
   let hoverClasses = 'timeline-group__hover';
   if (characters.length > 3) hoverClasses += ' timeline-group__hover--list';
 
-  const renderTooltip = useCallback(() => {
+  const renderTooltip = useCallback(id => {
     return (
-      <div className={hoverClasses}>
+      <div className={hoverClasses} data-group-id={id}>
         <div className="timeline-group__hover-wrapper">
           <ScrollArea
             vertical
@@ -107,7 +107,9 @@ const TimelineCharacterGroup = ({ group, width, min, max }) => {
           <div className="timeline-character-group__text">{text}</div>
         </React.Fragment>
       )}
+      tooltipClassName="timeline-character-group__hover-positioning"
       renderTooltip={renderTooltip}
+      linkFn={getCharacterLink}
     />
   );
 };

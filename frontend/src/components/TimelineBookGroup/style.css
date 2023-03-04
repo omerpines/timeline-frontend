@@ -32,6 +32,10 @@
   background-color: #F3F3F3;
 }
 
+.timeline-book-group__hover-positioning {
+  top: 164px;
+}
+
 @media (max-height: 1050px) {
   .timeline-book-group {
     top: 143px;

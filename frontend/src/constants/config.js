@@ -8,7 +8,7 @@ const config = {
   // The year 100001 is 1AD
   // The year 100000 is 1BC
   INITIAL_YEAR: 97041,
-  INITIAL_RANGE: 400,
+  INITIAL_RANGE: 100,
   // For each year in the 3d part this amount of years will be shown in timeline
   BOTTOM_RATIO: 12.5,
   MIN_YEAR: 96241,
@@ -68,6 +68,8 @@ const config = {
   ],
   // Height of 2d part in px
   TIMELINE_HEIGHT: 293,
+  // Minimal distance between a hover popup and window's edges before the popup sticks, in px
+  GROUP_HOVER_PADDING: 20,
 };
 
 export default config;

@@ -7,8 +7,10 @@ const useTimelineGroupHover = () => {
     if (!hovered) setHovered(true);
   }, [hovered]);
 
-  const onmouseleave = useCallback(() => {
-    if (hovered) setHovered(false);
+  const onmouseleave = useCallback(e => {
+    if (hovered) {
+      setHovered(false);
+    }
   }, [hovered]);
 
   return [hovered, onmouseenter, onmouseleave];

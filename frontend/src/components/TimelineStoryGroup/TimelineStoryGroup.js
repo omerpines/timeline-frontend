@@ -118,9 +118,9 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
     || (viewedStory && viewedEvents.length > 3)
   ) hoverClasses += ' timeline-story-group__hover--list';
 
-  const renderTooltip = useCallback(() => {
+  const renderTooltip = useCallback(id => {
     return (
-      <div className={hoverClasses}>
+      <div className={hoverClasses} data-group-id={id}>
         <div className="timeline-story-group__hover-wrapper">
           {!viewedStory && renderStoryListHover(data, eventsByStories, showStory)}
           {viewedStory && renderEventListHover(t, showStories, viewedEvents, viewedStory)}
@@ -144,7 +144,9 @@ const TimelineStoryGroup = ({ group, min, max, width }) => {
       visibleContent={(
         <div className="timeline-story-group__text">{text}</div>
       )}
+      tooltipClassName="timeline-story-group__hover-positioning"
       renderTooltip={renderTooltip}
+      linkFn={getStoryLink}
     />
   );
 };

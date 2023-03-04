@@ -31,9 +31,9 @@ const TimelineBookGroup = ({ group, width, min, max }) => {
   let hoverClasses = 'timeline-group__hover';
   if (data.length > 3) hoverClasses += ' timeline-group__hover--list';
 
-  const renderTooltip = useCallback(() => {
+  const renderTooltip = useCallback(id => {
     return (
-      <div className={hoverClasses}>
+      <div className={hoverClasses} data-group-id={id}>
         <div className="timeline-group__hover-wrapper">
           <ScrollArea
             vertical
@@ -64,7 +64,9 @@ const TimelineBookGroup = ({ group, width, min, max }) => {
       visibleContent={(
         <div className="timeline-book-group__text">{text}</div>
       )}
+      tooltipClassName="timeline-book-group__hover-positioning"
       renderTooltip={renderTooltip}
+      linkFn={getBookLink}
     />
   );
 };
