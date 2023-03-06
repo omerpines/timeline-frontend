@@ -21,7 +21,6 @@ const typeToLinkFnRelations = {
 };
 
 const renderEntry = (t, lang, onClickLink) => e => {
-  console.log(e);
 
   return (
     <tr className="admin-period-row" key={e.id}>

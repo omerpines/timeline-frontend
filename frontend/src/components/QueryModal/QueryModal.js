@@ -14,7 +14,6 @@ const QueryModal = ({ onClose }) => {
   const { t } = useTranslation();
 
   function myFunction() {
-    console.log("Here");
     var input = document.getElementById("myInput");
     var filter = input.value.toUpperCase();
     var table = document.getElementById("myTable");
@@ -23,7 +22,6 @@ const QueryModal = ({ onClose }) => {
 
     for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName("td")[2];
-      console.log("Td :", td);
       if (td) {
         if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";

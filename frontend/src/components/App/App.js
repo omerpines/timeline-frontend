@@ -204,7 +204,7 @@ function App() {
     if (zoomTo) {
       const [zoomMin, zoomMax] = zoomTo;
       const newRange = zoomMax - zoomMin;
-      const newCurrent = (zoomMin + zoomMax) / 2;
+      const newCurrent = zoomMin + newRange * (config.FOCUS_POINT / 100);
 
       const initCurrent = current;
       const initRange = range;

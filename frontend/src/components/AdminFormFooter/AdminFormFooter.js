@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import './style.css';
 
 const AdminFormFooter = ({ onSubmit, onCancel, disableSubmit }) => {
-  console.log(disableSubmit);
   const navigate = useNavigate();
   const { t } = useTranslation();
 

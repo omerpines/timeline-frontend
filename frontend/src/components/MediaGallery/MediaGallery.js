@@ -54,8 +54,6 @@ const MediaGallery = ({ data }) => {
   const [urls, types, attrs, captions] = useMemo(() => {
     if (!otherData.length) return [[], [], [], []];
 
-    console.log(otherData);
-
     return [
       otherData.map(d => d.url || `https://youtu.be/${d.youtubeId}`),
       otherData.map(d => d.type),
