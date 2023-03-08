@@ -235,7 +235,7 @@ nav.admin__nav a {
   }
 
   .media-image__image{
-    width: 260px !important;
+    width: 100% !important;
   }
   .aside__scrollarea{
     padding-right: 20px !important;
@@ -260,21 +260,6 @@ nav.admin__nav a {
     line-height: 24px;
 }
 }
-@media screen and (max-width: 600px) {
-  .media-gallery__gallery{
-    right: -400px !important;
-  }
-}
-@media screen and (max-width: 500px) {
-  .media-gallery__gallery{
-    right: -345px !important;
-  }
-}
-@media screen and (max-width: 400px) {
-  .media-gallery__gallery{
-    right: -285px !important;
-  }
-}
 
 .aside-modal__box {
   background-color: white;
@@ -285,17 +270,17 @@ nav.admin__nav a {
   flex-direction: column;
   left: 50%;
   height: calc(100vh - 76px);
-  max-width: calc(100vw - 316px);
   padding: 50px 74px 64px;
   position: absolute;
   text-align: right;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: calc(100vw - 20px);
+  width: calc(100vw - 316px);
 }
 
 .aside-modal__body, .aside-modal__columns {
   height: 100%;
+  width: 100%;
 }
 
 .aside-modal__columns {
@@ -320,6 +305,7 @@ nav.admin__nav a {
   flex-grow: 1;
   font: normal normal normal 24px/35px Assistant;
   letter-spacing: 0px;
+  width: 0px;
 }
 
 .aside-modal__scrollarea--content {
