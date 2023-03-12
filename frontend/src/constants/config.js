@@ -37,7 +37,7 @@ const config = {
   PERIOD_TRANSITION_RANGE: 5,
   // The maximum amount of entity balls in the 3d view area. If there's more than that in the "cluster" area
   // all balls inside are clustered
-  CLUSTER_TRESHOLD: 9,
+  CLUSTER_TRESHOLD: 100,
   // In percents from INITIAL_RANGE
   ZOOM_INCREMENT: 10,
   // In percents from INITIAL_RANGE on each mouse wheel event
