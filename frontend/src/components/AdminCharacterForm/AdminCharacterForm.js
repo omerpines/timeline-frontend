@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import AdminPage from 'components/AdminPage';
@@ -9,6 +9,7 @@ import AdminDateInput from 'components/AdminDateInput';
 import AdminInput from 'components/AdminInput';
 import AdminFormFooter from 'components/AdminFormFooter';
 import AdminDropdown from 'components/AdminDropdown';
+import AdminRadioButton from 'components/AdminRadioButton';
 import AdminCharacterRelationBlock from 'components/AdminCharacterRelationBlock';
 import AdminMultiSelect from 'components/AdminMultiSelect';
 import AdminMediaLibrary from 'components/AdminMediaLibrary';
@@ -34,10 +35,16 @@ const genderOptions = [
   ['female', 'admin.gender.female'],
 ];
 
+const showOptions = [
+  'admin.showTimeLine.show',
+  'admin.showTimeLine.hide',
+]
+
 const AdminCharacterForm = ({ editMode }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const pid = parseInt(id, 10);
+  const [showintimeline, setShowInTimeLine] = useState(0)
 
   const { professions } = useData();
 
@@ -50,6 +57,10 @@ const AdminCharacterForm = ({ editMode }) => {
     requestEditCharacter,
     id,
   );
+
+  useEffect(() => {
+    setShowInTimeLine(state.showTimeLine)
+  }, [state]);
 
   const [showMedia, moveToForm, moveToMedia] = useAdminTab();
   
@@ -108,10 +119,11 @@ const AdminCharacterForm = ({ editMode }) => {
               value={state.area}
               onChange={onChange}
             />
+            <AdminRadioButton value={showintimeline} options={showOptions} onChange={onChange} name="showTimeLine" label="admin.showTimeLine"/>
           </div>
         </div>
         <AdminInput type="text" label="admin.character.role" name="role" value={state.role} onChange={onChange} />
-        <AdminMultiSelect
+        {/* <AdminMultiSelect
           options={professions}
           selectedIds={state.profession_tags}
           entities={professions}
@@ -122,7 +134,7 @@ const AdminCharacterForm = ({ editMode }) => {
           name="profession_tags"
           value={professionValue}
           onChangeValue={onChangeProfessionValue}
-        />
+        /> */}
         <AdminInput type="text" label="admin.character.nation" name="nation" value={state.nation} onChange={onChange} />
         <div className="admin-form__columns admin-character-form__mb">
           <div className="admin-form__column">

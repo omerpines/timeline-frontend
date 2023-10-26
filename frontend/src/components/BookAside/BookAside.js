@@ -42,20 +42,20 @@ const BookAside = ({ zoomTo, min, max }) => {
     if (!data) return false;
     return (
       <React.Fragment>
-      <div className="aside__paragraph-title">{t('data.stories')}</div>
+      <div className="aside__paragraph-label">{t('data.stories')}</div>
       <div className="aside__characters">
         {relatedStories.map(renderStory)}
       </div>
       {ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
       {ReactHtmlParser(`<div>${getLocalized(data, 'content', lang)}</div>`)}
       {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
-      <div className="aside__paragraph-title">{t('data.mainCharacters')}</div>
+      <div className="aside__paragraph-label">{t('data.mainCharacters')}</div>
       <div className="aside__characters">
         {data.characters.map(renderCharacter)}
       </div>
       {!data.links ? false : (
         <React.Fragment>
-          <div className="aside__paragraph-title">{t('admin.forMoreInformation')}</div>
+          <div className="aside__paragraph-label">{t('admin.forMoreInformation')}</div>
           {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
         </React.Fragment>
       )}

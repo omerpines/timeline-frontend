@@ -1,29 +1,30 @@
-import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import './style.scss';
+
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import DimensionalView from 'components/DimensionalView';
-import TimelineView from 'components/TimelineView';
-import YearDisplay from 'components/YearDisplay';
-import WelcomeModal from 'components/WelcomeModal';
-import StoryAside from 'components/StoryAside';
-import CharacterAside from 'components/CharacterAside';
-import EventAside from 'components/EventAside';
+import { getBookLink, getCharacterLink, getEventLink, getPeriodLink, getStoryLink } from 'helpers/urls';
+
 import BookAside from 'components/BookAside';
-import PeriodAside from 'components/PeriodAside';
-import SecuredPart from 'components/SecuredPart';
-import Logo from 'components/Logo';
-import Search from 'components/SearchBar';
+import CharacterAside from 'components/CharacterAside';
+import DimensionalView from 'components/DimensionalView';
+import EventAside from 'components/EventAside';
 import Help from 'components/Help';
+import Logo from 'components/Logo';
+import PeriodAside from 'components/PeriodAside';
+import Search from 'components/SearchBar';
+import SecuredPart from 'components/SecuredPart';
+import StoryAside from 'components/StoryAside';
+import TimelineView from 'components/TimelineView';
+import WelcomeModal from 'components/WelcomeModal';
 import Zoom from 'components/Zoom';
+import config from 'constants/config';
+import { filterSortedByRange } from 'helpers/time';
+import { fromRange } from 'helpers/util';
+import { isDataLoading } from 'store/selectors/data';
 import useData from 'hooks/useData';
 import useDrag from 'hooks/useDrag';
 import useMobile from 'hooks/useMobile';
-import config from 'constants/config';
-import { fromRange } from 'helpers/util';
-import { getStoryLink, getCharacterLink, getEventLink, getBookLink, getPeriodLink } from 'helpers/urls';
-import { filterSortedByRange } from 'helpers/time';
-import { isDataLoading } from 'store/selectors/data';
-import './style.scss';
+import { useSelector } from 'react-redux';
 
 const skipWelcomeModal = window.localStorage.getItem('skipWelcomeModal');
 
@@ -40,8 +41,8 @@ const RIGHT_RANGE = 1 - config.FOCUS_POINT / 100;
 
 const minDesktopRange = Math.round(config.INITIAL_RANGE * config.MIN_DESKTOP_ZOOM / 100);
 const maxDesktopRange = Math.round(config.INITIAL_RANGE * config.MAX_DESKTOP_ZOOM / 100);
-const minMobileRange =  Math.round(config.INITIAL_RANGE * config.MIN_MOBILE_ZOOM / 100);
-const maxMobileRange =  Math.round(config.INITIAL_RANGE * config.MAX_MOBILE_ZOOM / 100);
+const minMobileRange = Math.round(config.INITIAL_RANGE * config.MIN_MOBILE_ZOOM / 100);
+const maxMobileRange = Math.round(config.INITIAL_RANGE * config.MAX_MOBILE_ZOOM / 100);
 
 const useScroll = (data, zoomTo) => {
   const [current, setCurrent] = useState(config.INITIAL_YEAR);
@@ -148,6 +149,24 @@ function App() {
 
   const isLoading = useSelector(isDataLoading);
 
+  const loadAccessibilityScript = () => {
+    var script = document.createElement('script');
+    script.src = 'https://js.nagich.co.il/core/4.1.1/accessibility.js';
+    script.defer = true;
+    script.integrity =
+      'sha512-Sa9czHEwHavqXKmdJEaYdtc0YzuvwZmRRZoovLeWq8Lp5R4ZB1LLCSBoQm6ivUfuncFOM+/9oR08+WCAcBH61Q==';
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-cfasync', true);
+
+    // Append the script to the document's head
+    document.head.appendChild(script);
+  };
+
+  // Load the accessibility script when the component mounts
+  useEffect(() => {
+    loadAccessibilityScript();
+  }, []);
+
   const [zoomTo, setZoomTo] = useState(null);
   const onZoom = useCallback((min, max) => {
     setZoomTo([min, max]);
@@ -161,16 +180,27 @@ function App() {
   ] = useScroll(data, onZoom);
   const [showWelcomeModal, onCloseWelcomeModal] = useWelcomeModal();
 
-  const range = max - min;
+  const isMobile = useMobile();
 
+  const [range, setRange] = useState(max - min);
+
+  useEffect(() => {
+    if (isMobile) {
+      setZoomTo([97061, 97081]);
+      setRange(20);
+    }
+  }, [isMobile])
+
+  useEffect(() => {
+    setRange(max - min);
+  }, [max, min]);
   const [minimized, setMinimized] = useState(false);
   const onMinimize = useCallback(() => {
     return setMinimized(a => !a);
   }, []);
 
   useEffect(() => {
-    const triggerResize = () =>  window.dispatchEvent(new Event('resize'));
-
+    const triggerResize = () => window.dispatchEvent(new Event('resize'));
     triggerResize();
 
     let animate = { current: true };
@@ -186,7 +216,7 @@ function App() {
     loop();
 
     return () => window.setTimeout(triggerResize, 0);
-    
+
   }, [minimized]);
 
   const [
@@ -259,10 +289,10 @@ function App() {
           />
           <SecuredPart />
         </React.Fragment>
-      }/>
+      } />
       <Route path="*" element={
         <div className="app">
-          <Search/>
+          <Search />
           <Logo />
           <div className="app__layout-horizontal">
             <div
@@ -283,15 +313,12 @@ function App() {
                 max={timelineMax}
                 onMinimize={onMinimize}
                 minimized={minimized}
+                ymin={min}
+                ymax={max}
               />
             </div>
-            <YearDisplay
-              className="year-display--in-dimensional"
-              min={min}
-              max={max}
-            />
             <Help />
-            <Zoom range={max - min} min={min} max={max} zoomTo={onZoom} />
+            <Zoom range={range} min={min} max={max} zoomTo={onZoom} />
             {showWelcomeModal && !skipWelcomeModal && <WelcomeModal onClose={onCloseWelcomeModal} />}
             <Routes>
               <Route path={storyLink} element={<StoryAside zoomTo={onZoom} min={min} max={max} />} />

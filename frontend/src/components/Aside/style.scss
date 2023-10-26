@@ -92,6 +92,16 @@
   margin-bottom: 20px;
 }
 
+@media (max-width: 600px) {
+  .aside__controls {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-right: 40px;
+  }
+}
+
 .aside__back {
   color: #DC1F57;
   display: block;
@@ -99,6 +109,7 @@
   position: relative;
   text-decoration: none;
 }
+
 
 .aside__fullscreen {
   color: #DC1F57;
@@ -202,6 +213,32 @@
   text-align: right;
 }
 
+@media (max-width: 768px) {
+  .aside__title {
+    color: #474747;
+    font: normal normal 600 42px Assistant;
+    letter-spacing: 0px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+  }
+  
+  .aside__subtitle {
+    color: #474747;
+    font: normal normal normal 36px/33px Assistant;
+    letter-spacing: 0px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  .aside__subsubtitle {
+    color: #474747;
+    font: normal normal normal 24px/35px Assistant;
+    letter-spacing: 0px;
+    text-align: right;
+    margin-right: 20px;
+  }
+}
+
 .aside__background {
   background-position: center center;
   background-size: cover;
@@ -248,11 +285,13 @@ nav.admin__nav a {
   }
   .aside__title{
     font-size: 24px;
+    margin-right: 20px;
   }
   .aside__subtitle,
   .aside__subsubtitle {
     font-family: Assistant;
     font-size: 22px;
+    margin-right: 20px;
   }
 
   .aside__content p {
@@ -335,6 +374,7 @@ nav.admin__nav a {
 
 .aside__paragraph-label {
   font-weight: bold;
+  margin-top: 20px;
 }
 
 .aside__books {

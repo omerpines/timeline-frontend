@@ -12,7 +12,8 @@ const config = {
   // For each year in the 3d part this amount of years will be shown in timeline
   BOTTOM_RATIO: 12.5,
   MIN_YEAR: 96241,
-  MAX_YEAR: 102519,
+  // MAX_YEAR: 102519,
+  MAX_YEAR: 100050,
   MIN_INPUT_YEAR: 96241,
   MAX_INPUT_YEAR: 99837,
   MIN_RANGE: 100,
@@ -26,11 +27,10 @@ const config = {
   MAX_MOBILE_ZOOM: 100,
   //Breakpoint is screen width in px
   MOBILE_BREAK_POINT: 768,
-  EMAIL: 'office@929.org.il',
-  EMAIL_SEND_TO: 'yasenfire@gmail.com',
   // Any string like 'robot@929.org.il' or false to use the email from the form
   EMAIL_SEND_FROM: false,
-  API: 'http://timelineapi.testing.929.org.il',
+  // API: 'http://timelineapi.testing.929.org.il',
+  API: 'http://127.0.0.1:1337',
   // In percents. Determines the position of the red line
   FOCUS_POINT: 20,
   // In percents. Determines the distance from the red line where a period background starts to fade in/out

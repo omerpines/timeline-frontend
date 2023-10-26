@@ -24,7 +24,7 @@
 .welcome__title {
   color: #474747;
   font: normal normal 600 36px/42px Assistant;
-  max-width: 50%;
+  /* max-width: 50%; */
 }
 
 .welcome__body {
@@ -34,8 +34,10 @@
 .welcome__text {
   color: #474747;
   font: normal normal normal 22px/38px Assistant;
+  white-space: pre-line;
   letter-spacing: 0px;
   margin-bottom: 20px;
+  DIRECTION: rtl;
 }
 
 .welcome__link {

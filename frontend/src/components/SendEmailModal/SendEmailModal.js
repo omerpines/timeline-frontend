@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ScrollArea from 'react-scrollbar';
 import Modal from 'components/Modal';
 import { requestEmail } from 'store/actionCreators/email';
+import toast, { Toaster } from 'react-hot-toast';
 import './style.css';
 
 const SendEmailModal = ({ onClose }) => {
@@ -17,9 +18,35 @@ const SendEmailModal = ({ onClose }) => {
   const onChangeName = useCallback(e => setName(e.currentTarget.value), []);
   const onChangeEmail = useCallback(e => setEmail(e.currentTarget.value), []);
   const onChangeMessage = useCallback(e => setMessage(e.currentTarget.value), []);
+  const notify = (msg) => toast(msg);
+
+  function validateEmail(email) {
+    // Regular expression for a valid email address, including Gmail
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+  
+    // Test the email against the regex pattern
+    return emailRegex.test(email);
+  }
 
   const onConfirm = useCallback(() => {
-    dispatch(requestEmail(name, email, message, onClose));
+    if (!validateEmail(email)) {
+      notify(t('sendEmail.warn.email'));
+      return;
+    }
+
+    if (name === '') {
+      notify(t('sendEmail.warn.name'));
+      return;
+    }
+
+    if (message === '') {
+      notify(t('sendEmail.warn.content'));
+      return;
+    }
+
+
+    dispatch(requestEmail(name, email, message, t('sendEmail.subject'), onClose));
+    notify(t('sendEmail.success'));
   }, [name, email, message, onClose]);
 
   return (
@@ -74,6 +101,27 @@ const SendEmailModal = ({ onClose }) => {
             </button>
           </footer>
         </ScrollArea>
+        <Toaster
+        position="top-center"
+        toastOptions={{
+          // Define default options
+          className: '',
+          duration: 5000,
+          style: {
+            background: '#008000',
+            color: '#fff',
+          },
+      
+          // Default options for specific types
+          success: {
+            duration: 5000,
+            theme: {
+              primary: 'green',
+              secondary: '#008000',
+            },
+          },
+        }}
+        />
       </div>
     </Modal>
   );

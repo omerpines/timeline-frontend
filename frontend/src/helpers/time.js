@@ -54,7 +54,7 @@ export const sortEntitiesByEndDate = (a, b) => a.endDate - b.endDate;
 export const filterSortedByRange = (min, max, arr) => {
   let firstIndex = arr.findIndex(e => e.fromDate >= min);
   let lastIndex = arr.findLastIndex(e => e.endDate <= max);
-  if (firstIndex < 0 && lastIndex < 0) return [];
+  if (firstIndex < 0 || lastIndex < 0) return [];
   if (firstIndex < 0) firstIndex = 0;
   if (lastIndex < 0) lastIndex = arr.length - 1;
   return arr.slice(firstIndex, lastIndex + 1);

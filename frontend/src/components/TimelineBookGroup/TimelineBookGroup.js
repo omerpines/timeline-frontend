@@ -1,16 +1,25 @@
-import React, { useMemo, useCallback } from 'react';
+import './style.css';
+
+import React, { useCallback, useMemo } from 'react';
+
 import { Link } from 'react-router-dom';
 import ScrollArea from 'react-scrollbar';
 import TimelineGroup from 'components/TimelineGroup';
-import useLanguage from 'hooks/useLanguage';
-import { getLocalized } from 'helpers/util';
 import { getBookLink } from 'helpers/urls';
+import { getLocalized } from 'helpers/util';
 import { joinHebrew } from 'helpers/lang';
-import './style.css';
+import useLanguage from 'hooks/useLanguage';
+
+const detectAsideEvent = () => {
+  const message = JSON.stringify({
+    channel: 'hideTooltip'
+  });
+  window.parent.postMessage(message, '*');
+}
 
 const renderHoverBook = c => (
-  <li key={c.id} className="timeline-group__hover-element">
-    <Link to={getBookLink(c.id)} className="timeline-group__hover-link">
+  <li key={c.id} className="timeline-group__hover-element" onClick={detectAsideEvent}>
+    <Link to={getBookLink(c.id)} className="timeline-group__hover-link" >
       <span className="timeline-group__hover-name">{c.name}</span>
     </Link>
   </li>

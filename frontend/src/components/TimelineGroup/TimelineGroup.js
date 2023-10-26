@@ -1,9 +1,11 @@
-import React, { useMemo, useState, useCallback, useRef, useLayoutEffect } from 'react';
+import './style.css';
+
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+
 import { Link } from 'react-router-dom';
-import useTimelineGroupHover from 'hooks/useTimelineGroupHover';
 import config from 'constants/config';
 import { inRange } from 'helpers/util';
-import './style.css';
+import useTimelineGroupHover from 'hooks/useTimelineGroupHover';
 
 const emptyStyles = {};
 
@@ -95,12 +97,38 @@ const TimelineGroup = ({
     </div>
   );
 
+
   return (
-    <React.Fragment>
+    // <React.Fragment>
+    //   <div
+    //     className={classes}
+    //     style={styles}
+    //     onMouseOver={onmouseenter}
+    //     onMouseLeave={onmouseleave}
+    //     data-group-id={id}
+    //   >
+    //     <div className={visibleClasses} data-group-id={id}>
+    //       {visibleContent}
+    //     </div>
+    //   </div>
+    //   {hovered && (
+    //     <div className={hoverClasses} style={hoverStyles} data-group-id={id}>
+    //       {renderTooltip(id)}
+    //       <div className="timeline-group__hover-bridge" ref={hoverRefCallback} data-group-id={id} />
+    //     </div>
+    //   )}
+    //   {hovered && (
+    //     <div className="timeline-group__hover-exit" onMouseLeave={onmouseleave} />
+    //   )}
+    // </React.Fragment>
+    <div
+      onMouseOver={onmouseenter}
+      onMouseLeave={onmouseleave}
+    >
       <div
         className={classes}
         style={styles}
-        onMouseEnter={onmouseenter}
+
         data-group-id={id}
       >
         <div className={visibleClasses} data-group-id={id}>
@@ -113,10 +141,10 @@ const TimelineGroup = ({
           <div className="timeline-group__hover-bridge" ref={hoverRefCallback} data-group-id={id} />
         </div>
       )}
-      {hovered && (
-        <div className="timeline-group__hover-exit" onMouseEnter={onmouseleave} />
-      )}
-    </React.Fragment>
+      {/* {hovered && (
+        <div className="timeline-group__hover-exit" onMouseLeave={onmouseleave} />
+      )} */}
+    </div>
   );
 };
 

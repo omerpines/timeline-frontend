@@ -33,7 +33,7 @@
 
 .dimensional__item::before {
   background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 80%);
-  content: '';
+  content: "";
   height: 100px;
   left: -46px;
   position: absolute;
@@ -45,7 +45,8 @@
 .dimensional__item-link {
   background-color: inherit;
   border-radius: 25px;
-  box-shadow: -4px -12px 26px -12px inset rgb(0 0 0 / 75%), 0px 1px 2px 0px inset rgb(255 255 255 / 75%);
+  box-shadow: -4px -12px 26px -12px inset rgb(0 0 0 / 75%),
+    0px 1px 2px 0px inset rgb(255 255 255 / 75%);
   display: block;
   height: 30px;
   position: absolute;
@@ -58,6 +59,13 @@
   pointer-events: none;
   position: absolute;
   top: 0px;
+  z-index: 200;
+}
+.dimensional__canvas1 {
+  left: 0px;
+  pointer-events: none;
+  position: absolute;
+  top: 10px;
   z-index: 200;
 }
 
@@ -77,7 +85,8 @@
   z-index: 1000;
 }
 
-.dimensional__cluster-enter-active, .dimensional__cluster-enter-done {
+.dimensional__cluster-enter-active,
+.dimensional__cluster-enter-done {
   opacity: 1;
 }
 
@@ -85,7 +94,8 @@
   opacity: 1;
 }
 
-.dimensional__cluster-exit-active, .dimensional__cluster-exit-done {
+.dimensional__cluster-exit-active,
+.dimensional__cluster-exit-done {
   opacity: 0;
 }
 
@@ -94,7 +104,332 @@
 }
 
 .dimensional__focus-pointer {
-  margin-left: -42px;
-  margin-top: -15px;
+  margin-left: -48px;
+  margin-top: -24px;
   position: absolute;
+}
+
+.dimensional__focus-year {
+  margin-left: -111px;
+  margin-top: -11px;
+  position: absolute;
+  width: 80px;
+}
+
+.dimensional__focus-arrow {
+  margin-left: -90px;
+  margin-top: -13px;
+  position: absolute;
+  width: 80px;
+}
+.dimensional__focus-arrow1 {
+  margin-left: -45px;
+  margin-top: -13px;
+  position: absolute;
+  width: 80px;
+}
+
+.arrow-right {
+  margin-left: 48px;
+  margin-top: 12px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+
+  border-left: 20px solid rgb(255, 255, 255);
+}
+
+.arrow-right1 {
+  margin-left: 36px;
+  margin-top: 0px;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+
+  border-left: 32px solid #dc1f57;
+}
+
+@media (max-width: 2560px) {
+  .dimensional__canvas1 {
+    left: -25px;
+    top: -26px;
+  }
+  .arrow-right1 {
+    margin-top: -28px;
+    margin-left: -12px;
+  }
+  .arrow-right {
+    margin-top: -15px;
+    margin-left: 0px;
+  }
+  .dimensional__focus-year {
+    margin-top: -38px;
+    margin-left: -160px;
+  }
+}
+
+@media (max-width: 2200px) {
+  .dimensional__canvas1 {
+    left: -13px;
+    top: -13px;
+  }
+  .arrow-right1 {
+    margin-top: -18px;
+    margin-left: 5px;
+  }
+  .arrow-right {
+    margin-top: -5px;
+    margin-left: 20px;
+  }
+  .dimensional__focus-year {
+    margin-top: -28px;
+    margin-left: -140px;
+  }
+}
+
+@media (max-width: 1920px) {
+  .dimensional__canvas1 {
+    left: -6px;
+    top: 3px;
+  }
+  .arrow-right1 {
+    margin-top: -2px;
+    margin-left: 12px;
+  }
+  .arrow-right {
+    margin-top: 5px;
+    margin-left: 26px;
+  }
+  .dimensional__focus-year {
+    margin-top: -17px;
+    margin-left: -135px;
+  }
+}
+
+@media (max-width: 1780px) {
+  .dimensional__canvas1 {
+    left: -4px;
+    top: -3px;
+  }
+  .arrow-right1 {
+    margin-top: -6px;
+    margin-left: 12px;
+  }
+  .arrow-right {
+    margin-top: 4px;
+    margin-left: 35px;
+  }
+  .dimensional__focus-year {
+    margin-top: -18px;
+    margin-left: -125px;
+  }
+}
+
+@media (max-width: 1560px) {
+  .dimensional__canvas1 {
+    left: 0px;
+    top: 4px;
+  }
+  .arrow-right1 {
+    margin-top: -1px;
+    margin-left: 17px;
+  }
+  .arrow-right {
+    margin-top: 8px;
+    margin-left: 35px;
+  }
+  .dimensional__focus-year {
+    margin-top: -14px;
+    margin-left: -125px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .dimensional__canvas1 {
+    left: 0px;
+    top: 4px;
+  }
+  .arrow-right1 {
+    margin-top: -1px;
+    margin-left: 17px;
+  }
+  .arrow-right {
+    margin-top: 8px;
+    margin-left: 35px;
+  }
+  .dimensional__focus-year {
+    margin-top: -14px;
+    margin-left: -125px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .dimensional__canvas1 {
+    left: 0px;
+    top: 7px;
+  }
+  .arrow-right1 {
+    margin-top: 2px;
+    margin-left: 20px;
+  }
+  .arrow-right {
+    margin-top: 12px;
+    margin-left: 35px;
+  }
+  .dimensional__focus-year {
+    margin-top: -10px;
+    margin-left: -125px;
+  }
+}
+@media (max-width: 1024px) {
+  .dimensional__canvas1 {
+    left: 0px;
+    top: 10px;
+  }
+  .arrow-right1 {
+    margin-top: 4px;
+    margin-left: 25px;
+  }
+  .arrow-right {
+    margin-top: 12px;
+    margin-left: 35px;
+  }
+  .dimensional__focus-year {
+    margin-top: -10px;
+    margin-left: -125px;
+  }
+}
+@media (max-width: 768px) {
+  .dimensional__canvas1 {
+    left: 0px;
+    top: 12px;
+  }
+  .arrow-right1 {
+    margin-top: 5px;
+    margin-left: 25px;
+  }
+  .arrow-right {
+    margin-top: 12px;
+    margin-left: 35px;
+  }
+  .dimensional__focus-year {
+    margin-top: -10px;
+    margin-left: -125px;
+  }
+}
+
+@media (max-width: 576px) {
+  .dimensional__canvas1 {
+    left: -4px;
+    top: 12px;
+  }
+  .arrow-right1 {
+    margin-top: 0px;
+    margin-left: 25px;
+  }
+  .arrow-right {
+    margin-top: 12px;
+    margin-left: 35px;
+  }
+  .dimensional__focus-year {
+    margin-top: -10px;
+    margin-left: -125px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dimensional__canvas1 {
+    left: -5px;
+    top: 14px;
+  }
+  .arrow-right1 {
+    margin-top: 0px;
+    margin-left: 27px;
+    border-top: 24px solid transparent;
+    border-bottom: 24px solid transparent;
+    border-left: 16px solid #dc1f57;
+  }
+  .arrow-right {
+    margin-top: 18px;
+    margin-left: 50px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+  .dimensional__focus-year {
+    margin-top: -5px;
+    margin-left: -110px;
+  }
+}
+
+@media (max-width: 425px) {
+  .dimensional__canvas1 {
+    left: -3px;
+    top: 16px;
+  }
+  .arrow-right1 {
+    margin-top: 10px;
+    margin-left: 30px;
+    border-top: 18px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 13px solid #dc1f57;
+  }
+  .arrow-right {
+    margin-top: 20px;
+    margin-left: 60px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 13px solid #ffffff;
+  }
+  .dimensional__focus-year {
+    margin-top: -5px;
+    margin-left: -100px;
+  }
+}
+
+@media (max-width: 375px) {
+  .dimensional__canvas1 {
+    left: -3px;
+    top: 16px;
+  }
+  .arrow-right1 {
+    margin-top: 9px;
+    margin-left: 30px;
+    border-top: 18px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 13px solid #dc1f57;
+  }
+  .arrow-right {
+    margin-top: 20px;
+    margin-left: 60px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 13px solid #ffffff;
+  }
+  .dimensional__focus-year {
+    margin-top: -5px;
+    margin-left: -100px;
+  }
+}
+
+@media (max-width: 320px) {
+  .dimensional__canvas1 {
+    left: -3px;
+    top: 18px;
+  }
+  .arrow-right1 {
+    margin-top: 11px;
+    margin-left: 30px;
+    border-top: 18px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 13px solid #dc1f57;
+  }
+  .arrow-right {
+    margin-top: 20px;
+    margin-left: 60px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 13px solid #ffffff;
+  }
+  .dimensional__focus-year {
+    margin-top: -5px;
+    margin-left: -100px;
+  }
 }

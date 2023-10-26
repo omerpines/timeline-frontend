@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { parse } from 'csv-parse/dist/esm/sync';
 import { uploadCSV, resetCSV } from 'store/actionCreators/csv';
 import { isCSVLoading, isCSVSucceed, getCSVErrors } from 'store/selectors/csv';
+import useGetCSV from 'hooks/useGetCSV';
 import { coordsToExcel } from 'helpers/csv';
 import './style.css';
 
@@ -19,6 +20,46 @@ function readFileAsync(file) {
   })
 }
 
+function containsSpecialCharactersOrQuotes(cell) {
+  return /[,"\n\r]/.test(cell);
+}
+
+function arrayToCSV(data) {
+  if (!Array.isArray(data) || data.length === 0) {
+    return "";
+  }
+
+  const columns = Object.keys(data[0]);
+  const header = columns.join(",") + "\n";
+
+  const rows = data.map(item => {
+    return columns.map(column => {
+      return containsSpecialCharactersOrQuotes(item[column])? `"${item[column].replace(/"/g, '""')}"` : item[column];
+    }).join(",");
+  });
+
+  return header + rows.join("\n");
+}
+
+function writeFileAsyncCSV(content, filename) {
+  const csvContent = "\uFEFF" + arrayToCSV(content);
+
+  const blob = new Blob([csvContent], { type: "text/csv; charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = filename + '.csv';
+  downloadLink.textContent = "Download CSV";
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+
+  document.body.removeChild(downloadLink);
+  URL.revokeObjectURL(url);
+}
+
+
 const renderCSVError = t => ([x, y, error]) => {
   const cell = coordsToExcel(x, y);
   return (
@@ -31,25 +72,30 @@ const renderCSVError = t => ([x, y, error]) => {
 const AdminPageTitle = ({ addTo, title, addTitle, onClickAdd, csvType, className }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const content = useGetCSV(csvType);
 
-  const csvRef = useRef(null);
+  const csvupRef = useRef(null);
 
   const csvLoading = useSelector(isCSVLoading);
   const csvSuccess = useSelector(isCSVSucceed);
   const csvErrors = useSelector(getCSVErrors);
 
-  const onClickCSV = useCallback(() => {
+  const onClickUpCSV = useCallback(() => {
     dispatch(resetCSV());
-    if (csvRef.current) csvRef.current.click();
+    if (csvupRef.current) csvupRef.current.click();
   }, []);
 
+  const onClickDownCSV = useCallback(() => {
+    writeFileAsyncCSV(content, csvType);
+  }, [csvType]);
+
   const onChangeCSV = useCallback(async () => {
-    if (!csvRef.current) return;
-    if (!csvRef.current.files) return;
-    const file = await readFileAsync(csvRef.current.files[0]);
+    if (!csvupRef.current) return;
+    if (!csvupRef.current.files) return;
+    const file = await readFileAsync(csvupRef.current.files[0]);
     const parsed = parse(file);
     dispatch(uploadCSV(parsed, csvType));
-    csvRef.current.value = null;
+    csvupRef.current.value = null;
   }, [csvType]);
 
   useEffect(() => {
@@ -64,11 +110,15 @@ const AdminPageTitle = ({ addTo, title, addTitle, onClickAdd, csvType, className
       <header className={classes}>
         <div className="admin-page-title__title">{t(title)}</div>
         <div className="admin-page-title__buttons">
-          <Link className="admin-page-title__add admin-page-title__add-csv" to="#" onClick={onClickCSV}>
+          <Link className="admin-page-title__add admin-page-title__add-csv" to="#" onClick={onClickDownCSV}>
             <span className="admin-page-title__add-icon"><i className="fa fa-table" /></span>
-            <span className="admin-page-title__add-text">{t('csv')}</span>
+            <span className="admin-page-title__add-text">{t('Download')}</span>
           </Link>
-          <input type="file" className="admin-page-title__csv" ref={csvRef} accept=".csv" onChange={onChangeCSV} />
+          <Link className="admin-page-title__add admin-page-title__add-csv" to="#" onClick={onClickUpCSV}>
+            <span className="admin-page-title__add-icon"><i className="fa fa-table" /></span>
+            <span className="admin-page-title__add-text">{t('Upload')}</span>
+          </Link>
+          <input type="file" className="admin-page-title__csv" ref={csvupRef} accept=".csv" onChange={onChangeCSV} />
           <Link className="admin-page-title__add" to={addTo || '#'} onClick={onClickAdd}>
             <span className="admin-page-title__add-icon">+</span>
             <span className="admin-page-title__add-text">{t(addTitle)}</span>

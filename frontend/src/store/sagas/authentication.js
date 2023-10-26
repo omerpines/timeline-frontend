@@ -27,6 +27,8 @@ function* processAuthenticationRequest({ username, password }) {
       password,
       identifier: username,
     };
+
+
     const response = yield call(axios.post, `${config.API}/api/auth/local`, params);
     const data = { jwt: response.data.jwt, ...response.data.user };
     yield put(successAuthentication(data));

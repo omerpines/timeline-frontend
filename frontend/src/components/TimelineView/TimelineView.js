@@ -6,6 +6,7 @@ import TimelineBookGroup from 'components/TimelineBookGroup';
 import TimelineStoryGroup from 'components/TimelineStoryGroup';
 import TimelineFocusPoint from 'components/TimelineFocusPoint';
 import TimelineLegend from 'components/TimelineLegend';
+import YearDisplay from 'components/YearDisplay';
 import useData from 'hooks/useData';
 import './style.css';
 
@@ -62,6 +63,8 @@ const TimelineView = ({
   minimized,
   className,
   minimize,
+  ymin,
+  ymax
 }) => {
   const { t } = useTranslation();
 
@@ -95,7 +98,7 @@ const TimelineView = ({
         {data.bookGroups.map(renderBookGroup(min, max, width))}
       </div>
       <TimelineLegend />
-      <TimelineFocusPoint />
+      <TimelineFocusPoint min={ymin} max={ymax} />
     </div>
   );
 };

@@ -12,3 +12,26 @@
   position: absolute;
   top: -36px;
 }
+
+.timeline-focus__year {
+  left: -20px;
+  position: absolute;
+  top: -80px;
+  z-index: 400;
+}
+
+.timeline-focus__arrow {
+  left: -20px;
+  position: absolute;
+  top: -50px;
+  z-index: 400;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  
+  border-top: 15px solid rgb(255, 255, 255);
+}

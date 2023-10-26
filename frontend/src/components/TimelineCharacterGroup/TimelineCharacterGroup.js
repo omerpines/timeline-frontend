@@ -1,35 +1,62 @@
-import React, { useMemo, useCallback } from 'react';
+import './style.css';
+
+import React, { useCallback, useMemo } from 'react';
+
+import CharacterDot from 'components/CharacterDot';
 import { Link } from 'react-router-dom';
 import ScrollArea from 'react-scrollbar';
 import TimelineGroup from 'components/TimelineGroup';
-import CharacterDot from 'components/CharacterDot';
-import useLanguage from 'hooks/useLanguage';
-import { joinHebrew } from 'helpers/lang';
-import { getLocalized } from 'helpers/util';
 import { getCharacterLink } from 'helpers/urls';
-import './style.css';
+import { getLocalized } from 'helpers/util';
+import { joinHebrew } from 'helpers/lang';
+import useLanguage from 'hooks/useLanguage';
+import useTimelineGroupHover from 'hooks/useTimelineGroupHover';
 
+const detectAsideEvent = () => {
+  const message = JSON.stringify({
+    channel: 'hideTooltip'
+  });
+  window.parent.postMessage(message, '*');
+}
 const renderCharacter = (c, i) => {
   if (i > 2) return false;
-  return (
-    <CharacterDot key={c.id} data={c} className="timeline-character-group__character" />
-  );
+  if (c.showTimeLine === 1)
+    return (
+      <CharacterDot key={c.id} data={c} className="timeline-character-group__character" />
+    );
+  else
+    return (
+      <div></div>
+    );
 };
 
 const renderHoverCharacter = c => (
-  <li key={c.id} className="timeline-group__hover-element">
-    <Link to={getCharacterLink(c.id)} className="timeline-group__hover-link">
-      <CharacterDot data={c} className="timeline-group__hover-dot" />
-      <span className="timeline-group__hover-name">{c.name}</span>
-    </Link>
-  </li>
+  <>
+    {c.showTimeLine === 1 && <li key={c.id} className="timeline-group__hover-element" onClick={detectAsideEvent}>
+      <Link to={getCharacterLink(c.id)} className="timeline-group__hover-link">
+        <CharacterDot data={c} className="timeline-group__hover-dot" />
+        <span className="timeline-group__hover-name">{c.name}</span>
+      </Link>
+    </li>}
+  </>
 );
 
 const TimelineCharacterGroup = ({ group, width, min, max }) => {
   const lang = useLanguage();
 
   const { data, fromDate, endDate } = group;
-  const characters = data;
+
+  const getCharcaters = (characters) => {
+    var ret = [];
+    for (var i = 0; i < characters.length; i++) {
+      if (characters[i].showTimeLine === 1)
+        ret.push(characters[i]);
+    }
+
+    return ret;
+  }
+
+  const characters = getCharcaters(data);
 
   const text = useMemo(() => {
     let text = '';
@@ -48,6 +75,25 @@ const TimelineCharacterGroup = ({ group, width, min, max }) => {
       transform: `translateX(${start * -1}px)`,
     };
   }, [width, data, min, max]);
+
+  const showState = (period) => {
+    for (var i = 0; i < period.length; i++) {
+      if (period[i].showTimeLine === 1)
+        return true;
+    }
+
+    return false;
+  }
+
+  const getCharacterLength = (period) => {
+    let length = 0;
+    for (var i = 0; i < period.length; i++) {
+      if (period[i].showTimeLine === 1)
+        length++;
+    }
+
+    return length;
+  }
 
   let hoverClasses = 'timeline-group__hover';
   if (characters.length > 3) hoverClasses += ' timeline-group__hover--list';
@@ -72,6 +118,13 @@ const TimelineCharacterGroup = ({ group, width, min, max }) => {
     );
   }, [hoverClasses]);
 
+
+
+  ///////////modified
+  const [hovered, onmouseenter, onmouseleave, onmousechange] = useTimelineGroupHover();
+
+
+  //////
   /*if (characters.length === 1) {
     const [character] = characters;
     return (
@@ -83,35 +136,40 @@ const TimelineCharacterGroup = ({ group, width, min, max }) => {
       </Link>
     );
   }*/
+  if (showState(characters))
+    return (
+      <TimelineGroup
+        data={characters}
+        fromDate={fromDate}
+        endDate={endDate}
+        min={min}
+        max={max}
+        width={width}
+        className="timeline-character-group"
+        visibleClassName="timeline-character-group__visible"
+        visibleContent={(
+          <React.Fragment>
+            <div className="timeline-character-group__characters" onMouseLeave={onmouseleave}>
+              {characters.map(renderCharacter)}
+              {getCharacterLength(characters) > 3 && (
+                <div className="timeline-character-group__more">
+                  {`+${getCharacterLength(characters) - 3}`}
+                </div>
+              )}
+            </div>
+            <div className="timeline-character-group__text">{text}</div>
+          </React.Fragment>
+        )}
+        tooltipClassName="timeline-character-group__hover-positioning"
+        renderTooltip={renderTooltip}
+        linkFn={getCharacterLink}
+      />
+    );
 
   return (
-    <TimelineGroup
-      data={data}
-      fromDate={fromDate}
-      endDate={endDate}
-      min={min}
-      max={max}
-      width={width}
-      className="timeline-character-group"
-      visibleClassName="timeline-character-group__visible"
-      visibleContent={(
-        <React.Fragment>
-          <div className="timeline-character-group__characters">
-            {characters.map(renderCharacter)}
-            {characters.length > 3 && (
-              <div className="timeline-character-group__more">
-                {`+${characters.length - 3}`}
-              </div>
-            )}
-          </div>
-          <div className="timeline-character-group__text">{text}</div>
-        </React.Fragment>
-      )}
-      tooltipClassName="timeline-character-group__hover-positioning"
-      renderTooltip={renderTooltip}
-      linkFn={getCharacterLink}
-    />
+    <div></div>
   );
+
 };
 
 export default TimelineCharacterGroup;

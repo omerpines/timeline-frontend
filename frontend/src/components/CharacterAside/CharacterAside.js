@@ -45,15 +45,22 @@ const CharacterAside = ({ zoomTo, min, max }) => {
     }).filter(a => !!a);
   }, [characters, data]);
 
+
   const content = useMemo(() => {
     if (!data) return false;
     return (
-      <React.Fragment>
+      <React.Fragment>  
         {ReactHtmlParser(`<div>${getLocalized(data, 'content', lang)}</div>`)}
-        {ReactHtmlParser(`<div>${getLocalized(data, 'appearances', lang)}</div>`)}
+        {/* {ReactHtmlParser(`<div>${getLocalized(data, 'biography', lang)}</div>`)} */}
+        {!data.appearances ? false : (
+          <React.Fragment>
+            <div className="aside__paragraph-label">{t('aside.label.appearances')}</div>
+            {ReactHtmlParser(`<div>${getLocalized(data, 'appearances', lang)}</div>`)}
+          </React.Fragment>
+        )}
         {!data.links ? false : (
           <React.Fragment>
-            <div className="aside__paragraph-title">{t('admin.forMoreInformation')}</div>
+            <div className="aside__paragraph-label">{t('aside.label.deepening')}</div>
             {ReactHtmlParser(`<div>${getLocalized(data, 'links', lang)}</div>`)}
           </React.Fragment>
         )}
@@ -66,14 +73,10 @@ const CharacterAside = ({ zoomTo, min, max }) => {
     return (
       <React.Fragment>
         <div className="character-aside__title">
-          {getLocalized(data, 'name', lang)}
-          <CharacterDot data={data} className="character-aside__dot" ignorable />
+          <p>
+            {getLocalized(data, 'name', lang)}
+          </p>
         </div>
-        {checkLocalized(data, 'summary', lang) && (
-          <div className="character-aside__subsubtitle aside__subsubtitle">
-            {ReactHtmlParser(getLocalized(data, 'summary', lang))}
-          </div>
-        )}
       </React.Fragment>
     );
   }, [data]);
@@ -83,11 +86,17 @@ const CharacterAside = ({ zoomTo, min, max }) => {
 
     return (
       <React.Fragment>
+        {checkLocalized(data, 'summary', lang) && (
+          <div className="character-aside__subsubtitle aside__subsubtitle">
+            {ReactHtmlParser(getLocalized(data, 'summary', lang))}
+          </div>
+        )}
+        <CharacterDot data={data} className="character-aside__dot" ignorable />
         {data.tags ? (
           <TagCloud tags={tags} />
         ) : false}
-        <MediaGallery data={data.media} />
         <QuoteBlock data={data} />
+        <MediaGallery data={data.media} />
         <div className="aside__characters">
           {relatedCharacters.map(renderCharacter)}
         </div>
@@ -102,10 +111,10 @@ const CharacterAside = ({ zoomTo, min, max }) => {
   return (
     <Aside
       header={header}
-      fullscreenGallery={gallery}
       fullscreenContent={content}
+      fullscreenGallery={gallery}
       data={data}
-    >
+      >
       {gallery}
       {content}
     </Aside>

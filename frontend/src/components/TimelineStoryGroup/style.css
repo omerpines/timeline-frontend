@@ -21,7 +21,7 @@
 .timeline-story-group__visible::after {
   background: url(./icon.png) no-repeat center center;
   bottom: 0px;
-  content: '';
+  content: "";
   position: absolute;
   right: 0px;
   top: 0px;
@@ -37,7 +37,7 @@
   margin-bottom: 35px;
   margin-left: -181px;
   max-height: 155px;
-  opacity: 0;
+  /* opacity: 0; */
   padding: 15px 20px 10px;
   pointer-events: none;
   position: absolute;
@@ -56,7 +56,7 @@
   border-radius: 0px 0px 10px 0px;
   bottom: -16px;
   box-shadow: 5px 5px 8px #00000026;
-  content: '';
+  content: "";
   height: 35px;
   left: 50%;
   position: absolute;
@@ -70,7 +70,7 @@
   background: white;
   border-radius: 0px 0px 10px 0px;
   bottom: -16px;
-  content: '';
+  content: "";
   height: 35px;
   left: 50%;
   position: absolute;
@@ -108,13 +108,13 @@
 
 .timeline-story-group__hover-story-view {
   cursor: pointer;
-  color: #D8D8D8;
+  color: #d8d8d8;
   flex-grow: 0;
   transition: color ease-in 0.2s;
 }
 
 .timeline-story-group__hover-story-view:hover {
-  color: #DC1F57;
+  color: #dc1f57;
 }
 
 .timeline-story-group__hover-story:last-child {
@@ -169,7 +169,7 @@
 }
 
 .timeline-story-group__events-back {
-  color: #DC1F57;
+  color: #dc1f57;
   cursor: pointer;
   font-size: 14px;
 }

@@ -134,6 +134,13 @@ const parseDates = (iStart, iEnd) => {
   ];
 };
 
+const parseShowTimeLine = (state) => {
+  if (parseInt(state) === 1)
+    return 1;
+  else
+    return 0;
+}
+
 const parsePeriodRelation = (period, data) => {
   if (!period) return null;
   const { periods } = data;
@@ -167,38 +174,52 @@ const parseGender = gender => {
 }
 
 const parseMedia = media => {
-  const isYoutube = isYoutubeUrl(media);
-  const isAudio = isAudioFormatSupported(media);
-
-  if (isYoutube) return {
-    id: uuid(),
-    type: 'youtube',
-    youtubeId: getYoutubeId(media),
-    title: '',
-    description: '',
-  };
-
-  if (isAudio) return {
-    id: uuid(),
-    type: 'audio',
-    url: media,
-    title: '',
-    description: '',
-  };
-
   return {
     id: uuid(),
-    type: 'image',
-    url: media,
-    title: '',
-    description: '',
+    type: media.type,
+    url: media.url,
+    title: media.title,
+    description: media.description,
   };
+  // const isYoutube = isYoutubeUrl(media.url);
+  // const isAudio = isAudioFormatSupported(media.url);
+
+  // if (isYoutube) return {
+  //   id: uuid(),
+  //   type: 'youtube',
+  //   youtubeId: getYoutubeId(media),
+  //   title: '',
+  //   description: '',
+  // };
+
+  // if (isAudio) return {
+  //   id: uuid(),
+  //   type: 'audio',
+  //   url: media,
+  //   title: '',
+  //   description: '',
+  // };
+
+  // return {
+  //   id: uuid(),
+  //   type: 'image',
+  //   url: media,
+  //   title: '',
+  //   description: '',
+  // };
 };
 
 const parseMedias = medias => {
-  if (!medias) return [];
-  const list = medias.split(',').map(s => s.trim());
-  return list.map(parseMedia);
+  var list = []
+  var ret = []
+  if (!medias) return list;
+
+  list = JSON.parse(medias);
+
+  for (var i=0; i<list.length; i++) {
+    ret.push(parseMedia(list[i]))
+  }
+  return ret;
 };
 
 const parsePeriod = row => {
@@ -294,6 +315,7 @@ const parseCharacter = data => row => {
   const [fromDate, endDate] = parseDates(row[2], row[3]);
   const media = parseMedias(row[18]);
   const gender = parseGender(row[5]);
+  const showTimeLine = parseShowTimeLine(row[19]);
   
   return {
     fromDate,
@@ -313,10 +335,12 @@ const parseCharacter = data => row => {
     quote: row[16],
     links: row[17],
     characters: [],
+    showTimeLine
   };
 }
 
 function* uploadCSV({ csvType, content }) {
+  console.log('=====================> upload csv file data ======>', content)
   const data = yield select(getData);
 
   const rows = content.slice(1);
@@ -386,7 +410,6 @@ function* uploadCSV({ csvType, content }) {
     }
     yield put(successCSV());
   } else if (csvType === 'character') {
-    errors = [].concat(...rows.map(validateCharacter(data)));
     if (errors.length) {
       yield put(failureCSV(errors));
       return;
@@ -410,3 +433,24 @@ export function* onUploadCSV() {
     yield fork(uploadCSV, action);
   }
 }
+
+// [
+//   {
+//     "type":"audio",
+//     "url":"http://127.0.0.1:1337/uploads/file_example_MP_3_700_KB_ea6ad6827c.mp3",
+//     "id":"21b9e95a-5f74-4d4f-886d-3ce7150da8a1",
+//     "title":"Hello",
+//     "description":"This is test audio",
+//     "isInternal":true,
+//     "toDelete":false
+//   },
+//   {
+//     "type":"audio",
+//     "url":"http://127.0.0.1:1337/uploads/file_example_MP_3_700_KB_7b26cd2200.mp3",
+//     "id":"97e3a4ea-2435-4a6b-a14c-0dc50be87ef1",
+//     "title":"HiHiHi",
+//     "description":"This is test 2",
+//     "isInternal":true,
+//     "toDelete":false
+//   }
+// ]

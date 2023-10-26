@@ -9,6 +9,19 @@
   text-align: right;
 }
 
+@media (max-width: 600px) {
+    .character-aside__title {
+      color: #474747;
+      direction: rtl;
+      display: flex;
+      flex-direction: column;
+      font: normal normal 600 42px/10px Assistant;
+      letter-spacing: 0px;
+      margin-bottom: 7px;
+      text-align: right;
+      margin-right: 15px;
+  }
+}
 .character-aside__dot {
   background-size: cover;
   border: 0px;

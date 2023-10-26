@@ -29,7 +29,10 @@ const Aside = ({ children, header, className, fullscreenGallery, fullscreenConte
 
     window.setTimeout(() => {
       animate.current = false;
-      if (exit) navigate('/');
+      if (exit) {
+        navigate('/');
+        // window.location.reload();
+      }
     }, 200);
 
     loop();

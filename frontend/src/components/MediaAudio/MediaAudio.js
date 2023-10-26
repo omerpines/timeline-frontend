@@ -23,13 +23,14 @@ const MediaAudio = ({ data, className }) => {
 
   return (
     <div className={classes} onClick={onClick}>
-      <div className="media-audio__icon">
+      {/* <div className="media-audio__icon">
         {playing && <i className="fa fa-pause-circle-o media-audio__pause" />}
         {!playing && <img src={play} className="media-audio__play" />}
-      </div>
+      </div> */}
       <div className="media-audio__title">{data.title}</div>
       <div className="media-audio__description">{data.description}</div>
-      <audio className="media-audio__player" src={data.url} ref={playerRef} />
+      {/* <audio className="media-audio__player" src={data.url} controls ref={playerRef} /> */}
+      <audio className="admin-media__audio" src={data.url} controls/>
     </div>
   );
 }

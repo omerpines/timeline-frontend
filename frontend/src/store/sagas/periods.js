@@ -88,6 +88,7 @@ export function* addPeriod({ data }) {
       generatePath(emptyObject),
       JSONToFormData(data),
     );
+
     yield put(successAddPeriod(cleanApiObject(response.data.data)));
     yield call(fetchPeriods);
   } catch (e) {

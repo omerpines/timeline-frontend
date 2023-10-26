@@ -11,10 +11,25 @@
   width: 100px;
 }
 
+@media (max-width:768px) {
+  .year-display {
+    width: 80px;
+  }
+}
+
 .year-display.year-display--in-dimensional {
   left: 50%;
   position: absolute;
   top: 84px;
   transform: translateX(-50%);
   z-index: 400;
+}
+
+.year-display.timeline-focus__year {
+  border-radius: 50px;
+  left: -42px;
+  position: absolute;
+  top: -85px;
+  z-index: 400;
+  width: 80px;
 }

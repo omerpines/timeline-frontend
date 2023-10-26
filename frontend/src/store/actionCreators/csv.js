@@ -6,6 +6,12 @@ export const uploadCSV = (content, type) => ({
   content,
 });
 
+export const downloadCSV = (content, type) => ({
+  type: types.CSV_DOWNLOAD,
+  csvType: type,
+  content,
+});
+
 export const failureCSV = errors => ({
   type: types.CSV_FAILURE,
   errors,

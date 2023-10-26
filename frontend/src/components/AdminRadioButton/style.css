@@ -1,0 +1,25 @@
+.admin-radiobutton {
+    background: white;
+    border: 1px solid #DEDEDE;
+    border-radius: 8px;
+    height: 60px;
+    display: flex;
+  }
+
+  .raddio-button {
+    margin-right: 10px;
+    transform: scale(2);
+    text-align: center;
+  }
+
+ .radio-text {
+    font-size: 20px;
+    color: #433f3f;
+ }
+
+ .radio-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+ }

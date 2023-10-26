@@ -86,7 +86,7 @@ const AdminMultiSelect = ({
   }, [onChange, selectedIds, name]);
 
   const filteredOptions = useMemo(() => {
-    return options.filter(o => o.name.startsWith(value) && selectedIds.indexOf(o.id) === -1);
+    return options?.filter(o => o.name.startsWith(value) && selectedIds.indexOf(o.id) === -1);
   }, [value, options, selectedIds]);
 
   let classes = 'admin-form__text admin-multiselect';

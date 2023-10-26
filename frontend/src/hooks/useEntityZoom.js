@@ -9,9 +9,9 @@ const useEntityZoom = (entity, zoomTo, min, max) => {
     const range = max - min;
     const percent = range / 100;
 
-    if (!entity || !entity.endDate) return;
+    if (!entity || !entity.fromDate) return;
 
-    const newDate = entity.endDate;
+    const newDate = entity.fromDate;
     const newMin = newDate - config.FOCUS_POINT * percent;
     const newMax = newDate + (100 - config.FOCUS_POINT) * percent;
 

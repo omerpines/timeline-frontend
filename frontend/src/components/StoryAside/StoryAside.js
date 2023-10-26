@@ -69,6 +69,7 @@ const StoryAside = ({ zoomTo, min, max }) => {
             {ReactHtmlParser(`<div>${getLocalized(data, 'summary', lang)}</div>`)}
           </React.Fragment>
         )}
+        {withMedia && gallery}
         {!data.plot ? false : (
           <React.Fragment>
             <div className="aside__paragraph-label">{t('aside.label.plot')}</div>
@@ -81,7 +82,6 @@ const StoryAside = ({ zoomTo, min, max }) => {
             {ReactHtmlParser(`<div>${getLocalized(data, 'location', lang)}</div>`)}
           </React.Fragment>
         )}
-        {withMedia && gallery}
         {!characterData.length ? false : (
           <React.Fragment>
             <div className="aside__paragraph-label">{t('aside.label.characters')}</div>

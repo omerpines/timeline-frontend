@@ -1,15 +1,17 @@
-import React, { useMemo, useCallback } from 'react';
+import './style.css';
+
+import React, { useCallback, useMemo } from 'react';
+
 import config from 'constants/config';
 import useMobile from 'hooks/useMobile';
-import './style.css';
 
 const percentCost = config.INITIAL_RANGE / 100;
 const zoomDiff = config.INITIAL_RANGE / 200 * config.ZOOM_INCREMENT;
 
 const minDesktopRange = Math.round(config.INITIAL_RANGE * config.MIN_DESKTOP_ZOOM / 100);
 const maxDesktopRange = Math.round(config.INITIAL_RANGE * config.MAX_DESKTOP_ZOOM / 100);
-const minMobileRange =  Math.round(config.INITIAL_RANGE * config.MIN_MOBILE_ZOOM / 100);
-const maxMobileRange =  Math.round(config.INITIAL_RANGE * config.MAX_MOBILE_ZOOM / 100);
+const minMobileRange = Math.round(config.INITIAL_RANGE * config.MIN_MOBILE_ZOOM / 100);
+const maxMobileRange = Math.round(config.INITIAL_RANGE * config.MAX_MOBILE_ZOOM / 100);
 
 const Zoom = ({ range, min, max, zoomTo }) => {
   const isMobile = useMobile();

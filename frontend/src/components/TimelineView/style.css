@@ -51,9 +51,9 @@
   text-align: right;
   padding: 11px 30px;
   position: absolute;
-  right: 100px;
+  left: 100px;
   top: -58px;
-  width: 363px;
+  width: 360px;
   z-index: 200;
 }
 
@@ -82,3 +82,40 @@
     width: 254px;
   }
 }
+
+@media (max-width:600px) {
+  .timeline__minimize {
+    margin-left: -40px;
+    width: 260px;
+  }
+}
+
+@media (max-width:576px) {
+  .timeline__minimize {
+    margin-left: -60px;
+    width: 240px;
+  }
+}
+
+@media (max-width:425px) {
+  .timeline__minimize {
+    margin-left: -60px;
+    width: 220px;
+  }
+}
+
+@media (max-width:375px) {
+  .timeline__minimize {
+    margin-left: -60px;
+    width: 200px;
+  }
+}
+
+@media (max-width:320px) {
+  .timeline__minimize {
+    margin-left: -100px;
+    width: 200px;
+  }
+}
+
+

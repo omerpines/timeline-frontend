@@ -84,6 +84,7 @@ export function* callAuthenticatedApi(method, url, iData, head) {
   const headers = head ? { ...head, ...tokenHeader } : tokenHeader;
   if (data instanceof FormData) headers['Content-Type'] = 'multipart/form-data';
   else if (data) data = prepareApiObject(data);
+
   const response = yield call(axios, {
     method,
     url,

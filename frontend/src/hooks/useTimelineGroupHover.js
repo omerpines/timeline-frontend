@@ -1,10 +1,13 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 const useTimelineGroupHover = () => {
   const [hovered, setHovered] = useState(false);
 
   const onmouseenter = useCallback(() => {
-    if (!hovered) setHovered(true);
+    if (!hovered) {
+      setHovered(true);
+    }
+    // else setHovered(false);
   }, [hovered]);
 
   const onmouseleave = useCallback(e => {
@@ -12,6 +15,11 @@ const useTimelineGroupHover = () => {
       setHovered(false);
     }
   }, [hovered]);
+
+
+  window.addEventListener('message', function (event) {
+    setHovered(false);
+  });
 
   return [hovered, onmouseenter, onmouseleave];
 };

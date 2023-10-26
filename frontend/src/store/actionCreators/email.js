@@ -1,10 +1,11 @@
 import types from 'store/actionTypes';
 
-export const requestEmail = (name, email, message, close) => ({
+export const requestEmail = (name, email, message, content, close) => ({
   type: types.EMAIL_REQUEST,
   name,
   email,
   message,
+  content,
   close,
 });
 
